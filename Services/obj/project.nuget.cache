@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "fKojm8RVvyaLOIWTOjvrvw2X3Ww1k62xITxWlSBySmyEwTfzNrDtNL5ET0S7wKCg7wpzEmTTlelYkPtpXbHV+Q==",
+  "dgSpecHash": "/wxbGwhuJ7y8AMBmebjLqV8+P+6HnkHxWgBH1xWW/EnwiJK+9kmSmJ5/UulAJ1mHZa81viXFh41ccuznycrZUQ==",
   "success": true,
-  "projectFilePath": "D:\\BTAP Nam\\CN7\\PRN221\\JewelryStorePRN221\\Services\\Services.csproj",
+  "projectFilePath": "D:\\BTAP Nam\\CN7\\PRN221\\JeweryStoreBE\\Services\\Services.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

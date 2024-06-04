@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\BTAP Nam\\CN7\\PRN221\\JewelryStorePRN221\\BusinessObjecs\\BusinessObjecs.csproj": {}
+    "D:\\BTAP Nam\\CN7\\PRN221\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj": {}
   },
   "projects": {
-    "D:\\BTAP Nam\\CN7\\PRN221\\JewelryStorePRN221\\BusinessObjecs\\BusinessObjecs.csproj": {
+    "D:\\BTAP Nam\\CN7\\PRN221\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\BTAP Nam\\CN7\\PRN221\\JewelryStorePRN221\\BusinessObjecs\\BusinessObjecs.csproj",
+        "projectUniqueName": "D:\\BTAP Nam\\CN7\\PRN221\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj",
         "projectName": "BusinessObjecs",
-        "projectPath": "D:\\BTAP Nam\\CN7\\PRN221\\JewelryStorePRN221\\BusinessObjecs\\BusinessObjecs.csproj",
+        "projectPath": "D:\\BTAP Nam\\CN7\\PRN221\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj",
         "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-        "outputPath": "D:\\BTAP Nam\\CN7\\PRN221\\JewelryStorePRN221\\BusinessObjecs\\obj\\",
+        "outputPath": "D:\\BTAP Nam\\CN7\\PRN221\\JeweryStoreBE\\BusinessObjecs\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",

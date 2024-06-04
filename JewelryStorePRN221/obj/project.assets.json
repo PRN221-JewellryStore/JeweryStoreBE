@@ -4319,11 +4319,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\BTAP Nam\\CN7\\PRN221\\JewelryStorePRN221\\JewelryStorePRN221\\JewelryStorePRN221.csproj",
+      "projectUniqueName": "D:\\BTAP Nam\\CN7\\PRN221\\JeweryStoreBE\\JewelryStorePRN221\\JewelryStorePRN221.csproj",
       "projectName": "JewelryStorePRN221",
-      "projectPath": "D:\\BTAP Nam\\CN7\\PRN221\\JewelryStorePRN221\\JewelryStorePRN221\\JewelryStorePRN221.csproj",
+      "projectPath": "D:\\BTAP Nam\\CN7\\PRN221\\JeweryStoreBE\\JewelryStorePRN221\\JewelryStorePRN221.csproj",
       "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-      "outputPath": "D:\\BTAP Nam\\CN7\\PRN221\\JewelryStorePRN221\\JewelryStorePRN221\\obj\\",
+      "outputPath": "D:\\BTAP Nam\\CN7\\PRN221\\JeweryStoreBE\\JewelryStorePRN221\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4340,17 +4340,17 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\BTAP Nam\\CN7\\PRN221\\JewelryStorePRN221\\BusinessObjecs\\BusinessObjecs.csproj": {
-              "projectPath": "D:\\BTAP Nam\\CN7\\PRN221\\JewelryStorePRN221\\BusinessObjecs\\BusinessObjecs.csproj"
+            "D:\\BTAP Nam\\CN7\\PRN221\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj": {
+              "projectPath": "D:\\BTAP Nam\\CN7\\PRN221\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj"
             },
-            "D:\\BTAP Nam\\CN7\\PRN221\\JewelryStorePRN221\\DAOs\\DAOs.csproj": {
-              "projectPath": "D:\\BTAP Nam\\CN7\\PRN221\\JewelryStorePRN221\\DAOs\\DAOs.csproj"
+            "D:\\BTAP Nam\\CN7\\PRN221\\JeweryStoreBE\\DAOs\\DAOs.csproj": {
+              "projectPath": "D:\\BTAP Nam\\CN7\\PRN221\\JeweryStoreBE\\DAOs\\DAOs.csproj"
             },
-            "D:\\BTAP Nam\\CN7\\PRN221\\JewelryStorePRN221\\Repositories\\Repositories.csproj": {
-              "projectPath": "D:\\BTAP Nam\\CN7\\PRN221\\JewelryStorePRN221\\Repositories\\Repositories.csproj"
+            "D:\\BTAP Nam\\CN7\\PRN221\\JeweryStoreBE\\Repositories\\Repositories.csproj": {
+              "projectPath": "D:\\BTAP Nam\\CN7\\PRN221\\JeweryStoreBE\\Repositories\\Repositories.csproj"
             },
-            "D:\\BTAP Nam\\CN7\\PRN221\\JewelryStorePRN221\\Services\\Services.csproj": {
-              "projectPath": "D:\\BTAP Nam\\CN7\\PRN221\\JewelryStorePRN221\\Services\\Services.csproj"
+            "D:\\BTAP Nam\\CN7\\PRN221\\JeweryStoreBE\\Services\\Services.csproj": {
+              "projectPath": "D:\\BTAP Nam\\CN7\\PRN221\\JeweryStoreBE\\Services\\Services.csproj"
             }
           }
         }
