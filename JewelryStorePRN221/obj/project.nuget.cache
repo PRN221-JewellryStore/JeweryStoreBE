@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "OGaCfB+kDxOpQqRds0u3a0vUfIu8j2McHrX3PaFDxSlpHFZNhKZ+B00lhcbx3R78sMkhrVbubVaq/RvbmsS00A==",
+  "dgSpecHash": "Hz3TFCKFQH1yllKIQxBxl/jwd4j8vzV72oxp7Fwio9ohI6Wm6CZM2JVrMmVfx0p/7oto57Y71ujEvx1O61YO6Q==",
   "success": true,
-  "projectFilePath": "D:\\BTAP Nam\\CN7\\PRN221\\JewelryStorePRN221\\JewelryStorePRN221\\JewelryStorePRN221.csproj",
+  "projectFilePath": "D:\\BTAP Nam\\CN7\\PRN221\\JeweryStoreBE\\JewelryStorePRN221\\JewelryStorePRN221.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ACER\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

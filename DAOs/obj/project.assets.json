@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\BTAP Nam\\CN7\\PRN221\\JewelryStorePRN221\\DAOs\\DAOs.csproj",
+      "projectUniqueName": "D:\\BTAP Nam\\CN7\\PRN221\\JeweryStoreBE\\DAOs\\DAOs.csproj",
       "projectName": "DAOs",
-      "projectPath": "D:\\BTAP Nam\\CN7\\PRN221\\JewelryStorePRN221\\DAOs\\DAOs.csproj",
+      "projectPath": "D:\\BTAP Nam\\CN7\\PRN221\\JeweryStoreBE\\DAOs\\DAOs.csproj",
       "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-      "outputPath": "D:\\BTAP Nam\\CN7\\PRN221\\JewelryStorePRN221\\DAOs\\obj\\",
+      "outputPath": "D:\\BTAP Nam\\CN7\\PRN221\\JeweryStoreBE\\DAOs\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
