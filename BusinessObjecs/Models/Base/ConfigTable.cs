@@ -26,4 +26,4 @@ namespace BusinessObjecs.Models.Base
         public DateTime? DeletedAt { get; set; }
     }
 }
-}
+
