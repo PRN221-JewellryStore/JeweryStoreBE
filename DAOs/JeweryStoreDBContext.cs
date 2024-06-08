@@ -51,10 +51,15 @@ namespace DAOs
                 return; // Exit if data already exists
             }
 
-            context.orderDetailEntities.AddRange(
-                new OrderDetailEntity { OrderID = "ODR001", ProductID = "PRD001", Quantity = 15 , ProductCost = 1500 },
-                new OrderDetailEntity { OrderID = "ODR002", ProductID = "PRD002", Quantity = 10, ProductCost = 2000 },
-                new OrderDetailEntity { OrderID = "ODR003", ProductID = "PRD003", Quantity = 12, ProductCost = 600 }
+            context.categoryEntities.AddRange(
+                new CategoryEntity { Name = "Electronics" },
+                new CategoryEntity { Name = "Furniture" }
+            );
+            context.SaveChanges();
+
+            context.counterEntities.AddRange(
+                new CounterEntity { CategoryID = 1, Name = "Electronics" },
+                new CounterEntity { CategoryID = 2, Name = "Furniture" }
             );
             context.SaveChanges();
 
@@ -62,6 +67,13 @@ namespace DAOs
                 new OrderEntity { Note = "Order for John Doe", PromotionID = "PRM001", CounterID = 1, UserID = "U001" },
                 new OrderEntity { Note = "Jane Smith's order", PromotionID = "PRM002", CounterID = 1, UserID = "U002" },
                 new OrderEntity { Note = "Enny's order", PromotionID = "PRM003", CounterID = 1, UserID = "U003" }
+            );
+            context.SaveChanges();
+
+            context.orderDetailEntities.AddRange(
+                new OrderDetailEntity { OrderID = "ODR001", ProductID = "PRD001", Quantity = 15 , ProductCost = 1500 },
+                new OrderDetailEntity { OrderID = "ODR002", ProductID = "PRD002", Quantity = 10, ProductCost = 2000 },
+                new OrderDetailEntity { OrderID = "ODR003", ProductID = "PRD003", Quantity = 12, ProductCost = 600 }
             );
             context.SaveChanges();
 
@@ -172,18 +184,6 @@ namespace DAOs
                     Point = 0,
                     RoleID = 1
                 }
-            );
-            context.SaveChanges();
-
-            context.categoryEntities.AddRange(
-                new CategoryEntity { Name = "Electronics" },
-                new CategoryEntity { Name = "Furniture" }
-            );
-            context.SaveChanges();
-
-            context.counterEntities.AddRange(
-                new CounterEntity { CategoryID = 1, Name = "Electronics" },
-                new CounterEntity { CategoryID = 2, Name = "Furniture" }
             );
             context.SaveChanges();
 

@@ -23,4 +23,8 @@
     <ProjectReference Include="..\BusinessObjecs\BusinessObjecs.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>
