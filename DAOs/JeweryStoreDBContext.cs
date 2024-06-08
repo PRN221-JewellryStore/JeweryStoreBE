@@ -63,17 +63,91 @@ namespace DAOs
             );
             context.SaveChanges();
 
-            context.orderEntities.AddRange(
-                new OrderEntity { Note = "Order for John Doe", PromotionID = "PRM001", CounterID = 1, UserID = "U001" },
-                new OrderEntity { Note = "Jane Smith's order", PromotionID = "PRM002", CounterID = 1, UserID = "U002" },
-                new OrderEntity { Note = "Enny's order", PromotionID = "PRM003", CounterID = 1, UserID = "U003" }
+            context.roleEntities.AddRange(
+                new RoleEntity { Name = "Admin" },
+                new RoleEntity { Name = "Customer" }
             );
             context.SaveChanges();
 
-            context.orderDetailEntities.AddRange(
-                new OrderDetailEntity { OrderID = "ODR001", ProductID = "PRD001", Quantity = 15 , ProductCost = 1500 },
-                new OrderDetailEntity { OrderID = "ODR002", ProductID = "PRD002", Quantity = 10, ProductCost = 2000 },
-                new OrderDetailEntity { OrderID = "ODR003", ProductID = "PRD003", Quantity = 12, ProductCost = 600 }
+            context.userEntities.AddRange(
+                new UserEntity
+                {
+                    Username = "john.doe",
+                    PasswordHash = "123",
+                    FullName = "John Doe",
+                    Email = "john.doe@example.com",
+                    PhoneNumber = "1234567890",
+                    Address = "123 Main Street",
+                    Point = 1000,
+                    RoleID = 2
+                },
+                new UserEntity
+                {
+                    Username = "jane.smith",
+                    PasswordHash = "456",
+                    FullName = "Jane Smith",
+                    Email = "jane.smith@example.com",
+                    PhoneNumber = "9876543210",
+                    Address = "456 Oak Avenue",
+                    Point = 500,
+                    RoleID = 2
+                },
+                new UserEntity
+                {
+                    Username = "enny",
+                    PasswordHash = "789",
+                    FullName = "Enny",
+                    Email = "enny@example.com",
+                    PhoneNumber = "0113344589",
+                    Address = "789 Some Where",
+                    Point = 500,
+                    RoleID = 2
+                },
+                new UserEntity
+                {
+                    Username = "Admin",
+                    PasswordHash = "admin",
+                    FullName = "Admin",
+                    Email = "admin@example.com",
+                    PhoneNumber = "0000000000",
+                    Address = "headquarter",
+                    Point = 0,
+                    RoleID = 1
+                }
+            );
+            context.SaveChanges();
+
+            context.promotionEntities.AddRange(
+                new PromotionEntity
+                {
+                    Description = "10% off your first order",
+                    ConditionsOfUse = 10,
+                    ReducedPercent = 10,
+                    MaximumReduce = 50,
+                    ExchangePoint = 50,
+                    ExpiresTime = DateTime.Now.AddDays(14),
+                    UserID = "U001"
+                },
+                new PromotionEntity
+                {
+                    Description = "10% off your first order",
+                    ConditionsOfUse = 10,
+                    ReducedPercent = 10,
+                    MaximumReduce = 50,
+                    ExchangePoint = 50,
+                    ExpiresTime = DateTime.Now.AddDays(14),
+                    UserID = "U002"
+                },
+                new PromotionEntity
+                {
+                    Description = "10% off your first order",
+                    ConditionsOfUse = 10,
+                    ReducedPercent = 10,
+                    MaximumReduce = 50,
+                    ExchangePoint = 50,
+                    ExpiresTime = DateTime.Now.AddDays(14),
+                    UserID = "U003"
+                }
             );
             context.SaveChanges();
 
@@ -105,92 +179,19 @@ namespace DAOs
             );
             context.SaveChanges();
 
-            context.promotionEntities.AddRange(
-                new PromotionEntity
-                {
-                    Description = "10% off your first order",
-                    ConditionsOfUse = 10, 
-                    ReducedPercent = 10,
-                    MaximumReduce = 50,
-                    ExchangePoint = 50,
-                    ExpiresTime = DateTime.Now.AddDays(14),
-                    UserID = "U001" 
-                },
-                new PromotionEntity
-                {
-                    Description = "10% off your first order",
-                    ConditionsOfUse = 10,
-                    ReducedPercent = 10,
-                    MaximumReduce = 50,
-                    ExchangePoint = 50,
-                    ExpiresTime = DateTime.Now.AddDays(14),
-                    UserID = "U002"
-                },
-                new PromotionEntity
-                {
-                    Description = "10% off your first order",
-                    ConditionsOfUse = 10,
-                    ReducedPercent = 10,
-                    MaximumReduce = 50,
-                    ExchangePoint = 50,
-                    ExpiresTime = DateTime.Now.AddDays(14),
-                    UserID = "U003"
-                }
+            context.orderEntities.AddRange(
+                new OrderEntity { Note = "Order for John Doe", PromotionID = "PRM001", CounterID = 1, UserID = "U001" },
+                new OrderEntity { Note = "Jane Smith's order", PromotionID = "PRM002", CounterID = 1, UserID = "U002" },
+                new OrderEntity { Note = "Enny's order", PromotionID = "PRM003", CounterID = 1, UserID = "U003" }
             );
             context.SaveChanges();
 
-            context.userEntities.AddRange(
-                new UserEntity
-                {
-                    Username = "john.doe",
-                    PasswordHash = "123", 
-                    FullName = "John Doe",
-                    Email = "john.doe@example.com",
-                    PhoneNumber = "1234567890",
-                    Address = "123 Main Street",
-                    Point = 1000,
-                    RoleID = 2 
-                },
-                new UserEntity
-                {
-                    Username = "jane.smith",
-                    PasswordHash = "456",
-                    FullName = "Jane Smith",
-                    Email = "jane.smith@example.com",
-                    PhoneNumber = "9876543210",
-                    Address = "456 Oak Avenue",
-                    Point = 500,
-                    RoleID = 2 
-                },
-                new UserEntity
-                {
-                    Username = "enny",
-                    PasswordHash = "789",
-                    FullName = "Enny",
-                    Email = "enny@example.com",
-                    PhoneNumber = "0113344589",
-                    Address = "789 Some Where",
-                    Point = 500,
-                    RoleID = 2 
-                },
-                new UserEntity
-                {
-                    Username = "Admin",
-                    PasswordHash = "admin",
-                    FullName = "Admin",
-                    Email = "admin@example.com",
-                    PhoneNumber = "0000000000",
-                    Address = "headquarter",
-                    Point = 0,
-                    RoleID = 1
-                }
+            context.orderDetailEntities.AddRange(
+                new OrderDetailEntity { OrderID = "ODR001", ProductID = "PRD001", Quantity = 15 , ProductCost = 1500 },
+                new OrderDetailEntity { OrderID = "ODR002", ProductID = "PRD002", Quantity = 10, ProductCost = 2000 },
+                new OrderDetailEntity { OrderID = "ODR003", ProductID = "PRD003", Quantity = 12, ProductCost = 600 }
             );
-            context.SaveChanges();
 
-            context.roleEntities.AddRange(
-                new RoleEntity { Name = "Admin" },
-                new RoleEntity { Name = "Customer" }
-            );
             context.SaveChanges();
         }
     }
