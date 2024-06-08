@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAOs.Migrations
 {
     [DbContext(typeof(JeweryStoreDBContext))]
-    [Migration("20240607045715_InitialCreate")]
+    [Migration("20240608063921_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
