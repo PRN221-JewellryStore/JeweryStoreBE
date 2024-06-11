@@ -282,6 +282,9 @@
             "projectReferences": {
               "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj": {
                 "projectPath": "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj"
+              },
+              "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\DAOs\\DAOs.csproj": {
+                "projectPath": "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\DAOs\\DAOs.csproj"
               }
             }
           }
@@ -364,6 +367,12 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Mapster": {
+              "target": "Package",
+              "version": "[7.4.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

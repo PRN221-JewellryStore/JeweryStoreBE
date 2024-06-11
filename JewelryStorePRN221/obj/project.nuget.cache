@@ -1,12 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "D8xlxGjU+Uq5eA5uJYjivN/cYKnEmRIR6tlC5ec4gk8Aewz+HC3YFj466Xy0CrVvvhoFW7q326siXukSUePOig==",
+  "dgSpecHash": "/w4MZMbLPsMNebxmR9PJlk5f6QlWSSrVDnwEqffvmdJM9LF12zN08gsPpoAnYQtZlDMaPh2tmQwmwFnnY8uYCg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\JewelryStorePRN221\\JewelryStorePRN221.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Toant\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\Toant\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
     "C:\\Users\\Toant\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\Toant\\.nuget\\packages\\mapster\\7.4.0\\mapster.7.4.0.nupkg.sha512",
+    "C:\\Users\\Toant\\.nuget\\packages\\mapster.core\\1.2.1\\mapster.core.1.2.1.nupkg.sha512",
     "C:\\Users\\Toant\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\8.0.6\\microsoft.aspnetcore.authentication.jwtbearer.8.0.6.nupkg.sha512",
     "C:\\Users\\Toant\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
     "C:\\Users\\Toant\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\3.3.3\\microsoft.codeanalysis.analyzers.3.3.3.nupkg.sha512",
