@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\JewelryStorePRN221\\JewelryStorePRN221.csproj": {}
+    "D:\\github\\JeweryStoreBE\\JewelryStorePRN221\\JewelryStorePRN221.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj": {
+    "D:\\github\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj",
+        "projectUniqueName": "D:\\github\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj",
         "projectName": "BusinessObjecs",
-        "projectPath": "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj",
-        "packagesPath": "C:\\Users\\Toant\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\BusinessObjecs\\obj\\",
+        "projectPath": "D:\\github\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj",
+        "packagesPath": "C:\\Users\\wew91\\.nuget\\packages\\",
+        "outputPath": "D:\\github\\JeweryStoreBE\\BusinessObjecs\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Toant\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\wew91\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -60,21 +64,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\DAOs\\DAOs.csproj": {
+    "D:\\github\\JeweryStoreBE\\DAOs\\DAOs.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\DAOs\\DAOs.csproj",
+        "projectUniqueName": "D:\\github\\JeweryStoreBE\\DAOs\\DAOs.csproj",
         "projectName": "DAOs",
-        "projectPath": "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\DAOs\\DAOs.csproj",
-        "packagesPath": "C:\\Users\\Toant\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\DAOs\\obj\\",
+        "projectPath": "D:\\github\\JeweryStoreBE\\DAOs\\DAOs.csproj",
+        "packagesPath": "C:\\Users\\wew91\\.nuget\\packages\\",
+        "outputPath": "D:\\github\\JeweryStoreBE\\DAOs\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Toant\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\wew91\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -88,8 +96,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj": {
-                "projectPath": "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj"
+              "D:\\github\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj": {
+                "projectPath": "D:\\github\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj"
               }
             }
           }
@@ -146,21 +154,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\JewelryStorePRN221\\JewelryStorePRN221.csproj": {
+    "D:\\github\\JeweryStoreBE\\JewelryStorePRN221\\JewelryStorePRN221.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\JewelryStorePRN221\\JewelryStorePRN221.csproj",
+        "projectUniqueName": "D:\\github\\JeweryStoreBE\\JewelryStorePRN221\\JewelryStorePRN221.csproj",
         "projectName": "JewelryStorePRN221",
-        "projectPath": "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\JewelryStorePRN221\\JewelryStorePRN221.csproj",
-        "packagesPath": "C:\\Users\\Toant\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\JewelryStorePRN221\\obj\\",
+        "projectPath": "D:\\github\\JeweryStoreBE\\JewelryStorePRN221\\JewelryStorePRN221.csproj",
+        "packagesPath": "C:\\Users\\wew91\\.nuget\\packages\\",
+        "outputPath": "D:\\github\\JeweryStoreBE\\JewelryStorePRN221\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Toant\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\wew91\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -174,17 +186,17 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj": {
-                "projectPath": "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj"
+              "D:\\github\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj": {
+                "projectPath": "D:\\github\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj"
               },
-              "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\DAOs\\DAOs.csproj": {
-                "projectPath": "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\DAOs\\DAOs.csproj"
+              "D:\\github\\JeweryStoreBE\\DAOs\\DAOs.csproj": {
+                "projectPath": "D:\\github\\JeweryStoreBE\\DAOs\\DAOs.csproj"
               },
-              "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\Repositories\\Repositories.csproj": {
-                "projectPath": "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\Repositories\\Repositories.csproj"
+              "D:\\github\\JeweryStoreBE\\Repositories\\Repositories.csproj": {
+                "projectPath": "D:\\github\\JeweryStoreBE\\Repositories\\Repositories.csproj"
               },
-              "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\Services\\Services.csproj": {
-                "projectPath": "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\Services\\Services.csproj"
+              "D:\\github\\JeweryStoreBE\\Services\\Services.csproj": {
+                "projectPath": "D:\\github\\JeweryStoreBE\\Services\\Services.csproj"
               }
             }
           }
@@ -252,21 +264,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\Repositories\\Repositories.csproj": {
+    "D:\\github\\JeweryStoreBE\\Repositories\\Repositories.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\Repositories\\Repositories.csproj",
+        "projectUniqueName": "D:\\github\\JeweryStoreBE\\Repositories\\Repositories.csproj",
         "projectName": "Repositories",
-        "projectPath": "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\Repositories\\Repositories.csproj",
-        "packagesPath": "C:\\Users\\Toant\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\Repositories\\obj\\",
+        "projectPath": "D:\\github\\JeweryStoreBE\\Repositories\\Repositories.csproj",
+        "packagesPath": "C:\\Users\\wew91\\.nuget\\packages\\",
+        "outputPath": "D:\\github\\JeweryStoreBE\\Repositories\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Toant\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\wew91\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -280,8 +296,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj": {
-                "projectPath": "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj"
+              "D:\\github\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj": {
+                "projectPath": "D:\\github\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj"
+              },
+              "D:\\github\\JeweryStoreBE\\DAOs\\DAOs.csproj": {
+                "projectPath": "D:\\github\\JeweryStoreBE\\DAOs\\DAOs.csproj"
               }
             }
           }
@@ -316,21 +335,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\Services\\Services.csproj": {
+    "D:\\github\\JeweryStoreBE\\Services\\Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\Services\\Services.csproj",
+        "projectUniqueName": "D:\\github\\JeweryStoreBE\\Services\\Services.csproj",
         "projectName": "Services",
-        "projectPath": "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\Services\\Services.csproj",
-        "packagesPath": "C:\\Users\\Toant\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\Services\\obj\\",
+        "projectPath": "D:\\github\\JeweryStoreBE\\Services\\Services.csproj",
+        "packagesPath": "C:\\Users\\wew91\\.nuget\\packages\\",
+        "outputPath": "D:\\github\\JeweryStoreBE\\Services\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Toant\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\wew91\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -344,8 +367,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\Repositories\\Repositories.csproj": {
-                "projectPath": "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\Repositories\\Repositories.csproj"
+              "D:\\github\\JeweryStoreBE\\Repositories\\Repositories.csproj": {
+                "projectPath": "D:\\github\\JeweryStoreBE\\Repositories\\Repositories.csproj"
               }
             }
           }
@@ -380,7 +403,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

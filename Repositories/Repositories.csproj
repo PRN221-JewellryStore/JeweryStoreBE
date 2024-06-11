@@ -8,11 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BusinessObjecs\BusinessObjecs.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="IRepository\" />
-    <Folder Include="RepositoryImpl\" />
+    <ProjectReference Include="..\DAOs\DAOs.csproj" />
   </ItemGroup>
 
 </Project>
