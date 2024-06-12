@@ -87,7 +87,11 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj": {
+                "projectPath": "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -104,6 +108,28 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[8.0.6, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.6, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -256,6 +282,9 @@
             "projectReferences": {
               "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj": {
                 "projectPath": "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj"
+              },
+              "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\DAOs\\DAOs.csproj": {
+                "projectPath": "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\DAOs\\DAOs.csproj"
               }
             }
           }
@@ -338,6 +367,12 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "Mapster": {
+              "target": "Package",
+              "version": "[7.4.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
