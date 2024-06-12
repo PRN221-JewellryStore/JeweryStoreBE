@@ -50,11 +50,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\BTAP Nam\\CN7\\PRN221\\JeweryStoreBE\\Services\\Services.csproj",
+      "projectUniqueName": "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\Services\\Services.csproj",
       "projectName": "Services",
-      "projectPath": "D:\\BTAP Nam\\CN7\\PRN221\\JeweryStoreBE\\Services\\Services.csproj",
+      "projectPath": "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\Services\\Services.csproj",
       "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
-      "outputPath": "D:\\BTAP Nam\\CN7\\PRN221\\JeweryStoreBE\\Services\\obj\\",
+      "outputPath": "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\Services\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -71,8 +71,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\BTAP Nam\\CN7\\PRN221\\JeweryStoreBE\\Repositories\\Repositories.csproj": {
-              "projectPath": "D:\\BTAP Nam\\CN7\\PRN221\\JeweryStoreBE\\Repositories\\Repositories.csproj"
+            "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\Repositories\\Repositories.csproj": {
+              "projectPath": "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\Repositories\\Repositories.csproj"
             }
           }
         }
