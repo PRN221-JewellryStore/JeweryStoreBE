@@ -37,7 +37,7 @@ namespace DAOs
         }
         public void SeedData()
         {
-            DbSampleData.Seed(this);
+            //DbSampleData.Seed(this);
         }
     }
 

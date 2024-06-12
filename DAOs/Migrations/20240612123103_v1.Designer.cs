@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DAOs.Migrations
 {
     [DbContext(typeof(JeweryStoreDBContext))]
-    [Migration("20240608063921_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240612123103_v1")]
+    partial class v1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

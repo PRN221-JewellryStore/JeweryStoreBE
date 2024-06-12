@@ -4123,19 +4123,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Toant\\.nuget\\packages\\": {}
+    "C:\\Users\\ACER\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\DAOs\\DAOs.csproj",
+      "projectUniqueName": "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\DAOs\\DAOs.csproj",
       "projectName": "DAOs",
-      "projectPath": "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\DAOs\\DAOs.csproj",
-      "packagesPath": "C:\\Users\\Toant\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\DAOs\\obj\\",
+      "projectPath": "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\DAOs\\DAOs.csproj",
+      "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
+      "outputPath": "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\DAOs\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Toant\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -4149,8 +4149,8 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj": {
-              "projectPath": "C:\\Users\\Toant\\Downloads\\fpt_stuff\\PRN221\\Jewel_Project\\PRN221-JewelrySales-ChienNguyensrdn\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj"
+            "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj": {
+              "projectPath": "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj"
             }
           }
         }
@@ -4207,7 +4207,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.204/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
