@@ -1,5 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Repositories.Interface;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using Repositories.Common.Interface;
 using Repositories.IRepository;
 using System;
 using System.Collections.Generic;
@@ -16,11 +17,11 @@ namespace Repositories.RepositoryImpl
        where TDomain : class
     {
         private readonly TDbContext _dbContext;
-        //private readonly IMapper _mapper;  chưa dùng tới mapper
-        public RepositoryBase(TDbContext dbContext/*, IMapper mapper*/)
+        private readonly IMapper _mapper;
+        public RepositoryBase(TDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
-            //_mapper = mapper;
+            _mapper = mapper;
         }
 
         public IUnitOfWork UnitOfWork => _dbContext;

@@ -1,11 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "8ZaoGcB0ohiUIRl44V9TVqXTzPe4tuYkmlppH4zdTKBHZaE1SVY9ERyBU6mYd6VHne36RydDgSoAWlpMndK7HQ==",
+  "dgSpecHash": "Do1Ya/pB37s9D8Tb8wrKuauK8C1W2g2T2CwDdg4AsouX4IF5U8CUWs2OehB48UztDMdxksRLJ6juDh12DE8dcw==",
   "success": true,
   "projectFilePath": "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\Services\\Services.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\ACER\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",
+    "C:\\Users\\ACER\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
+    "C:\\Users\\ACER\\.nuget\\packages\\fluentvalidation\\11.9.2\\fluentvalidation.11.9.2.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\mapster\\7.4.0\\mapster.7.4.0.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\mapster.core\\1.2.1\\mapster.core.1.2.1.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",

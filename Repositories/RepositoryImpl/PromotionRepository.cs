@@ -1,13 +1,7 @@
-﻿using Repositories.IRepository;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using DAOs;
-using BusinessObjecs.Models;
+﻿using BusinessObjecs.Models;
 using Microsoft.EntityFrameworkCore;
+using Repositories.IRepository;
+using System.Linq.Expressions;
 
 namespace Repositories.RepositoryImpl
 {
