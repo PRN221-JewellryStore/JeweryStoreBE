@@ -10,5 +10,6 @@ namespace Repositories.IRepository
     public interface IUserRepository : IEFRepository<UserEntity, UserEntity>
     {
         bool VerifyPassword(string password, string passwordHash);
+        string HashPassword(string password);
     }
 }

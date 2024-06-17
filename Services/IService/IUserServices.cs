@@ -11,5 +11,6 @@ namespace Services.IService
     public interface IUserServices : IServices<UserEntity>
     {
         Task<UserLoginDTO> Login(LoginDTO query, CancellationToken cancellationToken);
+        Task<string> Register(RegisterDTO request, CancellationToken cancellationToken);
     }
 }

@@ -16,7 +16,7 @@ namespace JewelryStorePRN221.Services
                 new(ClaimTypes.Role, roles)
             };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("PRN221 JeWellry!!!"));
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("PRN221 JeWelry Team ASP API Entity Framework Core!!!"));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
