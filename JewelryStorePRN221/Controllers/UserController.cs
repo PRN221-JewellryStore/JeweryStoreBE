@@ -27,27 +27,26 @@ namespace JewelryStorePRN221.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> Login(
-                       [FromBody] LoginDTO query,
+                       [FromBody] LoginDTO request,
                                   CancellationToken cancellationToken = default)
         {
-            var result = await _userServices.Login(query, cancellationToken);
+            var result = await _userServices.Login(request, cancellationToken);
             var token = _jwtService.CreateToken(result.ID, result.Role);
             return Ok(new JsonResponse<string>(token));
         }
 
         [HttpPost]
-        [Route("user/testJwt")]
+        [Route("register")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> TestJwt(
-                       [FromBody] LoginDTO query,
+                       [FromBody] RegisterDTO request,
                                   CancellationToken cancellationToken = default)
         {
-            var result = await _userServices.Login(query, cancellationToken);
-            var token = _jwtService.CreateToken(result.ID, result.Role);
-            return Ok(new JsonResponse<string>(token));
+            var result = await _userServices.Register(request, cancellationToken);
+            return Ok(new JsonResponse<string>(result));
         }
     }
 }
