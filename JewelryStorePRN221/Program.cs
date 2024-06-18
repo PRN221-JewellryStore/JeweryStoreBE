@@ -23,10 +23,13 @@ builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddScoped<IUserServices, UserServices>();
 builder.Services.AddScoped<IJwtService, JwtService>();
 builder.Services.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<JeweryStoreDBContext>());
+builder.Services.AddScoped<IPromotionService, PromotionService>();
+
 
 //repo
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IRoleRepository, RoleRepository>();
+builder.Services.AddTransient<IPromotionRepository, PromotionRepository>();
 
 builder.Services.AddDbContext<JeweryStoreDBContext>(options =>
 {

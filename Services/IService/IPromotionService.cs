@@ -1,4 +1,5 @@
 ﻿using BusinessObjecs.DTOs;
+using BusinessObjecs.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace Services.IService
 {
-    public interface IPromotionService
+    public interface IPromotionService : IServices<PromotionEntity>
     {
-        public Task<PromotionDTO> GetById(string id);
-        public Task<List<PromotionDTO>> GetAll();
-        public Task<PromotionDTO> Add(PromotionDTO promotionDTO);
-        public Task<PromotionDTO> Update(PromotionDTO promotionDTO);
-        public Task<PromotionDTO> Delete(string id);
+        Task<PromotionDTO> GetById(string id, CancellationToken cancellationToken);
+        Task<List<PromotionDTO>> GetAll(CancellationToken cancellationToken);
+        Task<PromotionDTO> Add(PromotionDTO promotionDTO, CancellationToken cancellationToken);
+        Task<PromotionDTO> Update(PromotionDTO promotionDTO, CancellationToken cancellationToken);
+        Task<PromotionDTO> Delete(string id, CancellationToken cancellationToken);
     }
 }
