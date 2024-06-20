@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using BusinessObjecs.DTOs;
+using BusinessObjecs.Models.Configured;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +15,8 @@ namespace BusinessObjecs.Mapping
         public MappingProfile()
         {
             ApplyMappingsFromAssembly(Assembly.GetExecutingAssembly());
+            CreateMap<CategoryEntity, CategoryDTO>().ReverseMap();
+
         }
 
         private void ApplyMappingsFromAssembly(Assembly assembly)

@@ -1,4 +1,5 @@
 using AutoMapper;
+using BusinessObjecs.Mapping;
 using JewelryStorePRN221.Services;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
@@ -18,15 +19,22 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 //service
 builder.Services.AddScoped<IUserServices, UserServices>();
 builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+
 builder.Services.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<JeweryStoreDBContext>());
 
 //repo
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IRoleRepository, RoleRepository>();
+builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
+
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+
 
 builder.Services.AddDbContext<JeweryStoreDBContext>(options =>
 {
