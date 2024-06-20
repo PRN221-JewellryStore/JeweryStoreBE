@@ -10,10 +10,10 @@ namespace Services.IService
 {
     public interface IPromotionService : IServices<PromotionEntity>
     {
-        Task<PromotionDTO> GetById(string id, CancellationToken cancellationToken);
-        Task<List<PromotionDTO>> GetAll(CancellationToken cancellationToken);
+        Task<PromotionEntity> GetById(string id, CancellationToken cancellationToken);
+        Task<List<PromotionEntity>> GetAll(CancellationToken cancellationToken);
         Task<PromotionDTO> Add(PromotionDTO promotionDTO, CancellationToken cancellationToken);
-        Task<PromotionDTO> Update(PromotionDTO promotionDTO, CancellationToken cancellationToken);
+        Task<PromotionDTO> Update(string id, PromotionDTO promotionDTO, CancellationToken cancellationToken);
         Task<PromotionDTO> Delete(string id, CancellationToken cancellationToken);
     }
 }

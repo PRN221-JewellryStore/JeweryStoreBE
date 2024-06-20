@@ -37,7 +37,9 @@ namespace Services.ServiceImpl
             {
                 throw new NotFoundException("Promotion not existed!");
             }
+
             _promotionRepository.Remove(promotion);
+
             if (await _promotionRepository.UnitOfWork.SaveChangesAsync(cancellationToken) != 0)
             {
                 return promotion.Adapt<PromotionDTO>();
@@ -45,27 +47,43 @@ namespace Services.ServiceImpl
             throw new Exception("Something went wrong! Delete action unsuccesful");
         }
 
-        public async Task<List<PromotionDTO>> GetAll(CancellationToken cancellationToken)
+        public async Task<List<PromotionEntity>> GetAll(CancellationToken cancellationToken)
         {
             var result = await _promotionRepository.FindAllAsync(cancellationToken);
-            return result.Adapt<List<PromotionDTO>>();
+            return result;
         }
 
-        public async Task<PromotionDTO> GetById(string id, CancellationToken cancellationToken)
+        public async Task<PromotionEntity> GetById(string id, CancellationToken cancellationToken)
         {
             var result = await _promotionRepository.FindAsync(p => p.ID.Equals(id));
-            return result.Adapt<PromotionDTO>();
+            if(result is null)
+            {
+                throw new NotFoundException("Promotion not existed");
+            }
+            return result;
         }
 
-        public async Task<PromotionDTO> Update(PromotionDTO promotionDTO, CancellationToken cancellationToken)
+        public async Task<PromotionDTO> Update(string id, PromotionDTO promotionDTO, CancellationToken cancellationToken)
         {
-            var promotion = await _promotionRepository.FindAsync(p => (p.Description != null && p.Description.Equals(promotionDTO.Description)) 
-            && (p.UserID != null && p.UserID.Equals(promotionDTO.UserID)));
+            var promotion = await _promotionRepository.FindAsync(p => p.ID.Equals(id));
             if (promotion is null)
             {
                 throw new NotFoundException("Promotion not found!");
             }
-            promotion = promotionDTO.Adapt<PromotionEntity>();
+            try
+            {
+                promotion.Description = promotionDTO.Description;
+                promotion.ConditionsOfUse = promotionDTO.ConditionsOfUse;
+                promotion.ReducedPercent = promotionDTO.ReducedPercent;
+                promotion.MaximumReduce = promotionDTO.MaximumReduce;
+                promotion.ExchangePoint = promotionDTO.ExchangePoint;
+                promotion.ExpiresTime = promotionDTO.ExpiresTime;
+            }
+            catch (Exception ex) 
+            {
+                throw new Exception(ex.Message);
+            }
+            
             if (await _promotionRepository.UnitOfWork.SaveChangesAsync(cancellationToken) != 0)
             {
                 return promotionDTO;

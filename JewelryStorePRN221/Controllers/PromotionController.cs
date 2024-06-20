@@ -16,6 +16,7 @@ namespace JewelryStorePRN221.Controllers
         {
             _promotionService = promotionService;
         }
+
         [AllowAnonymous]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
@@ -26,6 +27,7 @@ namespace JewelryStorePRN221.Controllers
         {
             return Ok(await _promotionService.GetById(id, cancellationToken));
         }
+
         [AllowAnonymous]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
@@ -36,6 +38,7 @@ namespace JewelryStorePRN221.Controllers
         {
             return Ok(await _promotionService.GetAll(cancellationToken));
         }
+
         [AllowAnonymous]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
@@ -46,16 +49,18 @@ namespace JewelryStorePRN221.Controllers
         {
             return Ok(await _promotionService.Add(promotionDTO, cancellationToken));
         }
+
         [AllowAnonymous]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        [HttpPatch]
-        public async Task<ActionResult<PromotionDTO>> Update([FromForm] PromotionDTO promotionDTO, CancellationToken cancellationToken = default)
+        [HttpPatch("{id}")]
+        public async Task<ActionResult<PromotionDTO>> Update(string id, [FromForm] PromotionDTO promotionDTO, CancellationToken cancellationToken = default)
         {
-            return Ok(await _promotionService.Update(promotionDTO, cancellationToken));
+            return Ok(await _promotionService.Update(id, promotionDTO, cancellationToken));
         }
+
         [AllowAnonymous]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
@@ -64,7 +69,7 @@ namespace JewelryStorePRN221.Controllers
         [HttpDelete]
         public async Task<ActionResult<PromotionDTO>> Delete(string id, CancellationToken cancellationToken = default)
         {
-            return Ok(await _promotionService.GetById(id, cancellationToken));
+            return Ok(await _promotionService.Delete(id, cancellationToken));
         }
     }
 }
