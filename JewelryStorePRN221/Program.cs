@@ -24,12 +24,15 @@ builder.Services.AddScoped<IUserServices, UserServices>();
 builder.Services.AddScoped<IJwtService, JwtService>();
 builder.Services.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<JeweryStoreDBContext>());
 builder.Services.AddScoped<IPromotionService, PromotionService>();
+builder.Services.AddScoped<IProductService, ProductService>();
 
 
 //repo
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IRoleRepository, RoleRepository>();
 builder.Services.AddTransient<IPromotionRepository, PromotionRepository>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
 
 builder.Services.AddDbContext<JeweryStoreDBContext>(options =>
 {
