@@ -11,7 +11,5 @@ namespace Repositories.IRepository
     {
         bool VerifyPassword(string password, string passwordHash);
         string HashPassword(string password);
-
-        Task <UserEntity> GetUser(string id);
     }
 }

@@ -17,13 +17,11 @@ namespace JewelryStorePRN221.Controllers
     {
         ICategoryService _categoryService;
         IUserServices _userService;
-        IUserRepository _userRepository;
 
         public CategoryController(ICategoryService categoryService ,IUserServices userServices, IUserRepository userRepo)
         {
             _userService = userServices;
             _categoryService = categoryService;
-            _userRepository = userRepo;
         }
         [HttpGet("{id}")]
         public async Task<ActionResult<CategoryEntity>> GetById(int id)
@@ -78,7 +76,7 @@ namespace JewelryStorePRN221.Controllers
         public async Task<ActionResult> DeleteCategory(int id,  string userId)
         {
             var categoryEntity = await _categoryService.GetById(id); // Ensure you have a method to get category by id
-            var User = await _userRepository.GetUser(userId);
+            var User = await _userService.GetUser(userId);
             if (categoryEntity == null)
             {
                 return NotFound(new { Message = "Category not found" });

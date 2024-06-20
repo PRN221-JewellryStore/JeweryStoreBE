@@ -11,7 +11,7 @@ namespace Repositories.IRepository
     public interface IEFRepository<TDomain, TPersistance> : IRepository<TDomain>
     {
         IUnitOfWork UnitOfWork { get; }
-            Task<TDomain?> FindAsync(Expression<Func<TPersistance, bool>> filterExpression, CancellationToken cancellationToken = default);
+        Task<TDomain?> FindAsync(Expression<Func<TPersistance, bool>> filterExpression, CancellationToken cancellationToken = default);
         Task<List<TDomain>> FindAllAsync(CancellationToken cancellationToken = default);
         Task<int> CountAsync(Expression<Func<TPersistance, bool>> filterExpression, CancellationToken cancellationToken = default);
         Task<bool> AnyAsync(Expression<Func<TPersistance, bool>> filterExpression, CancellationToken cancellationToken = default);

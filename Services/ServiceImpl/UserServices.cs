@@ -1,5 +1,6 @@
 ﻿using BusinessObjecs.DTOs;
 using BusinessObjecs.Models;
+using Microsoft.EntityFrameworkCore;
 using Repositories.Common.Exceptions;
 using Repositories.IRepository;
 using Services.IService;
@@ -77,6 +78,11 @@ namespace Services.ServiceImpl
             await _userRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
             return user.ID;       
         }
-        
+        public async Task<UserEntity> GetUser(string id)
+        {
+            return await _userRepository.FindAsync(p=> p.ID == id);
+
+        }
+
     }
 }
