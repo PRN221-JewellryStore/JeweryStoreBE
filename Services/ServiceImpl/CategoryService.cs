@@ -77,9 +77,12 @@ namespace Services.ServiceImpl
             return await _categoryRepository.GetCategoryById(id);
         }
 
-        public async Task Update(CategoryEntity CategoryEntity)
+        public async Task Update(CategoryDTO Categorydto, int id)
         {
-             await _categoryRepository.UpdateCategoryById(CategoryEntity);
+            var ExistingCatogory = await _categoryRepository.GetCategoryById(id);
+            _mapper.Map(Categorydto, ExistingCatogory);
+              _categoryRepository.Update(ExistingCatogory);
+            await _categoryRepository.UnitOfWork.SaveChangesAsync();
         }
     }
 }

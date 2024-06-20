@@ -55,10 +55,10 @@ namespace JewelryStorePRN221.Controllers
         }
         [HttpPatch]
 
-        public async Task<ActionResult> UpdateCategory([FromForm] CategoryEntity category) {
+        public async Task<ActionResult> UpdateCategory([FromForm] CategoryDTO category, int id) {
             try
             {
-                var updatedCategory =  _categoryService.Update(category);
+                var updatedCategory =  _categoryService.Update(category,  id);
                 return Ok(updatedCategory);
             }
             catch (Exception ex)

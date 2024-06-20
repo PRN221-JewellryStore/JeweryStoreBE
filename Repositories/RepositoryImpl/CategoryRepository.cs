@@ -76,11 +76,12 @@ namespace Repositories.RepositoryImpl
 
        
 
-        public Task UpdateCategoryById(CategoryEntity entity)
+        public Task UpdateCategoryById(CategoryEntity entity, int id)
         {
+        /*    var ExistingCategory = _Context.categoryEntities
             _Context.Update(entity);
              _Context.SaveChangesAsync(); 
-
+*/
             return Task.CompletedTask ;
 
         }

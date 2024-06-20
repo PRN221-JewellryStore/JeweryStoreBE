@@ -14,7 +14,7 @@ namespace Services.IService
         public Task<CategoryEntity> GetById(int id);
         public Task<List<CategoryEntity>> GetAll();
         public Task<CategoryDTO> Add(CategoryDTO CategoryEntity);
-        public Task Update(CategoryEntity CategoryEntity);
+        public Task Update(CategoryDTO CategoryEntity, int Id);
         public Task Delete(CategoryEntity CategoryEntity, UserEntity user);
     }
 }

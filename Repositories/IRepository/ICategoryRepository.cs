@@ -19,7 +19,7 @@ namespace Repositories.IRepository
         Task <CategoryEntity> GetCategoryById(int id);
 
         Task DeleteCategoryById(CategoryEntity entity, string DeletedId);
-        Task UpdateCategoryById(CategoryEntity entity);
+        Task UpdateCategoryById(CategoryEntity entity, int id);
 
     //    Task<CategoryDTO> AddCategoryAsync(CategoryDTO categoryDto);
 
