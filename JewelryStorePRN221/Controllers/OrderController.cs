@@ -8,23 +8,24 @@ namespace JewelryStorePRN221.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductController : ControllerBase
+    public class OrderController : ControllerBase
     {
-        IProductService _ProductService;
+        IOrderService _OrderService;
 
-        public ProductController(IProductService ProductService)
+        public OrderController(IOrderService OrderService)
         {
-            _ProductService = ProductService;
+            _OrderService = OrderService;
         }
 
+        [AllowAnonymous]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProductDTO>> GetById(string id, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<OrderDTO>> GetById(string id, CancellationToken cancellationToken = default)
         {
-            return Ok(await _ProductService.GetById(id, cancellationToken));
+            return Ok(await _OrderService.GetById(id, cancellationToken));
         }
 
         [AllowAnonymous]
@@ -33,9 +34,9 @@ namespace JewelryStorePRN221.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [HttpGet]
-        public async Task<ActionResult<List<ProductDTO>>> GetAll(CancellationToken cancellationToken = default)
+        public async Task<ActionResult<List<OrderDTO>>> GetAll(CancellationToken cancellationToken = default)
         {
-            return Ok(await _ProductService.GetAll(cancellationToken));
+            return Ok(await _OrderService.GetAll(cancellationToken));
         }
 
         [AllowAnonymous]
@@ -44,9 +45,9 @@ namespace JewelryStorePRN221.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [HttpPost]
-        public async Task<ActionResult> Create([FromForm] ProductDTO ProductDTO, CancellationToken cancellationToken = default)
+        public async Task<ActionResult> Create([FromForm] OrderDTO OrderDTO, CancellationToken cancellationToken = default)
         {
-            return Ok(await _ProductService.Add(ProductDTO, cancellationToken));
+            return Ok(await _OrderService.Add(OrderDTO, cancellationToken));
         }
 
         [AllowAnonymous]
@@ -55,9 +56,9 @@ namespace JewelryStorePRN221.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [HttpPatch("{id}")]
-        public async Task<ActionResult<ProductDTO>> Update(string id, [FromForm] ProductDTO ProductDTO, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<OrderDTO>> Update(string id, [FromForm] OrderDTO OrderDTO, CancellationToken cancellationToken = default)
         {
-            return Ok(await _ProductService.Update(id, ProductDTO, cancellationToken));
+            return Ok(await _OrderService.Update(id, OrderDTO, cancellationToken));
         }
 
         [AllowAnonymous]
@@ -66,9 +67,9 @@ namespace JewelryStorePRN221.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [HttpDelete]
-        public async Task<ActionResult<ProductDTO>> Delete(string id, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<OrderDTO>> Delete(string id, CancellationToken cancellationToken = default)
         {
-            return Ok(await _ProductService.Delete(id, cancellationToken));
+            return Ok(await _OrderService.Delete(id, cancellationToken));
         }
     }
 }
