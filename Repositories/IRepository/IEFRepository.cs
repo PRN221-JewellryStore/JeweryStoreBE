@@ -1,4 +1,4 @@
-﻿using Repositories.Interface;
+﻿using Repositories.Common.Interface;
 using System;
 using System.Collections.Generic;
 using System.Linq;

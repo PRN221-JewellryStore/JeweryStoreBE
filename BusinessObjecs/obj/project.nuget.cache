@@ -1,8 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "7tmB2R4K5AY9DsxGjquMfOQPuyYZNt4n6RJqk1jo4Etj7C7L50uhXyYKeXYcfdcJnacoP747pE9aD6pQ22+aGQ==",
+  "dgSpecHash": "dKIY5j3EwVsvXAiaHkWvEqnbD8HNwrLX9j7sbCVmPEjjvv6edccO+Xi9leUsN0fT2X49jQxh6JS9uLHIBwTiBw==",
   "success": true,
   "projectFilePath": "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\ACER\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
+    "C:\\Users\\ACER\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\ACER\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
+    "C:\\Users\\ACER\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "C:\\Users\\ACER\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+  ],
   "logs": []
 }
