@@ -26,6 +26,8 @@ builder.Services.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<
 builder.Services.AddScoped<IPromotionService, PromotionService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IOrderDetailService, OrderDetailService>();
+
 
 
 //repo
@@ -34,6 +36,8 @@ builder.Services.AddTransient<IRoleRepository, RoleRepository>();
 builder.Services.AddTransient<IPromotionRepository, PromotionRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
+
 
 
 builder.Services.AddDbContext<JeweryStoreDBContext>(options =>
