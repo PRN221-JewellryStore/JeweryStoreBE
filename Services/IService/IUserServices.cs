@@ -12,5 +12,7 @@ namespace Services.IService
     {
         Task<UserLoginDTO> Login(LoginDTO query, CancellationToken cancellationToken);
         Task<string> Register(RegisterDTO request, CancellationToken cancellationToken);
+
+        Task<UserEntity> GetUser(string id);
     }
 }
