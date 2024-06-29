@@ -33,7 +33,7 @@ namespace JewelryStorePRN221.Controllers
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        [HttpGet]
+        [HttpGet("getall")]
         public async Task<ActionResult<List<OrderDetailDTO>>> GetAll(CancellationToken cancellationToken = default)
         {
             return Ok(await _OrderDetailService.GetAll(cancellationToken));
@@ -44,7 +44,7 @@ namespace JewelryStorePRN221.Controllers
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<ActionResult> Create([FromForm] OrderDetailDTO OrderDetailDTO, CancellationToken cancellationToken = default)
         {
             return Ok(await _OrderDetailService.Add(OrderDetailDTO, cancellationToken));
@@ -55,7 +55,7 @@ namespace JewelryStorePRN221.Controllers
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        [HttpPatch("{id}")]
+        [HttpPatch("update/{id}")]
         public async Task<ActionResult<OrderDetailDTO>> Update(string id, [FromForm] OrderDetailDTO OrderDetailDTO, CancellationToken cancellationToken = default)
         {
             return Ok(await _OrderDetailService.Update(id, OrderDetailDTO, cancellationToken));
@@ -66,7 +66,7 @@ namespace JewelryStorePRN221.Controllers
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        [HttpDelete]
+        [HttpDelete("delete")]
         public async Task<ActionResult<OrderDetailDTO>> Delete(string id, CancellationToken cancellationToken = default)
         {
             return Ok(await _OrderDetailService.Delete(id, cancellationToken));
