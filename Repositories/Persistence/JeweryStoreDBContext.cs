@@ -38,11 +38,42 @@ namespace Repositories
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.Seed();
         }
         private void ConfigureModel(ModelBuilder modelBuilder)
         {
 
 
         }
-    }  
+
+
+    }
+    public static class ModelBuilderExtensions
+    {
+        public static void Seed(this ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<RoleEntity>().HasData(
+                new RoleEntity { ID = 1, Name = "Admin" },
+                new RoleEntity { ID = 2, Name = "Customer" },
+                new RoleEntity { ID = 3, Name = "Manager" },
+                new RoleEntity { ID = 4, Name = "Staff" }
+            );
+
+            modelBuilder.Entity<UserEntity>().HasData(
+                new UserEntity
+                {
+                    ID = Guid.NewGuid().ToString(),
+                    Username = "admin",
+                    Email = "admin@gmail.com",
+                    PasswordHash = "$2b$12$HE0v7UbzZwl6wY3y/jXhR.oYyGo2DWcIRFQatHueQLw4aS1PbeI8y", //admin
+                    RoleID = 1,
+                    CreatedAt = DateTime.Now,
+                    FullName = "Administrator",
+                    Address = "123 Admin St.",
+                    PhoneNumber = "1234567890",
+                    Point = 0
+                }
+            );
+        }
+    }
 }

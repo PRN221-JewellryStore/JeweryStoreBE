@@ -1681,6 +1681,8 @@
           "AutoMapper": "13.0.1",
           "BCrypt.Net-Next": "4.0.3",
           "BusinessObjecs": "1.0.0",
+          "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
+          "Microsoft.AspNetCore.Http.Features": "2.2.0",
           "Microsoft.EntityFrameworkCore": "8.0.6",
           "Microsoft.EntityFrameworkCore.SqlServer": "8.0.6"
         },

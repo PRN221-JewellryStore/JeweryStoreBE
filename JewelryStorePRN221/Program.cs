@@ -20,6 +20,14 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddAutoMapper(typeof(MappingProfile));
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy",
+    builder => builder.AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader()
+    );
+});
 
 //service
 builder.Services.AddScoped<IUserServices, UserServices>();
@@ -30,6 +38,7 @@ builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IOrderDetailService, OrderDetailService>();
 builder.Services.AddScoped<IPromotionService, PromotionService>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IVnPayService, VnPayService>();
 
 
 builder.Services.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<JeweryStoreDBContext>());
