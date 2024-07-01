@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("JewelryStorePRN221")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0a546f975dfe901c562cd19dce1c263e888a72d7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cffdc4b54b1832d2b2674b8adb0e957f48901c47")]
 [assembly: System.Reflection.AssemblyProductAttribute("JewelryStorePRN221")]
 [assembly: System.Reflection.AssemblyTitleAttribute("JewelryStorePRN221")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
