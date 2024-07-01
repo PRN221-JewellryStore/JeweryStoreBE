@@ -1,4 +1,5 @@
 using AutoMapper;
+using BusinessObjecs.Mapping;
 using JewelryStorePRN221.Services;
 using Microsoft.EntityFrameworkCore;
 using Repositories;
@@ -18,15 +19,32 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+builder.Services.AddAutoMapper(typeof(MappingProfile));
 
 //service
 builder.Services.AddScoped<IUserServices, UserServices>();
 builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<ICounterService, CounterService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
+builder.Services.AddScoped<IOrderDetailService, OrderDetailService>();
+builder.Services.AddScoped<IPromotionService, PromotionService>();
+builder.Services.AddScoped<IProductService, ProductService>();
+
+
 builder.Services.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<JeweryStoreDBContext>());
 
 //repo
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IRoleRepository, RoleRepository>();
+builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
+builder.Services.AddTransient<ICounterRepository, CounterRepository>();
+builder.Services.AddTransient<IOrderRepository, OrderRepository>();
+builder.Services.AddTransient<IOrderDetailRepository, OrderDetailRepository>();
+builder.Services.AddTransient<IPromotionRepository, PromotionRepository>();
+builder.Services.AddTransient<IProductRepository, ProductRepository>();
+
+
 
 builder.Services.AddDbContext<JeweryStoreDBContext>(options =>
 {

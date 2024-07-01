@@ -36,6 +36,7 @@ namespace BusinessObjecs.Models.Base
         #region Dispose
         public void Dispose()
         {
+
             Dispose(isDisposing: true);
             GC.SuppressFinalize(this);
         }

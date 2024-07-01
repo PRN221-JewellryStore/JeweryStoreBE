@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Repositories.IRepository
 {
-    public interface IPromotionRepository : IEFRepository<PromotionEntity, PromotionEntity>
+    public interface IOrderRepository : IEFRepository<OrderEntity, OrderEntity>
     {
     }
 }

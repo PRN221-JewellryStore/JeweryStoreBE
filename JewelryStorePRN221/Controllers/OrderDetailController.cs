@@ -8,13 +8,13 @@ namespace JewelryStorePRN221.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PromotionController : ControllerBase
+    public class OrderDetailController : ControllerBase
     {
-        IPromotionService _promotionService;
+        IOrderDetailService _OrderDetailService;
 
-        public PromotionController(IPromotionService promotionService)
+        public OrderDetailController(IOrderDetailService OrderDetailService)
         {
-            _promotionService = promotionService;
+            _OrderDetailService = OrderDetailService;
         }
 
         [AllowAnonymous]
@@ -23,9 +23,9 @@ namespace JewelryStorePRN221.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [HttpGet("{id}")]
-        public async Task<ActionResult<PromotionDTO>> GetById(string id, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<OrderDetailDTO>> GetById(string id, CancellationToken cancellationToken = default)
         {
-            return Ok(await _promotionService.GetById(id, cancellationToken));
+            return Ok(await _OrderDetailService.GetById(id, cancellationToken));
         }
 
         [AllowAnonymous]
@@ -34,9 +34,9 @@ namespace JewelryStorePRN221.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [HttpGet("getall")]
-        public async Task<ActionResult<List<PromotionDTO>>> GetAll(CancellationToken cancellationToken = default)
+        public async Task<ActionResult<List<OrderDetailDTO>>> GetAll(CancellationToken cancellationToken = default)
         {
-            return Ok(await _promotionService.GetAll(cancellationToken));
+            return Ok(await _OrderDetailService.GetAll(cancellationToken));
         }
 
         [AllowAnonymous]
@@ -45,9 +45,9 @@ namespace JewelryStorePRN221.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [HttpPost("create")]
-        public async Task<ActionResult> Create([FromForm] PromotionDTO promotionDTO, CancellationToken cancellationToken = default)
+        public async Task<ActionResult> Create([FromForm] OrderDetailDTO OrderDetailDTO, CancellationToken cancellationToken = default)
         {
-            return Ok(await _promotionService.Add(promotionDTO, cancellationToken));
+            return Ok(await _OrderDetailService.Add(OrderDetailDTO, cancellationToken));
         }
 
         [AllowAnonymous]
@@ -56,9 +56,9 @@ namespace JewelryStorePRN221.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [HttpPatch("update/{id}")]
-        public async Task<ActionResult<PromotionDTO>> Update(string id, [FromForm] PromotionDTO promotionDTO, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<OrderDetailDTO>> Update(string id, [FromForm] OrderDetailDTO OrderDetailDTO, CancellationToken cancellationToken = default)
         {
-            return Ok(await _promotionService.Update(id, promotionDTO, cancellationToken));
+            return Ok(await _OrderDetailService.Update(id, OrderDetailDTO, cancellationToken));
         }
 
         [AllowAnonymous]
@@ -67,9 +67,9 @@ namespace JewelryStorePRN221.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [HttpDelete("delete")]
-        public async Task<ActionResult<PromotionDTO>> Delete(string id, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<OrderDetailDTO>> Delete(string id, CancellationToken cancellationToken = default)
         {
-            return Ok(await _promotionService.Delete(id, cancellationToken));
+            return Ok(await _OrderDetailService.Delete(id, cancellationToken));
         }
     }
 }
