@@ -1,24 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\github\\Ton\\JeweryStoreBE\\Services\\Services.csproj": {}
+    "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\Services\\Services.csproj": {}
   },
   "projects": {
-    "D:\\github\\Ton\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj": {
+    "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\github\\Ton\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj",
+        "projectUniqueName": "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj",
         "projectName": "BusinessObjecs",
-        "projectPath": "D:\\github\\Ton\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj",
-        "packagesPath": "C:\\Users\\wew91\\.nuget\\packages\\",
-        "outputPath": "D:\\github\\Ton\\JeweryStoreBE\\BusinessObjecs\\obj\\",
+        "projectPath": "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj",
+        "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
+        "outputPath": "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\BusinessObjecs\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\wew91\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -70,25 +66,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\github\\Ton\\JeweryStoreBE\\Repositories\\Repositories.csproj": {
+    "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\Repositories\\Repositories.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\github\\Ton\\JeweryStoreBE\\Repositories\\Repositories.csproj",
+        "projectUniqueName": "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\Repositories\\Repositories.csproj",
         "projectName": "Repositories",
-        "projectPath": "D:\\github\\Ton\\JeweryStoreBE\\Repositories\\Repositories.csproj",
-        "packagesPath": "C:\\Users\\wew91\\.nuget\\packages\\",
-        "outputPath": "D:\\github\\Ton\\JeweryStoreBE\\Repositories\\obj\\",
+        "projectPath": "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\Repositories\\Repositories.csproj",
+        "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
+        "outputPath": "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\Repositories\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\wew91\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -102,8 +94,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\github\\Ton\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj": {
-                "projectPath": "D:\\github\\Ton\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj"
+              "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj": {
+                "projectPath": "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj"
               }
             }
           }
@@ -130,6 +122,14 @@
             "BCrypt.Net-Next": {
               "target": "Package",
               "version": "[4.0.3, )"
+            },
+            "Microsoft.AspNetCore.Http.Abstractions": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Http.Features": {
+              "target": "Package",
+              "version": "[2.2.0, )"
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
@@ -168,25 +168,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\github\\Ton\\JeweryStoreBE\\Services\\Services.csproj": {
+    "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\Services\\Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\github\\Ton\\JeweryStoreBE\\Services\\Services.csproj",
+        "projectUniqueName": "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\Services\\Services.csproj",
         "projectName": "Services",
-        "projectPath": "D:\\github\\Ton\\JeweryStoreBE\\Services\\Services.csproj",
-        "packagesPath": "C:\\Users\\wew91\\.nuget\\packages\\",
-        "outputPath": "D:\\github\\Ton\\JeweryStoreBE\\Services\\obj\\",
+        "projectPath": "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\Services\\Services.csproj",
+        "packagesPath": "C:\\Users\\ACER\\.nuget\\packages\\",
+        "outputPath": "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\Services\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\wew91\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\ACER\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -200,8 +196,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "D:\\github\\Ton\\JeweryStoreBE\\Repositories\\Repositories.csproj": {
-                "projectPath": "D:\\github\\Ton\\JeweryStoreBE\\Repositories\\Repositories.csproj"
+              "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\Repositories\\Repositories.csproj": {
+                "projectPath": "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\Repositories\\Repositories.csproj"
               }
             }
           }
@@ -254,7 +250,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
