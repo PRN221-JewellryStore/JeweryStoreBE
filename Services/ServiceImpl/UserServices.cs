@@ -109,22 +109,43 @@ namespace Services.ServiceImpl
             return userList.MapToUserDtoList(_mapper);
         }
 
-        public async Task<string> Update(UserUpdateDTO request, CancellationToken cancellationToken)
+        public async Task<string> Update(string id, UserUpdateDTO request, CancellationToken cancellationToken)
         {
-            var user = await _userRepository.FindAsync(p => p.ID == request.ID && p.DeletedAt == null, cancellationToken);
+            var user = await _userRepository.FindAsync(p => p.ID == id && p.DeletedAt == null, cancellationToken);
             if (user == null)
             {
                 throw new NotFoundException("Không tìm thấy user");
             }
-            user.FullName = request.FullName;
-            user.PhoneNumber = request.PhoneNumber;
-            user.PasswordHash = _userRepository.HashPassword(request.Password);
-            user.Email = request.Email;
-            user.Address = request.Address;
+            if(request.FullName != null)
+            {
+                user.FullName = request.FullName;
+            }
+            if (request.PhoneNumber != null)
+            {
+                user.PhoneNumber = request.PhoneNumber;
+            }
+            if (request.Password != null)
+            {
+                user.PasswordHash = _userRepository.HashPassword(request.Password);
+            }
+            if (request.Email != null)
+            {
+                user.Email = request.Email;
+            }
+            if (request.Address != null)
+            {
+                user.Address = request.Address;
+            }
+            if (request.RoleID != null)
+            {
+                user.RoleID = (int)request.RoleID;
+            }
+            if (request.Point != null)
+            {
+                user.Point = (int)request.Point;
+            }
             user.UpdaterID = _currentUserService.UserId;
             user.LastestUpdateAt = DateTime.Now;
-            user.RoleID = request.RoleID;
-            user.Point = request.Point;
             _userRepository.Update(user);
             return await _userRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Update thành công" : "Update thất bại";
         }

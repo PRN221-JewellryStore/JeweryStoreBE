@@ -17,7 +17,7 @@ namespace Services.IService
 
         Task<List<UserDTO>> GetAll(CancellationToken cancellationToken);
 
-        Task<string> Update(UserUpdateDTO dto, CancellationToken cancellationToken);
+        Task<string> Update(string id, UserUpdateDTO dto, CancellationToken cancellationToken);
         Task<string> Delete(string id, CancellationToken cancellationToken);
     }
 }
