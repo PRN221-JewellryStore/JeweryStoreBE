@@ -9,6 +9,9 @@ using System.Net.Mime;
 
 namespace JewelryStorePRN221.Controllers
 {
+
+    [Route("api/[controller]")]
+    [ApiController]
     public class CounterController : ControllerBase
     {
         ICounterService _counterService;
@@ -20,9 +23,13 @@ namespace JewelryStorePRN221.Controllers
             _counterService = CounterService;
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<CounterEntity>> GetById(int id)
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<CounterEntity>> GetById(int id, CancellationToken cancellationToken = default)
         {
-            return Ok(await _counterService.GetById(id));
+            return Ok(await _counterService.GetById(id, cancellationToken));
         }
         /*  [HttpGet]
           public async Task<ActionResult<CategoryEntity>> GetAll() {
@@ -32,33 +39,43 @@ namespace JewelryStorePRN221.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        [Route("Counter/getall")]
+        [Route("getall")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<CounterEntity>>> GetAll()
+        public async Task<ActionResult<IEnumerable<CounterEntity>>> GetAll(CancellationToken cancellationToken)
         {
-            var categories = await _counterService.GetAll();
+            var categories = await _counterService.GetAll(cancellationToken);
             return Ok(categories);
         }
         [HttpPost]
-        public async Task<ActionResult<CategoryDTO>> CreateCategory([FromForm] CounterDTO counter)
+        [AllowAnonymous]
+        [Route("Create")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<CategoryDTO>> CreateCategory([FromForm] CounterDTO counter, CancellationToken cancellationToken)
         {
 
 
-            return Ok(await _counterService.Add(counter));
+            return Ok(await _counterService.Add(counter, cancellationToken));
 
         }
         [HttpPatch]
 
-        [Route("counter/Update")]
-
-            public async Task<ActionResult> UpdateCounter([FromForm] CounterDTO counter, int id)
+        [Route("Update")]
+        [AllowAnonymous]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> UpdateCounter([FromForm] CounterDTO counter, int id, CancellationToken cancellationToken)
             {
 
                 try
-                { var getCounter = await _counterService.GetById(id);
+                { var getCounter = await _counterService.GetById(id, cancellationToken);
                     if (getCounter == null)
                     {
                         return NotFound(new { Message = "Counter not found" });
@@ -67,7 +84,7 @@ namespace JewelryStorePRN221.Controllers
                     }
                     else
                     {
-                       await _counterService.Update(counter, id);
+                       await _counterService.Update(counter, id, cancellationToken);
                         return Ok("Update success");
                     }
                 }
@@ -78,14 +95,14 @@ namespace JewelryStorePRN221.Controllers
         }
         [HttpDelete]
         [AllowAnonymous]
-        [Route("counter/Delete")]
+        [Route("Delete")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> DeleteCounter(int id, string userId, CancellationToken cancellationToken = default)
         {
-            var categoryEntity = await _counterService.GetById(id); // Ensure you have a method to get category by id
+            var categoryEntity = await _counterService.GetById(id, cancellationToken); // Ensure you have a method to get category by id
             var User = await _userService.GetUser(userId, cancellationToken);
             if (categoryEntity == null)
             {
@@ -93,7 +110,7 @@ namespace JewelryStorePRN221.Controllers
             }
 
             // Call the delete method
-            await _counterService.Delete(categoryEntity, User);
+            await _counterService.Delete(categoryEntity, User,cancellationToken);
 
             return Ok(new { Message = "Counter deleted successfully" });
         }

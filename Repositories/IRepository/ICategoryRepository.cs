@@ -14,11 +14,11 @@ namespace Repositories.IRepository
     {
         Task<List<CategoryEntity>> FindAsync(Expression<Func<CategoryEntity, bool>> expression);
 
-        Task<List<CategoryEntity>> GetAll();
+        Task<List<CategoryEntity>> GetAll(CancellationToken cancellationToken);
 
-        Task <CategoryEntity> GetCategoryById(int id);
+        Task <CategoryEntity> GetCategoryById(int id,CancellationToken cancellationToken);
 
-        Task DeleteCategoryById(CategoryEntity entity, string DeletedId);
+        Task DeleteCategoryById(CategoryEntity entity, string DeletedId,CancellationToken cancellationToken);
         Task UpdateCategoryById(CategoryEntity entity, int id);
 
     //    Task<CategoryDTO> AddCategoryAsync(CategoryDTO categoryDto);

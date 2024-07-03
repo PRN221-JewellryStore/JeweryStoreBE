@@ -27,20 +27,20 @@ namespace Services.ServiceImpl
             _mapper = mapper;
         }
 
-        public async Task<CounterDTO> Add(CounterDTO CounterDTO)
+        public async Task<CounterDTO> Add(CounterDTO CounterDTO,CancellationToken cancellationToken)
         {
             var Counter = _mapper.Map<CounterEntity>(CounterDTO);
             _counterRepository.Add(Counter);
-           await _counterRepository.UnitOfWork.SaveChangesAsync();
+           await _counterRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
             var CounterEntity = _mapper.Map<CounterDTO>(Counter);
 
             return CounterEntity;
 
         }
 
-        public Task Delete(CounterEntity counter, UserDTO user)
+        public Task Delete(CounterEntity counter, UserDTO user, CancellationToken cancellationToken)
         {
-            var getCounter = _counterRepository.FindAsync(x => x.ID == counter.ID && x.DeleterID == null).ToString();
+            var getCounter = _counterRepository.FindAsync(x => x.ID == counter.ID && x.DeleterID == null, cancellationToken).ToString();
             if (getCounter == null) {
                 throw new ArgumentNullException(nameof(CounterEntity), "Already Deleted");
             }
@@ -49,7 +49,7 @@ namespace Services.ServiceImpl
                 counter.DeleterID = user.ID;
                 counter.DeletedAt= DateTime.Now;
                 _counterRepository.Update(counter);
-                _counterRepository.UnitOfWork.SaveChangesAsync().Wait();
+                _counterRepository.UnitOfWork.SaveChangesAsync(cancellationToken).Wait();
 
                 throw new ArgumentNullException(nameof(CounterEntity), "Deleted Success");
 
@@ -57,21 +57,30 @@ namespace Services.ServiceImpl
 
         }
 
-        public async Task<List<CounterEntity>> GetAll()
+        public async Task<List<CounterEntity>> GetAll(CancellationToken cancellationToken)
         {
-            var getAll = await _counterRepository.FindAllAsync();
+            var getAll = await _counterRepository.FindAllAsync(cancellationToken);
             var getActive = getAll.Where(c => c.DeleterID == null).ToList();
+            if (getActive == null) {
+                throw new Exception("No list");
+            
+            }
             return getActive;
         }
 
-        public Task<CounterEntity> GetById(int id)
+        public async Task<CounterEntity> GetById(int id, CancellationToken cancellationToken)
         {
-           return _counterRepository.FindAsync(p=> p.ID == id); 
+           var counter = await _counterRepository.FindAsync(p=> p.ID == id && p.DeleterID == null, cancellationToken);
+            if(counter == null)
+            {
+                throw new NotFoundException($"Counter with ID {id} not found");
+            }
+            else { return counter; }
         }
 
-        public async Task Update(CounterDTO counterDTO, int id)
+        public async Task Update(CounterDTO counterDTO, int id,CancellationToken cancellationToken)
         {
-            var existingCounterEntity = await _counterRepository.FindAsync(p => p.ID == id);
+            var existingCounterEntity = await _counterRepository.FindAsync(p => p.ID == id , cancellationToken);
             if (existingCounterEntity == null)
             {
                 throw new NotFoundException($"Counter with ID {id} not found");
@@ -79,7 +88,7 @@ namespace Services.ServiceImpl
 
             _mapper.Map(counterDTO, existingCounterEntity);
             _counterRepository.Update(existingCounterEntity);
-            await _counterRepository.UnitOfWork.SaveChangesAsync();
+            await _counterRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
         }
         /*  var existingCounterEntity = await _counterRepository.FindAsync(p => p.ID == id);
           if (existingCounterEntity == null)

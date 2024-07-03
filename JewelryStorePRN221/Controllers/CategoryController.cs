@@ -23,10 +23,15 @@ namespace JewelryStorePRN221.Controllers
             _userService = userServices;
             _categoryService = categoryService;
         }
+        [AllowAnonymous]
         [HttpGet("{id}")]
-        public async Task<ActionResult<CategoryEntity>> GetById(int id)
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<CategoryEntity>> GetById(int id, CancellationToken cancellationToken = default )
         {
-            return Ok(await _categoryService.GetById(id));
+            return Ok(await _categoryService.GetById(id, cancellationToken));
         }
         /*  [HttpGet]
           public async Task<ActionResult<CategoryEntity>> GetAll() {
@@ -34,31 +39,42 @@ namespace JewelryStorePRN221.Controllers
           }*/
 
 
-        [AllowAnonymous]
         [HttpGet]
-        [Route("Category/getall")]
+        [Route("getall")]
+        [AllowAnonymous]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<CategoryEntity>>> GetAll()
+        public async Task<ActionResult<IEnumerable<CategoryEntity>>> GetAll(CancellationToken cancellationToken = default)
         {
-            var categories = await _categoryService.GetAll();
+            var categories = await _categoryService.GetAll(cancellationToken);
             return Ok(categories);
         }
         [HttpPost]
-        public async Task<ActionResult<CategoryDTO >> CreateCategory([FromForm] CategoryDTO category) {
+        [Route("Create")]
+        [AllowAnonymous]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<CategoryDTO >> CreateCategory([FromForm] CategoryDTO category, CancellationToken cancellationToken = default) {
 
           
-            return Ok(await _categoryService.Add(category));
+            return Ok(await _categoryService.Add(category, cancellationToken));
 
         }
         [HttpPatch]
-
-        public async Task<ActionResult> UpdateCategory([FromForm] CategoryDTO category, int id) {
+        [Route("Update")]
+        [AllowAnonymous]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> UpdateCategory([FromForm] CategoryDTO category, int id, CancellationToken cancellationToken = default) {
             try
             {
-                var updatedCategory =  _categoryService.Update(category,  id);
+                var updatedCategory =  _categoryService.Update(category,  id, cancellationToken);
                 return Ok(updatedCategory);
             }
             catch (Exception ex)
@@ -68,14 +84,14 @@ namespace JewelryStorePRN221.Controllers
         }
         [HttpDelete]
         [AllowAnonymous]
-        [Route("Category/Delete")]
+        [Route("Delete")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> DeleteCategory(int id,  string userId, CancellationToken cancellationToken = default)
         {
-            var categoryEntity = await _categoryService.GetById(id); // Ensure you have a method to get category by id
+            var categoryEntity = await _categoryService.GetById(id, cancellationToken); // Ensure you have a method to get category by id
             var User = await _userService.GetUser(userId, cancellationToken);
             if (categoryEntity == null)
             {
@@ -83,7 +99,7 @@ namespace JewelryStorePRN221.Controllers
             }
 
             // Call the delete method
-            await _categoryService.Delete(categoryEntity,User);
+            await _categoryService.Delete(categoryEntity,User, cancellationToken);
 
             return Ok(new { Message = "Category deleted successfully" });
         }

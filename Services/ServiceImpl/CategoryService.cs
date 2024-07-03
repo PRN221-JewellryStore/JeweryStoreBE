@@ -4,6 +4,7 @@ using BusinessObjecs.Models;
 using BusinessObjecs.Models.Configured;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
+using Repositories.Common.Exceptions;
 using Repositories.IRepository;
 using Repositories.RepositoryImpl;
 using Services.IService;
@@ -27,7 +28,7 @@ namespace Services.ServiceImpl
             _mapper = mapper;
         }
 
-        public async Task<CategoryDTO> Add(CategoryDTO categoryDto)
+        public async Task<CategoryDTO> Add(CategoryDTO categoryDto, CancellationToken cancellationToken)
         {
             /*    _categoryRepository.AddCategoryAsync(CategoryEntity);
                return CategoryEntity;*/
@@ -39,7 +40,7 @@ namespace Services.ServiceImpl
             _categoryRepository.Add(categoryEntity);
 
                 // Save changes asynchronously
-                await _categoryRepository.UnitOfWork.SaveChangesAsync();
+                await _categoryRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
                 // Map the saved CategoryEntity back to CategoryDTO
                 var addedCategoryDto = _mapper.Map<CategoryDTO>(categoryEntity);
@@ -48,7 +49,7 @@ namespace Services.ServiceImpl
 
     }
 
-        public async  Task Delete(CategoryEntity CategoryEntity, UserDTO user)
+        public async  Task Delete(CategoryEntity CategoryEntity, UserDTO user, CancellationToken cancellationToken)
         {
             /*   if (!_categoryRepository.IsAdmin(user)) {
                    throw new UnauthorizedAccessException("User is not an admin.");
@@ -63,26 +64,35 @@ namespace Services.ServiceImpl
             {
                 throw new ArgumentException("Invalid user ID", nameof(user.ID));
             }
-            await _categoryRepository.DeleteCategoryById(CategoryEntity, user.ID);
+            await _categoryRepository.DeleteCategoryById(CategoryEntity, user.ID, cancellationToken);
         }
 
-        public async Task<List<CategoryEntity>> GetAll()
+        public async Task<List<CategoryEntity>> GetAll(CancellationToken cancellationToken)
         {
-            return await _categoryRepository.GetAll();
-             
+            var category=  await _categoryRepository.GetAll(cancellationToken);
+            if (category == null) {
+
+                throw new Exception("No list");
+            }
+            return category;
         }
 
-        public async Task<CategoryEntity> GetById(int id)
+        public async Task<CategoryEntity> GetById(int id, CancellationToken cancellationToken)
         {
-            return await _categoryRepository.GetCategoryById(id);
+            var category = await _categoryRepository.GetCategoryById(id, cancellationToken);
+            if(category == null)
+            {
+                throw new NotFoundException($"Category with ID {id} not found");
+
+            } return category;
         }
 
-        public async Task Update(CategoryDTO Categorydto, int id)
+        public async Task Update(CategoryDTO Categorydto, int id, CancellationToken cancellationToken)
         {
-            var ExistingCatogory = await _categoryRepository.GetCategoryById(id);
+            var ExistingCatogory = await _categoryRepository.GetCategoryById(id, cancellationToken);
             _mapper.Map(Categorydto, ExistingCatogory);
               _categoryRepository.Update(ExistingCatogory);
-            await _categoryRepository.UnitOfWork.SaveChangesAsync();
+            await _categoryRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
         }
     }
 }

@@ -30,11 +30,11 @@ namespace Repositories.RepositoryImpl
 
       
         } */
-        public async Task<List<CategoryEntity>> GetAll()
+        public async Task<List<CategoryEntity>> GetAll(CancellationToken cancellationToken)
         {
             return await _Context.categoryEntities
                  .Where(c => c.DeleterID == null)
-                 .ToListAsync();
+                 .ToListAsync(cancellationToken);
         }
         /*      private readonly JeweryStoreDBContext _Context;
               private readonly ICategoryRepository _CategoryRepository;*/
@@ -43,9 +43,9 @@ namespace Repositories.RepositoryImpl
         {
             return await _Context.Set<CategoryEntity>().Where(expression).ToListAsync();
         }
-        public async Task<CategoryEntity> GetCategoryById(int id)
+        public async Task<CategoryEntity> GetCategoryById(int id, CancellationToken cancellationToken)
         {
-            return await _Context.Set<CategoryEntity>().FindAsync(id);
+            return await _Context.Set<CategoryEntity>().FindAsync(id, cancellationToken);
         }
      
         public bool IsAdmin(UserEntity user)
@@ -60,15 +60,15 @@ namespace Repositories.RepositoryImpl
             }
         }
 
-        public  async Task DeleteCategoryById(CategoryEntity entity, String DeletedId)
+        public  async Task DeleteCategoryById(CategoryEntity entity, String DeletedId, CancellationToken cancellationToken)
         {
-            var categoryDelete = await _Context.Set<CategoryEntity>().FindAsync(entity.ID);
+            var categoryDelete = await _Context.Set<CategoryEntity>().FindAsync(entity.ID, cancellationToken);
             //check xem User co phair admin khong -> Neu la ADmin gang DeleteId = UserId
             if (categoryDelete != null)
             {
                 categoryDelete.DeleterID = DeletedId; // Đánh dấu xóa bằng cách gán DeletedId
                 _Context.Update(categoryDelete);
-                await _Context.SaveChangesAsync();
+                await _Context.SaveChangesAsync(cancellationToken);
             }
         }
 
