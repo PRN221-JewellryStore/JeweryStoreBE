@@ -1,4 +1,7 @@
-﻿using System;
+﻿using AutoMapper;
+using BusinessObjecs.Mapping;
+using BusinessObjecs.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BusinessObjecs.DTOs
 {
-    public class UserDTO
+    public class UserDTO : IMapFrom<UserEntity>
     {
         public string ID {  get; set; }
         public string Username { get; set; }
@@ -17,5 +20,10 @@ namespace BusinessObjecs.DTOs
         public string Address { get; set; }
         public int Point { get; set; }
         public int RoleID { get; set; }
+
+        public void Mapping(Profile profile)
+        {
+            profile.CreateMap<UserEntity, UserDTO>();
+        }
     }
 }

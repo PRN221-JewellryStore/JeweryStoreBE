@@ -58,22 +58,49 @@ namespace JewelryStorePRN221.Controllers
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<string>>> DeleteRole([FromRoute] string id, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<string>>> DeleteUser([FromRoute] string id, CancellationToken cancellationToken = default)
         {
             var result = await _userServices.Delete(id, cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpPut("update")]
+        [HttpPatch("update/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<string>>> UpdateRole(UserUpdateDTO dto
+        public async Task<ActionResult<JsonResponse<string>>> UpdateUser([FromRoute] string id
+            , [FromForm]UserUpdateDTO dto
             , CancellationToken cancellationToken)
         {
-            var result = await _userServices.Update(dto, cancellationToken);
+            var result = await _userServices.Update(id, dto, cancellationToken);
             return Ok(new JsonResponse<string>(result));
+        }
+
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(JsonResponse<UserDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<UserDTO>>> GetByID([FromRoute] string id, CancellationToken cancellationToken = default)
+        {
+            var result = await _userServices.GetUser(id, cancellationToken);
+            return Ok(new JsonResponse<UserDTO>(result));
+        }
+
+        [HttpGet("getAll")]
+        [ProducesResponseType(typeof(JsonResponse<List<UserDTO>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<UserDTO>>> GetAll(CancellationToken cancellationToken = default)
+        {
+            var result = await _userServices.GetAll(cancellationToken);
+            return Ok(new JsonResponse<List<UserDTO>>(result));
         }
     }
 }
