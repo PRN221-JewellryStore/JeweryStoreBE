@@ -48,7 +48,7 @@ namespace Services.ServiceImpl
 
     }
 
-        public async  Task Delete(CategoryEntity CategoryEntity, UserEntity user)
+        public async  Task Delete(CategoryEntity CategoryEntity, UserDTO user)
         {
             /*   if (!_categoryRepository.IsAdmin(user)) {
                    throw new UnauthorizedAccessException("User is not an admin.");
