@@ -1,7 +1,12 @@
 using AutoMapper;
 using BusinessObjecs.Mapping;
+using JewelryStorePRN221;
+using JewelryStorePRN221.Configuration;
 using JewelryStorePRN221.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 using Repositories;
 using Repositories.Common.Interface;
 using Repositories.IRepository;
@@ -9,29 +14,29 @@ using Repositories.RepositoryImpl;
 using Services.IService;
 using Services.ServiceImpl;
 using System.Reflection;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+var startup = new Startup(builder.Configuration);
+startup.ConfigureServices(builder.Services);
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.AddAutoMapper(typeof(MappingProfile));
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy",
     builder => builder.AllowAnyOrigin()
-    .AllowAnyMethod()
-    .AllowAnyHeader()
-    );
+                      .AllowAnyMethod()
+                      .AllowAnyHeader());
 });
 
-//service
+// Register services
 builder.Services.AddScoped<IUserServices, UserServices>();
-builder.Services.AddScoped<IJwtService, JwtService>();
+builder.Services.AddTransient<IJwtService, JwtService>();
+builder.Services.AddTransient<ICurrentUserService, CurrentUserService>();
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICounterService, CounterService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
@@ -40,10 +45,9 @@ builder.Services.AddScoped<IPromotionService, PromotionService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IVnPayService, VnPayService>();
 
-
 builder.Services.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<JeweryStoreDBContext>());
 
-//repo
+// Register repositories
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IRoleRepository, RoleRepository>();
 builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
@@ -53,8 +57,6 @@ builder.Services.AddTransient<IOrderDetailRepository, OrderDetailRepository>();
 builder.Services.AddTransient<IPromotionRepository, PromotionRepository>();
 builder.Services.AddTransient<IProductRepository, ProductRepository>();
 
-
-
 builder.Services.AddDbContext<JeweryStoreDBContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -62,24 +64,12 @@ builder.Services.AddDbContext<JeweryStoreDBContext>(options =>
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope()) // Create a scope to access the services
+using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     var context = services.GetRequiredService<JeweryStoreDBContext>();
 }
 
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
+startup.Configure(app, app.Environment);
 
 app.Run();

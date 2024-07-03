@@ -1,4 +1,7 @@
-﻿using BusinessObjecs.DTOs;
+﻿using AutoMapper;
+using Azure.Core;
+using BusinessObjecs.DTOs;
+using BusinessObjecs.MappingExtension;
 using BusinessObjecs.Models;
 using Microsoft.EntityFrameworkCore;
 using Repositories.Common.Exceptions;
@@ -8,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Services.ServiceImpl
@@ -15,28 +19,32 @@ namespace Services.ServiceImpl
     public class UserServices : IUserServices
     {
         private readonly IUserRepository _userRepository;
+        private readonly IMapper _mapper;
+        private readonly ICurrentUserService _currentUserService;
         private readonly IRoleRepository _roleRepository;
-        public UserServices(IUserRepository userRepository, IRoleRepository roleRepository)
+        public UserServices(IUserRepository userRepository, IRoleRepository roleRepository, IMapper mapper, ICurrentUserService currentUserService)
         {
+            _currentUserService = currentUserService;
+            _mapper = mapper;
             _userRepository = userRepository;
             _roleRepository = roleRepository;
         }
         public async Task<UserLoginDTO> Login(LoginDTO query, CancellationToken cancellationToken)
         {
-            var user = await _userRepository.FindAsync(x => x.Email == query.user.Email && x.DeletedAt == null, cancellationToken);
+            var user = await _userRepository.FindAsync(x => x.Email == query.Email && x.DeletedAt == null, cancellationToken);
             if (user == null)
             {
-                throw new NotFoundException($"Không tìm thấy tài khoản nào với email - {query.user.Email}");
+                throw new NotFoundException($"Không tìm thấy tài khoản nào với email - {query.Email}");
             }
             if (user != null)
             {
                 var role = await _roleRepository.FindAsync(x => x.ID == user.RoleID && x.DeletedAt == null, cancellationToken);
                 if (role == null)
                 {
-                    throw new NotFoundException($"Không tìm thấy tài khoản với role - {query.user.Email}");
+                    throw new NotFoundException($"Không tìm thấy tài khoản với role - {query.Email}");
                 }
 
-                var checkPassword = _userRepository.VerifyPassword(query.user.Password, user.PasswordHash);
+                var checkPassword = _userRepository.VerifyPassword(query.Password, user.PasswordHash);
                 if (checkPassword)
                 {
                     return UserLoginDTO.Create(user.Email, user.ID, role.Name);
@@ -78,11 +86,60 @@ namespace Services.ServiceImpl
             await _userRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
             return user.ID;       
         }
-        public async Task<UserEntity> GetUser(string id)
+        public async Task<UserDTO> GetUser(string id, CancellationToken cancellationToken)
         {
-            return await _userRepository.FindAsync(p=> p.ID == id);
-
+            var user = await _userRepository.FindAsync(p=> p.ID == id && p.DeletedAt == null, cancellationToken);
+            if (user == null)
+            {
+                throw new NotFoundException("Không tìm thấy user");
+            }
+            return user.MapToUserDto(_mapper);
         }
 
+        public async Task<List<UserDTO>> GetAll(CancellationToken cancellationToken)
+        {
+            var userList = await _userRepository.FindAllAsync(cancellationToken);
+            foreach (UserEntity user in userList)
+            {
+                if ( user.DeleterID != null)
+                {
+                    userList.Remove(user);
+                }
+            }
+            return userList.MapToUserDtoList(_mapper);
+        }
+
+        public async Task<string> Update(UserUpdateDTO request, CancellationToken cancellationToken)
+        {
+            var user = await _userRepository.FindAsync(p => p.ID == request.ID && p.DeletedAt == null, cancellationToken);
+            if (user == null)
+            {
+                throw new NotFoundException("Không tìm thấy user");
+            }
+            user.FullName = request.FullName;
+            user.PhoneNumber = request.PhoneNumber;
+            user.PasswordHash = _userRepository.HashPassword(request.Password);
+            user.Email = request.Email;
+            user.Address = request.Address;
+            user.UpdaterID = _currentUserService.UserId;
+            user.LastestUpdateAt = DateTime.Now;
+            user.RoleID = request.RoleID;
+            user.Point = request.Point;
+            _userRepository.Update(user);
+            return await _userRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Update thành công" : "Update thất bại";
+        }
+
+        public async Task<string> Delete(string id, CancellationToken cancellationToken)
+        {
+            var user = await _userRepository.FindAsync(p => p.ID == id && p.DeletedAt == null, cancellationToken);
+            if (user == null)
+            {
+                throw new NotFoundException("Không tìm thấy user");
+            }
+            user.DeleterID = _currentUserService.UserId;
+            user.DeletedAt = DateTime.Now;
+            _userRepository.Update(user);
+            return await _userRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Delete thành công" : "Delete thất bại";
+        }
     }
 }

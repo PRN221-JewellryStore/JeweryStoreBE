@@ -38,7 +38,7 @@ namespace Services.ServiceImpl
 
         }
 
-        public Task Delete(CounterEntity counter, UserEntity user)
+        public Task Delete(CounterEntity counter, UserDTO user)
         {
             var getCounter = _counterRepository.FindAsync(x => x.ID == counter.ID && x.DeleterID == null).ToString();
             if (getCounter == null) {

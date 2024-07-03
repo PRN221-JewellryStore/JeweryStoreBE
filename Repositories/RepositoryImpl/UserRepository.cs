@@ -7,14 +7,10 @@ namespace Repositories.RepositoryImpl
 {
     public class UserRepository : RepositoryBase<UserEntity, UserEntity, JeweryStoreDBContext>, IUserRepository
     {
-        private readonly JeweryStoreDBContext _Context;
-
-        public UserRepository(JeweryStoreDBContext dbContext, IMapper mapper) : base(dbContext,mapper)
+        public UserRepository(JeweryStoreDBContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
-            _Context = dbContext;
-        }
 
-      
+        }
 
         public string HashPassword(string password)
         {

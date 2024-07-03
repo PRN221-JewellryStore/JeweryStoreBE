@@ -9,15 +9,12 @@ namespace BusinessObjecs.DTOs
 {
     public class LoginDTO
     {
-        public LoginDTO()
+        public LoginDTO(string email, string password)
         {
-            
+            Email = email;
+            Password = password;
         }
-        public LoginDTO(LoginEntity loginEntity)
-        {
-            user.Email = loginEntity.Email;
-            user.Password = loginEntity.Password;
-        }
-        public required LoginEntity user { get; set; }
+        public required string Email { get; set; }
+        public required string Password { get; set; }
     }
 }

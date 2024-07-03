@@ -73,10 +73,10 @@ namespace JewelryStorePRN221.Controllers
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> DeleteCategory(int id,  string userId)
+        public async Task<ActionResult> DeleteCategory(int id,  string userId, CancellationToken cancellationToken = default)
         {
             var categoryEntity = await _categoryService.GetById(id); // Ensure you have a method to get category by id
-            var User = await _userService.GetUser(userId);
+            var User = await _userService.GetUser(userId, cancellationToken);
             if (categoryEntity == null)
             {
                 return NotFound(new { Message = "Category not found" });

@@ -15,6 +15,6 @@ namespace Services.IService
         public Task<List<CounterEntity>> GetAll();
         public Task<CounterDTO> Add(CounterDTO CategoryEntity);
         public Task Update(CounterDTO CategoryEntity, int id);
-        public Task Delete(CounterEntity CategoryEntity, UserEntity user);
+        public Task Delete(CounterEntity CategoryEntity, UserDTO user);
     }
 }
