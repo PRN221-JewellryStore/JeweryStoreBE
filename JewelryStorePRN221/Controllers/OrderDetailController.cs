@@ -69,7 +69,7 @@ namespace JewelryStorePRN221.Controllers
         [HttpDelete("delete")]
         public async Task<ActionResult<OrderDetailDTO>> Delete(string id, CancellationToken cancellationToken = default)
         {
-            return Ok(await _OrderDetailService.Delete(id, cancellationToken));
+            return Ok(await _OrderDetailService.Delete(id, cancellationToken, HttpContext.User));
         }
     }
 }

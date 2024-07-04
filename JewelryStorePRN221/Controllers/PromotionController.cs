@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.IService;
 using System.Net.Mime;
+using System.Security.Claims;
 
 namespace JewelryStorePRN221.Controllers
 {
@@ -69,7 +70,8 @@ namespace JewelryStorePRN221.Controllers
         [HttpDelete("delete")]
         public async Task<ActionResult<PromotionDTO>> Delete(string id, CancellationToken cancellationToken = default)
         {
-            return Ok(await _promotionService.Delete(id, cancellationToken));
+            
+            return Ok(await _promotionService.Delete(id, cancellationToken, HttpContext.User));
         }
     }
 }

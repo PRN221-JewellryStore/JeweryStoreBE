@@ -6,7 +6,9 @@ using Repositories.IRepository;
 using Services.IService;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -31,15 +33,17 @@ namespace Services.ServiceImpl
             throw new Exception("Something went wrong! Add action unsuccesful");
         }
 
-        public async Task<ProductDTO> Delete(string id, CancellationToken cancellationToken)
+        public async Task<ProductDTO> Delete(string id, CancellationToken cancellationToken, ClaimsPrincipal claims)
         {
+
             var Product = await _ProductRepository.FindAsync(p => p.ID.Equals(id));
             if (Product is null)
             {
                 throw new NotFoundException("Product not existed!");
             }
 
-            _ProductRepository.Remove(Product);
+            Product.DeleterID = claims.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
+            Product.DeletedAt = DateTime.Now;
 
             if (await _ProductRepository.UnitOfWork.SaveChangesAsync(cancellationToken) != 0)
             {
