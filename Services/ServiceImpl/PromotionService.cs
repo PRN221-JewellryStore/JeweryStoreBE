@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Mapster;
 using BusinessObjecs.Models;
 using Repositories.Common.Exceptions;
+using System.Security.Claims;
 
 namespace Services.ServiceImpl
 {
@@ -30,15 +31,16 @@ namespace Services.ServiceImpl
             throw new Exception("Something went wrong! Add action unsuccesful");
         }
 
-        public async Task<PromotionDTO> Delete(string id, CancellationToken cancellationToken)
+        public async Task<PromotionDTO> Delete(string id, CancellationToken cancellationToken, ClaimsPrincipal claims)
         {
             var promotion = await _promotionRepository.FindAsync(p => p.ID.Equals(id));
             if (promotion is null)
             {
                 throw new NotFoundException("Promotion not existed!");
             }
-
-            _promotionRepository.Remove(promotion);
+            promotion.DeleterID = claims.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            promotion.DeletedAt = DateTime.Now;
+            _promotionRepository.Update(promotion);
 
             if (await _promotionRepository.UnitOfWork.SaveChangesAsync(cancellationToken) != 0)
             {

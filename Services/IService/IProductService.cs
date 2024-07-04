@@ -3,6 +3,7 @@ using BusinessObjecs.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,6 +15,6 @@ namespace Services.IService
         Task<List<ProductEntity>> GetAll(CancellationToken cancellationToken);
         Task<ProductDTO> Add(ProductDTO productDTO, CancellationToken cancellationToken);
         Task<ProductDTO> Update(string id, ProductDTO productDTO, CancellationToken cancellationToken);
-        Task<ProductDTO> Delete(string id, CancellationToken cancellationToken);
+        Task<ProductDTO> Delete(string id, CancellationToken cancellationToken, ClaimsPrincipal claims);
     }
 }
