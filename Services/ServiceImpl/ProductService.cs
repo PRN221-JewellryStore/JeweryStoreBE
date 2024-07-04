@@ -6,6 +6,7 @@ using Repositories.IRepository;
 using Services.IService;
 using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -41,9 +42,8 @@ namespace Services.ServiceImpl
                 throw new NotFoundException("Product not existed!");
             }
 
-            Product.DeleterID = claims.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            Product.DeleterID = claims.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
             Product.DeletedAt = DateTime.Now;
-            _ProductRepository.Update(Product);
 
             if (await _ProductRepository.UnitOfWork.SaveChangesAsync(cancellationToken) != 0)
             {

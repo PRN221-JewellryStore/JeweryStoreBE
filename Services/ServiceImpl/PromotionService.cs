@@ -10,6 +10,7 @@ using Mapster;
 using BusinessObjecs.Models;
 using Repositories.Common.Exceptions;
 using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Services.ServiceImpl
 {
@@ -38,9 +39,8 @@ namespace Services.ServiceImpl
             {
                 throw new NotFoundException("Promotion not existed!");
             }
-            promotion.DeleterID = claims.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            promotion.DeleterID = claims.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
             promotion.DeletedAt = DateTime.Now;
-            _promotionRepository.Update(promotion);
 
             if (await _promotionRepository.UnitOfWork.SaveChangesAsync(cancellationToken) != 0)
             {
