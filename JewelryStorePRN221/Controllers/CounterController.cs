@@ -9,6 +9,7 @@ using System.Net.Mime;
 
 namespace JewelryStorePRN221.Controllers
 {
+    //[ApiController]
     public class CounterController : ControllerBase
     {
         ICounterService _counterService;

@@ -10,7 +10,7 @@ namespace JewelryStorePRN221.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class UserController : ControllerBase
     {
         private readonly IUserServices _userServices;
@@ -21,22 +21,25 @@ namespace JewelryStorePRN221.Controllers
             _userServices = userServices;
             _jwtService = jwtService;
         }
+
         [AllowAnonymous]
         [HttpPost]
         [Route("login")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(JsonResponse<UserLoginDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<string>>> Login(
+        public async Task<ActionResult<JsonResponse<UserLoginDTO>>> Login(
                        [FromBody] LoginDTO request,
                                   CancellationToken cancellationToken = default)
-        {           
-            var result = await _userServices.Login(request, cancellationToken);
-            var token = _jwtService.CreateToken(result.ID, result.Role);
-            return Ok(new JsonResponse<string>(token));
+        {
+            var result = _userServices.Login(request, cancellationToken);
+            var token = _jwtService.CreateToken(result.Result.ID, result.Result.Role);
+            result.Result.Token = token;
+            return Ok(result.Result);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [Route("register")]
         [Produces(MediaTypeNames.Application.Json)]

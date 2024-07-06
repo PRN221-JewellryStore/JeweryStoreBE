@@ -47,7 +47,7 @@ namespace Services.ServiceImpl
                 var checkPassword = _userRepository.VerifyPassword(query.Password, user.PasswordHash);
                 if (checkPassword)
                 {
-                    return UserLoginDTO.Create(user.Email, user.ID, role.Name);
+                    return UserLoginDTO.Create(user.ID, user.Username, user.Email, role.Name);
                 }
             }
             throw new Exception("Tài khoản hoặc mật khẩu không đúng.");
