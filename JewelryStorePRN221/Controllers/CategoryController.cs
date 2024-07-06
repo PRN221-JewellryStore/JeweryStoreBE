@@ -12,7 +12,7 @@ using System.Net.Mime;
 namespace JewelryStorePRN221.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]
+    //[ApiController]
     public class CategoryController : ControllerBase
     {
         ICategoryService _categoryService;

@@ -17,15 +17,18 @@ namespace BusinessObjecs.DTOs
             profile.CreateMap<UserEntity, UserLoginDTO>();
         }
         public string Username { get; set; }
+        public string Email {  get; set; }
         public string ID { get; set; }
         public string Role { get; set; }
-        public static UserLoginDTO Create(string username, string id, string role)
+        public string Token {  get; set; }
+        public static UserLoginDTO Create(string id, string username, string email, string role)
         {
             return new UserLoginDTO
             {
                 Username = username,
                 ID = id,
-                Role = role
+                Role = role,
+                Email = email
             };
         }
     }
