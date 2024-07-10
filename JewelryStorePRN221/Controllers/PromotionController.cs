@@ -67,7 +67,7 @@ namespace JewelryStorePRN221.Controllers
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        [HttpDelete("delete")]
+        [HttpDelete("delete/{id}")]
         public async Task<ActionResult<PromotionDTO>> Delete(string id, CancellationToken cancellationToken = default)
         {
             
