@@ -99,23 +99,30 @@ namespace Repositories
 
             var products = new List<ProductEntity>
             {
-                new ProductEntity { ID = Guid.NewGuid().ToString("N"), Description = "Product 1", Cost = 1000, Weight = 10, Quantity = 5, CategoryID = 1 },
-                new ProductEntity { ID = Guid.NewGuid().ToString("N"), Description = "Product 2", Cost = 1500, Weight = 15, Quantity = 10, CategoryID = 1 },
-                new ProductEntity { ID = Guid.NewGuid().ToString("N"), Description = "Product 3", Cost = 2000, Weight = 20, Quantity = 7, CategoryID = 2 },
-                new ProductEntity { ID = Guid.NewGuid().ToString("N"), Description = "Product 4", Cost = 2500, Weight = 25, Quantity = 12, CategoryID = 2 },
-                new ProductEntity { ID = Guid.NewGuid().ToString("N"), Description = "Product 5", Cost = 3000, Weight = 30, Quantity = 3, CategoryID = 3 },
-                new ProductEntity { ID = Guid.NewGuid().ToString("N"), Description = "Product 6", Cost = 3500, Weight = 35, Quantity = 8, CategoryID = 3 },
-                new ProductEntity { ID = Guid.NewGuid().ToString("N"), Description = "Product 7", Cost = 4000, Weight = 40, Quantity = 2, CategoryID = 4 },
-                new ProductEntity { ID = Guid.NewGuid().ToString("N"), Description = "Product 8", Cost = 4500, Weight = 45, Quantity = 6, CategoryID = 4 },
-                new ProductEntity { ID = Guid.NewGuid().ToString("N"), Description = "Product 9", Cost = 5000, Weight = 50, Quantity = 4, CategoryID = 5 },
-                new ProductEntity { ID = Guid.NewGuid().ToString("N"), Description = "Product 10", Cost = 5500, Weight = 55, Quantity = 9, CategoryID = 5 },
-                new ProductEntity { ID = Guid.NewGuid().ToString("N"), Description = "Product 11", Cost = 6000, Weight = 60, Quantity = 1, CategoryID = 6 },
-                new ProductEntity { ID = Guid.NewGuid().ToString("N"), Description = "Product 12", Cost = 6500, Weight = 65, Quantity = 5, CategoryID = 6 },
-                new ProductEntity { ID = Guid.NewGuid().ToString("N"), Description = "Product 13", Cost = 7000, Weight = 70, Quantity = 11, CategoryID = 7 },
-                new ProductEntity { ID = Guid.NewGuid().ToString("N"), Description = "Product 14", Cost = 7500, Weight = 75, Quantity = 13, CategoryID = 7 }
+                new ProductEntity { ID = Guid.NewGuid().ToString(), Description = "Vòng cổ 1", Cost = 1000000, Weight = 10.5f, Quantity = 5, CategoryID = 1 },
+                new ProductEntity { ID = Guid.NewGuid().ToString(), Description = "Vòng cổ 2", Cost = 1500000, Weight = 12.0f, Quantity = 3, CategoryID = 1 },
+                new ProductEntity { ID = Guid.NewGuid().ToString(), Description = "Vòng tay 1", Cost = 500000, Weight = 8.0f, Quantity = 10, CategoryID = 2 },
+                new ProductEntity { ID = Guid.NewGuid().ToString(), Description = "Vòng tay 2", Cost = 700000, Weight = 9.0f, Quantity = 8, CategoryID = 2 },
+                new ProductEntity { ID = Guid.NewGuid().ToString(), Description = "Nhẫn 1", Cost = 2000000, Weight = 5.0f, Quantity = 4, CategoryID = 3 },
+                new ProductEntity { ID = Guid.NewGuid().ToString(), Description = "Nhẫn 2", Cost = 2500000, Weight = 6.0f, Quantity = 6, CategoryID = 3 },
+                new ProductEntity { ID = Guid.NewGuid().ToString(), Description = "Đồng hồ 1", Cost = 3000000, Weight = 50.0f, Quantity = 2, CategoryID = 4 },
+                new ProductEntity { ID = Guid.NewGuid().ToString(), Description = "Đồng hồ 2", Cost = 3500000, Weight = 55.0f, Quantity = 3, CategoryID = 4 },
+                new ProductEntity { ID = Guid.NewGuid().ToString(), Description = "Bông tai 1", Cost = 800000, Weight = 3.0f, Quantity = 12, CategoryID = 5 },
+                new ProductEntity { ID = Guid.NewGuid().ToString(), Description = "Bông tai 2", Cost = 900000, Weight = 3.5f, Quantity = 14, CategoryID = 5 },
+                new ProductEntity { ID = Guid.NewGuid().ToString(), Description = "Kiềng 1", Cost = 1200000, Weight = 20.0f, Quantity = 7, CategoryID = 6 },
+                new ProductEntity { ID = Guid.NewGuid().ToString(), Description = "Kiềng 2", Cost = 1400000, Weight = 22.0f, Quantity = 6, CategoryID = 6 },
+                new ProductEntity { ID = Guid.NewGuid().ToString(), Description = "Lắc 1", Cost = 1000000, Weight = 15.0f, Quantity = 9, CategoryID = 7 },
+                new ProductEntity { ID = Guid.NewGuid().ToString(), Description = "Lắc 2", Cost = 1100000, Weight = 16.5f, Quantity = 8, CategoryID = 7 }
             };
 
             modelBuilder.Entity<ProductEntity>().HasData(products);
+
+            var promotions = new List<PromotionEntity>
+            {
+                new PromotionEntity { ID = Guid.NewGuid().ToString(), Description = "Summer Sale", ConditionsOfUse = 5000000, ReducedPercent = 10, MaximumReduce = 500000, ExchangePoint = 100, ExpiresTime = DateTime.Now.AddMonths(1), UserID = null },
+                new PromotionEntity { ID = Guid.NewGuid().ToString(), Description = "Winter Sale", ConditionsOfUse = 3000000, ReducedPercent = 15, MaximumReduce = 300000, ExchangePoint = 50, ExpiresTime = DateTime.Now.AddMonths(2), UserID = null }
+            };
+            modelBuilder.Entity<PromotionEntity>().HasData(promotions);
 
         }
     }
