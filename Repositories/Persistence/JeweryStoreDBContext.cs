@@ -74,6 +74,56 @@ namespace Repositories
                     Point = 0
                 }
             );
+
+            var categories = new List<CategoryEntity>
+        {
+            new CategoryEntity { ID = 1, Name = "Vòng cổ" },
+            new CategoryEntity { ID = 2, Name = "Vòng tay" },
+            new CategoryEntity { ID = 3, Name = "Nhẫn" },
+            new CategoryEntity { ID = 4, Name = "Đồng hồ" },
+            new CategoryEntity { ID = 5, Name = "Bông tai" },
+            new CategoryEntity { ID = 6, Name = "Kiềng" },
+            new CategoryEntity { ID = 7, Name = "Lắc" }
+        };
+
+            modelBuilder.Entity<CategoryEntity>().HasData(categories);
+
+            var counters = categories.Select(c => new CounterEntity
+            {
+                ID = c.ID,
+                Name = c.Name + " Counter",
+                CategoryID = c.ID
+            }).ToList();
+
+            modelBuilder.Entity<CounterEntity>().HasData(counters);
+
+            var products = new List<ProductEntity>
+            {
+                new ProductEntity { ID = Guid.NewGuid().ToString(), Description = "Vòng cổ 1", Cost = 1000000, Weight = 10.5f, Quantity = 5, CategoryID = 1 },
+                new ProductEntity { ID = Guid.NewGuid().ToString(), Description = "Vòng cổ 2", Cost = 1500000, Weight = 12.0f, Quantity = 3, CategoryID = 1 },
+                new ProductEntity { ID = Guid.NewGuid().ToString(), Description = "Vòng tay 1", Cost = 500000, Weight = 8.0f, Quantity = 10, CategoryID = 2 },
+                new ProductEntity { ID = Guid.NewGuid().ToString(), Description = "Vòng tay 2", Cost = 700000, Weight = 9.0f, Quantity = 8, CategoryID = 2 },
+                new ProductEntity { ID = Guid.NewGuid().ToString(), Description = "Nhẫn 1", Cost = 2000000, Weight = 5.0f, Quantity = 4, CategoryID = 3 },
+                new ProductEntity { ID = Guid.NewGuid().ToString(), Description = "Nhẫn 2", Cost = 2500000, Weight = 6.0f, Quantity = 6, CategoryID = 3 },
+                new ProductEntity { ID = Guid.NewGuid().ToString(), Description = "Đồng hồ 1", Cost = 3000000, Weight = 50.0f, Quantity = 2, CategoryID = 4 },
+                new ProductEntity { ID = Guid.NewGuid().ToString(), Description = "Đồng hồ 2", Cost = 3500000, Weight = 55.0f, Quantity = 3, CategoryID = 4 },
+                new ProductEntity { ID = Guid.NewGuid().ToString(), Description = "Bông tai 1", Cost = 800000, Weight = 3.0f, Quantity = 12, CategoryID = 5 },
+                new ProductEntity { ID = Guid.NewGuid().ToString(), Description = "Bông tai 2", Cost = 900000, Weight = 3.5f, Quantity = 14, CategoryID = 5 },
+                new ProductEntity { ID = Guid.NewGuid().ToString(), Description = "Kiềng 1", Cost = 1200000, Weight = 20.0f, Quantity = 7, CategoryID = 6 },
+                new ProductEntity { ID = Guid.NewGuid().ToString(), Description = "Kiềng 2", Cost = 1400000, Weight = 22.0f, Quantity = 6, CategoryID = 6 },
+                new ProductEntity { ID = Guid.NewGuid().ToString(), Description = "Lắc 1", Cost = 1000000, Weight = 15.0f, Quantity = 9, CategoryID = 7 },
+                new ProductEntity { ID = Guid.NewGuid().ToString(), Description = "Lắc 2", Cost = 1100000, Weight = 16.5f, Quantity = 8, CategoryID = 7 }
+            };
+
+            modelBuilder.Entity<ProductEntity>().HasData(products);
+
+            var promotions = new List<PromotionEntity>
+            {
+                new PromotionEntity { ID = Guid.NewGuid().ToString(), Description = "Summer Sale", ConditionsOfUse = 5000000, ReducedPercent = 10, MaximumReduce = 500000, ExchangePoint = 100, ExpiresTime = DateTime.Now.AddMonths(1), UserID = null },
+                new PromotionEntity { ID = Guid.NewGuid().ToString(), Description = "Winter Sale", ConditionsOfUse = 3000000, ReducedPercent = 15, MaximumReduce = 300000, ExchangePoint = 50, ExpiresTime = DateTime.Now.AddMonths(2), UserID = null }
+            };
+            modelBuilder.Entity<PromotionEntity>().HasData(promotions);
+
         }
     }
 }
