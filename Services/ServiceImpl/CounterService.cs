@@ -62,16 +62,21 @@ namespace Services.ServiceImpl
 
         }
 
-        public async Task<List<CounterEntity>> GetAll()
+        public async Task<List<CounterDTO>> GetAll()
         {
-            var getAll = await _counterRepository.FindAllAsync();
+            var getAll = await _counterRepository.getAllwithCategory();
             var getActive = getAll.Where(c => c.DeleterID == null).ToList();
-            return getActive;
+            if (getActive == null)
+            {
+                throw new NotFoundException($"Counter with  not found");
+
+            }
+            return getActive.Adapt<List<CounterDTO>>();
         }
 
         public async Task<CounterDTO> GetById(int id)
         {
-            var counterEntity = await _counterRepository.FindAsync(p => p.ID == id && p.DeleterID == null);
+            var counterEntity = await _counterRepository.GetByIdWithCategoryAsync(id);
             if(counterEntity == null)
             {
                 throw new NotFoundException($"Counter with ID {id} not found");

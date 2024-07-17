@@ -12,7 +12,7 @@ namespace Services.IService
     public interface ICategoryService
     {
         public Task<CategoryDTO> GetById(int id);
-        public Task<List<CategoryEntity>> GetAll();
+        public Task<List<CategoryDTO>> GetAll();
         public Task<CategoryDTO> Add(CategoryDTO CategoryEntity);
         public Task Update(CategoryDTO CategoryEntity, int Id);
         public Task Delete(CategoryDTO CategoryEntity, UserDTO user);

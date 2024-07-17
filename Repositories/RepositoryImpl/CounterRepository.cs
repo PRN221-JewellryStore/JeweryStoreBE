@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using BusinessObjecs.DTOs;
 using BusinessObjecs.Models.Configured;
+using Microsoft.EntityFrameworkCore;
 using Repositories.IRepository;
 using System;
 using System.Collections.Generic;
@@ -19,13 +20,26 @@ namespace Repositories.RepositoryImpl
             _Context= dbContext;
         }
 
-
-       /* public Task DeleteCategoryById(CategoryEntity entity, string DeletedId)
+        public async Task<List<CounterEntity>> getAllwithCategory()
         {
-            
+            return await _Context.counterEntities
+                                    .Include(c => c.Category).ToListAsync();
+        }
 
-        }*/
+        public async Task<CounterEntity> GetByIdWithCategoryAsync(int id)
+        {
+            return await _Context.counterEntities
+                           .Include(c => c.Category) // Include Category
+                           .FirstOrDefaultAsync(c => c.ID == id);
+        }
 
-     
+
+        /* public Task DeleteCategoryById(CategoryEntity entity, string DeletedId)
+         {
+
+
+         }*/
+
+
     }
 }

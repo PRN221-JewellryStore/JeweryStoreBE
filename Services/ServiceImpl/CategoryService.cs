@@ -84,10 +84,12 @@ namespace Services.ServiceImpl
                 await Task.CompletedTask;
 
             }*/
-        public async Task<List<CategoryEntity>> GetAll()
+        public async Task<List<CategoryDTO>> GetAll()
         {
-            return await _categoryRepository.GetAll();
-             
+            var getList= await _categoryRepository.GetAll();
+            return  getList.Adapt<List<CategoryDTO>>();
+
+
         }
 
         public async Task<CategoryDTO> GetById(int id)

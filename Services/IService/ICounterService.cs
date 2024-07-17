@@ -12,7 +12,7 @@ namespace Services.IService
     public interface ICounterService
     {
         public Task<CounterDTO> GetById(int id);
-        public Task<List<CounterEntity>> GetAll();
+        public Task<List<CounterDTO>> GetAll();
         public Task<CounterDTO> Add(CounterDTO CategoryEntity);
         public Task Update(CounterDTO CategoryEntity, int id);
         public Task Delete(CounterDTO CategoryEntity, UserDTO user);

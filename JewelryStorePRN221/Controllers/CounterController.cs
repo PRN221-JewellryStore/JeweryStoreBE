@@ -10,7 +10,7 @@ using System.Net.Mime;
 
 namespace JewelryStorePRN221.Controllers
 {
-    //[ApiController]
+    [Route("api/[controller]")]
     public class CounterController : ControllerBase
     {
         ICounterService _counterService;
@@ -46,7 +46,7 @@ namespace JewelryStorePRN221.Controllers
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<CounterEntity>>> GetAll()
+        public async Task<ActionResult<IEnumerable<CounterDTO>>> GetAll()
         {
             var categories = await _counterService.GetAll();
             return Ok(categories);
