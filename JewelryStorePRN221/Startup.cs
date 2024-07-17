@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.Extensions.DependencyInjection;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace JewelryStorePRN221
 {
@@ -32,6 +33,10 @@ namespace JewelryStorePRN221
                 opt =>
                 {
                     opt.Filters.Add<ExceptionFilter>();
+                })
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
                 });
             services.ConfigureApplicationSecurity(Configuration);
             services.ConfigureProblemDetails();
