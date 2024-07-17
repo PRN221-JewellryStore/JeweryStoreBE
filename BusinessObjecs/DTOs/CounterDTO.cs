@@ -22,18 +22,37 @@ namespace BusinessObjecs.DTOs
         }*/
         //  public int ID { get; set; }
         public string Name { get; set; }
-        //public  int CategoryID { get; set; }
-        public CategoryDTO Category { get; set; }
-        public static CounterDTO Create(string Name, CategoryDTO category)
+        public  int CategoryID { get; set; }
+        //public CategoryDTO Category { get; set; }
+        public static CounterDTO Create(string Name)
         {
             return new CounterDTO
             {
                 //CategoryID = CategoryId,
 
                 Name = Name,
-                Category = category,
+                         /*  Category = category,*/
 
             };
         }
+
+
+    }
+    public class CounterDTOResponse
+    {
+        // Mapping is handled by the same MappingProfile class as CounterDTO
+        public string Name { get; set; }
+        public CategoryDTO Category { get; set; }
+
+        public static CounterDTOResponse Create(string Name, CategoryDTO category)
+        {
+            return new CounterDTOResponse
+            {
+                Name = Name,
+                Category = category,
+            };
+        }
+
+
     }
 }

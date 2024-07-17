@@ -11,10 +11,10 @@ namespace Services.IService
 {
     public interface ICounterService
     {
-        public Task<CounterDTO> GetById(int id);
-        public Task<List<CounterDTO>> GetAll();
+        public Task<CounterDTOResponse> GetById(int id);
+        public Task<List<CounterDTOResponse>> GetAll();
         public Task<CounterDTO> Add(CounterDTO CategoryEntity);
         public Task Update(CounterDTO CategoryEntity, int id);
-        public Task Delete(CounterDTO CategoryEntity, UserDTO user);
+        public Task Delete(int id, UserDTO user);
     }
 }

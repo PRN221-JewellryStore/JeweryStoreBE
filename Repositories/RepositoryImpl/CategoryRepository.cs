@@ -64,9 +64,9 @@ namespace Repositories.RepositoryImpl
             }
         }
 
-        public  async Task DeleteCategoryById(CategoryEntity entity, String DeletedId)
+        public  async Task DeleteCategoryById(int id, String DeletedId)
         {
-            var categoryDelete = await _Context.Set<CategoryEntity>().FindAsync(entity.ID);
+            var categoryDelete = await _Context.Set<CategoryEntity>().FindAsync(id);
             //check xem User co phair admin khong -> Neu la ADmin gang DeleteId = UserId
             if (categoryDelete != null)
             {

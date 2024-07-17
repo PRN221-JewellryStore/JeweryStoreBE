@@ -22,7 +22,7 @@ namespace JewelryStorePRN221.Controllers
             _counterService = CounterService;
         }
         [HttpGet("Counter/{id}")]
-        public async Task<ActionResult<CounterDTO>> GetById(int id)
+        public async Task<ActionResult<CounterDTOResponse>> GetById(int id)
         {
             var counterDto = await _counterService.GetById(id);
 
@@ -46,11 +46,12 @@ namespace JewelryStorePRN221.Controllers
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<IEnumerable<CounterDTO>>> GetAll()
+        public async Task<ActionResult<IEnumerable<CounterDTOResponse>>> GetAll()
         {
             var categories = await _counterService.GetAll();
             return Ok(categories);
         }
+
         [HttpPost]
         [Route("counter/Create")]
         public async Task<ActionResult<CategoryDTO>> CreateCategory([FromForm] CounterDTO counter)
@@ -58,6 +59,7 @@ namespace JewelryStorePRN221.Controllers
 
 
             return Ok(await _counterService.Add(counter));
+
 
         }
         [HttpPatch("Update/{id}")]
@@ -108,7 +110,7 @@ namespace JewelryStorePRN221.Controllers
             }
 
             // Call the delete method
-            await _counterService.Delete(counterDto, User);
+            await _counterService.Delete(id, User);
 
             return Ok(new { Message = "Counter deleted successfully" });
         }

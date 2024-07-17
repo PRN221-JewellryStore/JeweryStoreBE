@@ -103,7 +103,7 @@ namespace JewelryStorePRN221.Controllers
             }
 
             // Call the delete method
-            await _categoryService.Delete(categoryEntity, User);
+            await _categoryService.Delete(id, User);
 
             return Ok(new { Message = "Category deleted successfully" });
         }

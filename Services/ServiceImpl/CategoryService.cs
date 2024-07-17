@@ -50,22 +50,22 @@ namespace Services.ServiceImpl
 
     }
 
-        public async  Task Delete(CategoryDTO CategoryEntity, UserDTO user)
+        public async  Task Delete(int id , UserDTO user)
         {
             /*   if (!_categoryRepository.IsAdmin(user)) {
                    throw new UnauthorizedAccessException("User is not an admin.");
                }*/
 
-            var categoryEntity = CategoryEntity.Adapt<CategoryEntity>();
-            //var getCategory = await _categoryRepository.FindAsync(x => x.ID == categoryEntity.ID && x.DeleterID == null);
-            if (CategoryEntity == null)
+            //var categoryEntity = CategoryEntity.Adapt<CategoryEntity>();
+            var getCategory = await _categoryRepository.FindAsync(x => x.ID == id && x.DeleterID == null);
+            if (getCategory == null)
             {
                 return;
             }
 
             // Check if userId is valid (optional but recommended)
           
-            await _categoryRepository.DeleteCategoryById(categoryEntity, user.ID);
+            await _categoryRepository.DeleteCategoryById(id, user.ID);
         }
         /*  
          var CounterEntity = counter.Adapt<CounterEntity>();

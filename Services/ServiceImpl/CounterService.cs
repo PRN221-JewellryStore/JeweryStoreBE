@@ -10,6 +10,7 @@ using Repositories.RepositoryImpl;
 using Services.IService;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,21 +31,29 @@ namespace Services.ServiceImpl
 
         public async Task<CounterDTO> Add(CounterDTO CounterDTO)
         {
-            var Counter = _mapper.Map<CounterEntity>(CounterDTO);
-            _counterRepository.Add(Counter);
-           await _counterRepository.UnitOfWork.SaveChangesAsync();
-            var CounterEntity = _mapper.Map<CounterDTO>(Counter);
+            try
+            {
+                var getcounter = CounterDTO.Adapt<CounterEntity>();
+                _counterRepository.Add(getcounter);
+                await _counterRepository.UnitOfWork.SaveChangesAsync();
 
-            return CounterEntity;
+                return getcounter.Adapt<CounterDTO>();
+            }
+            catch (Exception ex)
+            {
+                // Log the exception for debugging purposes
+                Console.WriteLine($"Error in Add method: {ex.Message}");
+                throw; // Rethrow the exception to propagate it upwards
+            }
 
         }
 
-        public async Task Delete(CounterDTO counter, UserDTO user)
+        public async Task Delete(int id, UserDTO user)
         {
   //          var getCounter = await _counterRepository.FindAsync(x => x.ID == counter.ID && x.DeleterID == null);
-
-            var CounterEntity = counter.Adapt<CounterEntity>();
-            var getCounter = await _counterRepository.FindAsync(x => x.ID == CounterEntity.ID && x.DeleterID == null);
+            
+            var getCounter = await _counterRepository.FindAsync(x => x.ID == id && x.DeleterID == null);
+         //   var CounterEntity = counter.Adapt<CounterEntity>();
 
             if (getCounter == null) {
                 Console.WriteLine(" was not found or already deleted.");
@@ -62,7 +71,7 @@ namespace Services.ServiceImpl
 
         }
 
-        public async Task<List<CounterDTO>> GetAll()
+        public async Task<List<CounterDTOResponse>> GetAll()
         {
             var getAll = await _counterRepository.getAllwithCategory();
             var getActive = getAll.Where(c => c.DeleterID == null).ToList();
@@ -71,10 +80,10 @@ namespace Services.ServiceImpl
                 throw new NotFoundException($"Counter with  not found");
 
             }
-            return getActive.Adapt<List<CounterDTO>>();
+            return getActive.Adapt<List<CounterDTOResponse>>();
         }
 
-        public async Task<CounterDTO> GetById(int id)
+        public async Task<CounterDTOResponse> GetById(int id)
         {
             var counterEntity = await _counterRepository.GetByIdWithCategoryAsync(id);
             if(counterEntity == null)
@@ -82,7 +91,7 @@ namespace Services.ServiceImpl
                 throw new NotFoundException($"Counter with ID {id} not found");
 
             }
-            return counterEntity.Adapt<CounterDTO>();
+            return counterEntity.Adapt<CounterDTOResponse>();
         }
 
         public async Task Update(CounterDTO counterDTO, int id)
