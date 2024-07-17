@@ -11,6 +11,7 @@ using BusinessObjecs.Models;
 using Repositories.Common.Exceptions;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
+using Repositories.RepositoryImpl;
 
 namespace Services.ServiceImpl
 {
@@ -57,8 +58,8 @@ namespace Services.ServiceImpl
 
         public async Task<PromotionEntity> GetById(string id, CancellationToken cancellationToken)
         {
-            var result = await _promotionRepository.FindAsync(p => p.ID.Equals(id));
-            if(result is null)
+            var result = (await _promotionRepository.GetAllWithDetail(cancellationToken)).FirstOrDefault(p => p.ID.Equals(id));
+            if (result is null)
             {
                 throw new NotFoundException("Promotion not existed");
             }

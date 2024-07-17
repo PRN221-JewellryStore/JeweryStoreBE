@@ -3,6 +3,7 @@ using BusinessObjecs.Models;
 using Mapster;
 using Repositories.Common.Exceptions;
 using Repositories.IRepository;
+using Repositories.RepositoryImpl;
 using Services.IService;
 using System;
 using System.Collections.Generic;
@@ -59,7 +60,7 @@ namespace Services.ServiceImpl
 
         public async Task<OrderEntity> GetById(string id, CancellationToken cancellationToken)
         {
-            var result = await _OrderRepository.FindAsync(p => p.ID.Equals(id));
+            var result = (await _OrderRepository.GetAllWithDetail(cancellationToken)).FirstOrDefault(p => p.ID.Equals(id));
             if (result is null)
             {
                 throw new NotFoundException("Order not existed");
