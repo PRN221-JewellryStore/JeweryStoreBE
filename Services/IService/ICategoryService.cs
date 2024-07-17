@@ -11,10 +11,10 @@ namespace Services.IService
 {
     public interface ICategoryService
     {
-        public Task<CategoryEntity> GetById(int id);
-        public Task<List<CategoryEntity>> GetAll();
+        public Task<CategoryDTO> GetById(int id);
+        public Task<List<CategoryDTO>> GetAll();
         public Task<CategoryDTO> Add(CategoryDTO CategoryEntity);
         public Task Update(CategoryDTO CategoryEntity, int Id);
-        public Task Delete(CategoryEntity CategoryEntity, UserDTO user);
+        public Task Delete(CategoryDTO CategoryEntity, UserDTO user);
     }
 }

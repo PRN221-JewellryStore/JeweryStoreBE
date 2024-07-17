@@ -18,11 +18,14 @@ namespace BusinessObjecs.DTOs
             profile.CreateMap<CategoryEntity, CategoryDTO>()
               .ReverseMap();
         }
+       public int ID { get; set; }
+
         public string Name { get; set; }
         public static CategoryDTO Create(string Name)
         {
             return new CategoryDTO
             {
+
                 Name = Name,
             };
         }

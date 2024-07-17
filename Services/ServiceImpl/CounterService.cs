@@ -2,6 +2,7 @@
 using BusinessObjecs.DTOs;
 using BusinessObjecs.Models;
 using BusinessObjecs.Models.Configured;
+using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Repositories.Common.Exceptions;
 using Repositories.IRepository;
@@ -38,35 +39,50 @@ namespace Services.ServiceImpl
 
         }
 
-        public Task Delete(CounterEntity counter, UserDTO user)
+        public async Task Delete(CounterDTO counter, UserDTO user)
         {
-            var getCounter = _counterRepository.FindAsync(x => x.ID == counter.ID && x.DeleterID == null).ToString();
+  //          var getCounter = await _counterRepository.FindAsync(x => x.ID == counter.ID && x.DeleterID == null);
+
+            var CounterEntity = counter.Adapt<CounterEntity>();
+            var getCounter = await _counterRepository.FindAsync(x => x.ID == CounterEntity.ID && x.DeleterID == null);
+
             if (getCounter == null) {
-                throw new ArgumentNullException(nameof(CounterEntity), "Already Deleted");
+                Console.WriteLine(" was not found or already deleted.");
+                return;
             }
             else
             {
-                counter.DeleterID = user.ID;
-                counter.DeletedAt= DateTime.Now;
-                _counterRepository.Update(counter);
+                getCounter.DeleterID = user.ID;
+                getCounter.DeletedAt= DateTime.Now;
+                _counterRepository.Update(getCounter);
                 _counterRepository.UnitOfWork.SaveChangesAsync().Wait();
-
-                throw new ArgumentNullException(nameof(CounterEntity), "Deleted Success");
+                await Task.CompletedTask;
 
             }
 
         }
 
-        public async Task<List<CounterEntity>> GetAll()
+        public async Task<List<CounterDTO>> GetAll()
         {
-            var getAll = await _counterRepository.FindAllAsync();
+            var getAll = await _counterRepository.getAllwithCategory();
             var getActive = getAll.Where(c => c.DeleterID == null).ToList();
-            return getActive;
+            if (getActive == null)
+            {
+                throw new NotFoundException($"Counter with  not found");
+
+            }
+            return getActive.Adapt<List<CounterDTO>>();
         }
 
-        public Task<CounterEntity> GetById(int id)
+        public async Task<CounterDTO> GetById(int id)
         {
-           return _counterRepository.FindAsync(p=> p.ID == id); 
+            var counterEntity = await _counterRepository.GetByIdWithCategoryAsync(id);
+            if(counterEntity == null)
+            {
+                throw new NotFoundException($"Counter with ID {id} not found");
+
+            }
+            return counterEntity.Adapt<CounterDTO>();
         }
 
         public async Task Update(CounterDTO counterDTO, int id)

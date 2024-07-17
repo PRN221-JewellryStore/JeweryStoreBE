@@ -12,7 +12,10 @@ namespace Repositories.IRepository
 {
     public interface ICounterRepository : IEFRepository<CounterEntity, CounterEntity>
     {
-      //  Task DeleteCategoryById(CategoryEntity entity, string DeletedId);
+        //  Task DeleteCategoryById(CategoryEntity entity, string DeletedId);
+        //    Task<string> GetCategoryNameById(int categoryId);
+        Task<CounterEntity> GetByIdWithCategoryAsync(int id);
 
+        Task<List<CounterEntity>> getAllwithCategory();
     }
 }

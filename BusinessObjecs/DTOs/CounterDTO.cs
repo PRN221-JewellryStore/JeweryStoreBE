@@ -16,16 +16,23 @@ namespace BusinessObjecs.DTOs
             profile.CreateMap<CounterEntity, CounterDTO > ()
               .ReverseMap();
         }
+    /*    public CounterDTO()
+        {
+            Category = new CategoryDTO(); // Initialize CategoryDTO in the constructor
+        }*/
+        //  public int ID { get; set; }
         public string Name { get; set; }
-        public  int CategoryID { get; set; }
-
-        public static CounterDTO Create(string Name, int CategoryId)
+        //public  int CategoryID { get; set; }
+        public CategoryDTO Category { get; set; }
+        public static CounterDTO Create(string Name, CategoryDTO category)
         {
             return new CounterDTO
             {
-                CategoryID = CategoryId,
+                //CategoryID = CategoryId,
 
                 Name = Name,
+                Category = category,
+
             };
         }
     }
