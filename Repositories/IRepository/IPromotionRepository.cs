@@ -11,5 +11,6 @@ namespace Repositories.IRepository
 {
     public interface IPromotionRepository : IEFRepository<PromotionEntity, PromotionEntity>
     {
+        Task<List<PromotionEntity>> GetAllWithDetail(CancellationToken cancellationToken);
     }
 }

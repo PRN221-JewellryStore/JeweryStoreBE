@@ -9,5 +9,6 @@ namespace Repositories.IRepository
 {
     public interface IProductRepository : IEFRepository<ProductEntity, ProductEntity>
     {
+        Task<List<ProductEntity>> GetAllWithDetail(CancellationToken cancellationToken);
     }
 }
