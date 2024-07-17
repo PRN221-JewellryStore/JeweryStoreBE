@@ -60,7 +60,7 @@ namespace Services.ServiceImpl
 
         public async Task<ProductEntity> GetById(string id, CancellationToken cancellationToken)
         {
-            var result = await _ProductRepository.FindAsync(p => p.ID.Equals(id));
+            var result = (await _ProductRepository.GetAllWithDetail(cancellationToken)).FirstOrDefault(p => p.ID.Equals(id));
             if (result is null)
             {
                 throw new NotFoundException("Product not existed");
