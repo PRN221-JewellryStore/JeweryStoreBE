@@ -11,5 +11,6 @@ namespace Repositories.IRepository
 {
     public interface IOrderRepository : IEFRepository<OrderEntity, OrderEntity>
     {
+        Task<List<OrderEntity>> GetAllWithDetail(CancellationToken cancellationToken);
     }
 }

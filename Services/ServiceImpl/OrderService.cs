@@ -53,7 +53,7 @@ namespace Services.ServiceImpl
 
         public async Task<List<OrderEntity>> GetAll(CancellationToken cancellationToken)
         {
-            var result = await _OrderRepository.FindAllAsync(cancellationToken);
+            var result = await _OrderRepository.GetAllWithDetail(cancellationToken);
             return result;
         }
 

@@ -54,7 +54,7 @@ namespace Services.ServiceImpl
 
         public async Task<List<ProductEntity>> GetAll(CancellationToken cancellationToken)
         {
-            var result = await _ProductRepository.FindAllAsync(cancellationToken);
+            var result = await _ProductRepository.GetAllWithDetail(cancellationToken);
             return result;
         }
 
