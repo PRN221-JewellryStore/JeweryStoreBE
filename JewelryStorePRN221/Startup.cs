@@ -36,7 +36,7 @@ namespace JewelryStorePRN221
                 })
                 .AddJsonOptions(options =>
                 {
-                    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
+                    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
                 });
             services.ConfigureApplicationSecurity(Configuration);
             services.ConfigureProblemDetails();
