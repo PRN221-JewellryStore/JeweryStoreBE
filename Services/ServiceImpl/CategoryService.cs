@@ -4,11 +4,13 @@ using BusinessObjecs.Models;
 using BusinessObjecs.Models.Configured;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
+using Repositories.Common.Exceptions;
 using Repositories.IRepository;
 using Repositories.RepositoryImpl;
 using Services.IService;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Metrics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -48,40 +50,63 @@ namespace Services.ServiceImpl
 
     }
 
-        public async  Task Delete(CategoryEntity CategoryEntity, UserDTO user)
+        public async  Task Delete(CategoryDTO CategoryEntity, UserDTO user)
         {
             /*   if (!_categoryRepository.IsAdmin(user)) {
                    throw new UnauthorizedAccessException("User is not an admin.");
                }*/
+
+            var categoryEntity = CategoryEntity.Adapt<CategoryEntity>();
+            //var getCategory = await _categoryRepository.FindAsync(x => x.ID == categoryEntity.ID && x.DeleterID == null);
             if (CategoryEntity == null)
             {
-                throw new ArgumentNullException(nameof(CategoryEntity), "Category entity is null");
+                return;
             }
 
             // Check if userId is valid (optional but recommended)
-            if (user.ID ==null)
-            {
-                throw new ArgumentException("Invalid user ID", nameof(user.ID));
-            }
-            await _categoryRepository.DeleteCategoryById(CategoryEntity, user.ID);
+          
+            await _categoryRepository.DeleteCategoryById(categoryEntity, user.ID);
         }
+        /*  
+         var CounterEntity = counter.Adapt<CounterEntity>();
+            var getCounter = await _counterRepository.FindAsync(x => x.ID == CounterEntity.ID && x.DeleterID == null);
 
+            if (getCounter == null) {
+                Console.WriteLine(" was not found or already deleted.");
+                return;
+            }
+            else
+            {
+                getCounter.DeleterID = user.ID;
+                getCounter.DeletedAt= DateTime.Now;
+                _counterRepository.Update(getCounter);
+                _counterRepository.UnitOfWork.SaveChangesAsync().Wait();
+                await Task.CompletedTask;
+
+            }*/
         public async Task<List<CategoryEntity>> GetAll()
         {
             return await _categoryRepository.GetAll();
              
         }
 
-        public async Task<CategoryEntity> GetById(int id)
+        public async Task<CategoryDTO> GetById(int id)
         {
-            return await _categoryRepository.GetCategoryById(id);
+            //
+            var categoryEntity =  await _categoryRepository.GetCategoryById(id);
+            return  categoryEntity.Adapt<CategoryDTO>();   
         }
 
         public async Task Update(CategoryDTO Categorydto, int id)
         {
-            var ExistingCatogory = await _categoryRepository.GetCategoryById(id);
-            _mapper.Map(Categorydto, ExistingCatogory);
-              _categoryRepository.Update(ExistingCatogory);
+            var existingCounterEntity = await _categoryRepository.GetCategoryById(id);
+            if (existingCounterEntity == null)
+            {
+                throw new NotFoundException($"Category with ID {id} not found");
+            }
+
+            _mapper.Map(Categorydto, existingCounterEntity);
+            _categoryRepository.Update(existingCounterEntity);
             await _categoryRepository.UnitOfWork.SaveChangesAsync();
         }
     }

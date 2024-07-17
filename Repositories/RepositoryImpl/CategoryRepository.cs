@@ -39,13 +39,17 @@ namespace Repositories.RepositoryImpl
         /*      private readonly JeweryStoreDBContext _Context;
               private readonly ICategoryRepository _CategoryRepository;*/
 
-        public async Task<List<CategoryEntity>> FindAsync(Expression<Func<CategoryEntity, bool>> expression)
+       /* public async Task<List<CategoryEntity>> FindAsync(Expression<Func<CategoryEntity, bool>> expression)
         {
             return await _Context.Set<CategoryEntity>().Where(expression).ToListAsync();
-        }
+        }*/
         public async Task<CategoryEntity> GetCategoryById(int id)
         {
-            return await _Context.Set<CategoryEntity>().FindAsync(id);
+            //            var counterEntity = await _counterRepository.FindAsync(p => p.ID == id && p.DeleterID == null);
+
+            //    return await _Context.Set<CategoryEntity>().FindAsync(id);
+            return await _Context.categoryEntities.FirstOrDefaultAsync(p => p.ID == id && p.DeleterID == null);
+
         }
      
         public bool IsAdmin(UserEntity user)
@@ -86,68 +90,70 @@ namespace Repositories.RepositoryImpl
 
         }
 
-        public bool IsAdmin()
+   /*     public bool IsAdmin()
         {
             throw new NotImplementedException();
-        }
-
-      /*  public async Task<CategoryDTO> AddCategoryAsync(CategoryDTO categoryDto)
-        {
-         *//*   try
-            {
-              
-                // Map CategoryDTO to CategoryEntity using AutoMapper
-                var categoryEntity = _mapper.Map<CategoryEntity>(categoryDto);
-
-                // Add the CategoryEntity to the context
-                _Context.Set<CategoryEntity>().Add(categoryEntity);
-                if (categoryEntity == null)
-                {
-                    throw new InvalidOperationException("Mapping resulted in a null CategoryEntity");
-                }
-                Console.WriteLine("Mapped CategoryEntity: " + categoryEntity);
-                if (_Context == null)
-                {
-                    throw new InvalidOperationException("_Context is not initialized");
-                }
-                // Save changes asynchronously
-                await _Context.SaveChangesAsync();
-
-                // Map the saved CategoryEntity back to CategoryDTO
-                var addedCategoryDto = _mapper.Map<CategoryDTO>(categoryEntity);
-
-                return addedCategoryDto;
-            }
-            catch (DbUpdateException dbEx)
-            {
-                // Log detailed database update exception
-                Console.WriteLine($"Database update exception: {dbEx.Message}");
-                if (dbEx.InnerException != null)
-                {
-                    Console.WriteLine($"Inner exception: {dbEx.InnerException.Message}");
-                }
-                throw;
-            }
-            catch (Exception ex)
-            {
-                // Log general exception
-                Console.WriteLine($"An error occurred: {ex.Message}");
-                throw;
-            }*//*
-        
-            GetSet().Add((TPersistence)entity);
-
-        }
-
-        public async Task<CategoryDTO> AddCategoryAsync(CategoryDTO categoryDto)
-        {
-           
-
-            GetSet().Add((CategoryDTO)categoryDto);
-
-        }
-        public virtual void Add(TDomain entity)
-        {
         }*/
+
+     
+
+        /*  public async Task<CategoryDTO> AddCategoryAsync(CategoryDTO categoryDto)
+          {
+           *//*   try
+              {
+
+                  // Map CategoryDTO to CategoryEntity using AutoMapper
+                  var categoryEntity = _mapper.Map<CategoryEntity>(categoryDto);
+
+                  // Add the CategoryEntity to the context
+                  _Context.Set<CategoryEntity>().Add(categoryEntity);
+                  if (categoryEntity == null)
+                  {
+                      throw new InvalidOperationException("Mapping resulted in a null CategoryEntity");
+                  }
+                  Console.WriteLine("Mapped CategoryEntity: " + categoryEntity);
+                  if (_Context == null)
+                  {
+                      throw new InvalidOperationException("_Context is not initialized");
+                  }
+                  // Save changes asynchronously
+                  await _Context.SaveChangesAsync();
+
+                  // Map the saved CategoryEntity back to CategoryDTO
+                  var addedCategoryDto = _mapper.Map<CategoryDTO>(categoryEntity);
+
+                  return addedCategoryDto;
+              }
+              catch (DbUpdateException dbEx)
+              {
+                  // Log detailed database update exception
+                  Console.WriteLine($"Database update exception: {dbEx.Message}");
+                  if (dbEx.InnerException != null)
+                  {
+                      Console.WriteLine($"Inner exception: {dbEx.InnerException.Message}");
+                  }
+                  throw;
+              }
+              catch (Exception ex)
+              {
+                  // Log general exception
+                  Console.WriteLine($"An error occurred: {ex.Message}");
+                  throw;
+              }*//*
+
+              GetSet().Add((TPersistence)entity);
+
+          }
+
+          public async Task<CategoryDTO> AddCategoryAsync(CategoryDTO categoryDto)
+          {
+
+
+              GetSet().Add((CategoryDTO)categoryDto);
+
+          }
+          public virtual void Add(TDomain entity)
+          {
+          }*/
     }
 }

@@ -12,7 +12,7 @@ namespace Repositories.IRepository
 {
     public interface ICategoryRepository : IEFRepository<CategoryEntity, CategoryEntity>
     {
-        Task<List<CategoryEntity>> FindAsync(Expression<Func<CategoryEntity, bool>> expression);
+      //  Task<List<CategoryEntity>> FindAsync(Expression<Func<CategoryEntity, bool>> expression);
 
         Task<List<CategoryEntity>> GetAll();
 
@@ -23,7 +23,7 @@ namespace Repositories.IRepository
 
     //    Task<CategoryDTO> AddCategoryAsync(CategoryDTO categoryDto);
 
-        public bool IsAdmin(UserEntity user);
+      //  public bool IsAdmin(UserEntity user);
 
 
     }

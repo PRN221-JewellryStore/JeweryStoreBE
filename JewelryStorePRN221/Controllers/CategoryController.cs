@@ -7,6 +7,7 @@ using Repositories.IRepository;
 using Repositories.RepositoryImpl;
 using Services.IService;
 using Services.ServiceImpl;
+using System.Diagnostics.Metrics;
 using System.Net.Mime;
 
 namespace JewelryStorePRN221.Controllers
@@ -24,7 +25,7 @@ namespace JewelryStorePRN221.Controllers
             _categoryService = categoryService;
         }
         [HttpGet("{id}")]
-        public async Task<ActionResult<CategoryEntity>> GetById(int id)
+        public async Task<ActionResult<CategoryDTO>> GetById(int id)
         {
             return Ok(await _categoryService.GetById(id));
         }
@@ -36,7 +37,7 @@ namespace JewelryStorePRN221.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        [Route("Category/getall")]
+        [Route("getall")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -47,43 +48,62 @@ namespace JewelryStorePRN221.Controllers
             return Ok(categories);
         }
         [HttpPost]
+        [Route("Create")]
+
         public async Task<ActionResult<CategoryDTO >> CreateCategory([FromForm] CategoryDTO category) {
 
           
             return Ok(await _categoryService.Add(category));
 
         }
-        [HttpPatch]
+        [HttpPatch("update/{id}")]
+       // [Route("Update")]
 
-        public async Task<ActionResult> UpdateCategory([FromForm] CategoryDTO category, int id) {
+        public async Task<ActionResult> UpdateCategory( int id, [FromForm] CategoryDTO category) {
+        
             try
             {
-                var updatedCategory =  _categoryService.Update(category,  id);
-                return Ok(updatedCategory);
+                var updatedCategory = await _categoryService.GetById(id);
+                if (updatedCategory == null)
+                {
+                    return NotFound(new { Message = "Counter not found" });
+
+
+                }
+                else
+                {
+                    await _categoryService.Update(category, id);
+                    return Ok("Update success");
+                }
             }
             catch (Exception ex)
             {
-                return StatusCode(500, "An error occurred while updating the category: " + ex.Message);
+                return StatusCode(500, "An error occurred while updating the Counter: " + ex.Message);
             }
         }
-        [HttpDelete]
+       // [HttpDelete]
         [AllowAnonymous]
-        [Route("Category/Delete")]
+        [HttpDelete("Delete/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> DeleteCategory(int id,  string userId, CancellationToken cancellationToken = default)
+        public async Task<ActionResult> DeleteCategory(int id, string userId, CancellationToken cancellationToken = default)
         {
             var categoryEntity = await _categoryService.GetById(id); // Ensure you have a method to get category by id
             var User = await _userService.GetUser(userId, cancellationToken);
+            if (User.RoleID != 1)
+            {
+                return NotFound(new { Message = "You are not have permission" });
+
+            }
             if (categoryEntity == null)
             {
-                return NotFound(new { Message = "Category not found" });
+                return NotFound(new { Message = "Category not found or already Deleted" });
             }
 
             // Call the delete method
-            await _categoryService.Delete(categoryEntity,User);
+            await _categoryService.Delete(categoryEntity, User);
 
             return Ok(new { Message = "Category deleted successfully" });
         }
