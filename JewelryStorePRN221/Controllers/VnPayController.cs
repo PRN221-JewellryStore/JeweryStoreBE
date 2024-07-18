@@ -5,6 +5,7 @@ using Services.IService;
 
 namespace JewelryStorePRN221.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
     //[Authorize]
     public class VnPayController : Controller
