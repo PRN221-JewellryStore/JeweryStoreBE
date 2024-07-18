@@ -22,16 +22,20 @@ namespace Services.ServiceImpl
         private readonly IOrderRepository _OrderRepository;
         private readonly IPromotionRepository _PromotionRepository;
         private readonly IProductRepository _ProductRepository;
+        private readonly ICounterRepository _CounterRepository;
+        private readonly ICategoryRepository _CategoryRepository;
 
-        public OrderDetailService(IOrderDetailRepository OrderDetailRepository, IOrderRepository orderRepository, IPromotionRepository promotionRepository, IProductRepository productRepository)
+        public OrderDetailService(IOrderDetailRepository OrderDetailRepository, IOrderRepository orderRepository, IPromotionRepository promotionRepository, IProductRepository productRepository, ICounterRepository counterRepository, ICategoryRepository categoryRepository)
         {
             _OrderDetailRepository = OrderDetailRepository;
             _OrderRepository = orderRepository;
             _PromotionRepository = promotionRepository;
             _ProductRepository = productRepository;
+            _CounterRepository = counterRepository;
+            _CategoryRepository = categoryRepository;
         }
 
-        public async Task<OrderDetailDTO> Add(OrderDetailDTO OrderDetailDTO, CancellationToken cancellationToken)
+        public async Task<GetOrderResponse> Add(OrderDetailDTO OrderDetailDTO, CancellationToken cancellationToken)
         {
             var order = await _OrderRepository.FindAsync(o => o.ID == OrderDetailDTO.OrderID);
             if (order is null)
@@ -46,8 +50,20 @@ namespace Services.ServiceImpl
             {
                 throw new NotFoundException("Promotion not found!");
             }
+            if (product.Quantity < OrderDetailDTO.Quantity)
+            {
+                throw new Exception("Not enough product in storage");
+            }
+            var counter = await _CounterRepository.FindAsync(c => c.ID == order.CounterID);
+            var category = await _CategoryRepository.FindAsync(c => c.ID == product.CategoryID);
+            if ( counter != null && category != null && !counter.Name.Contains(category.Name))
+            {
+                throw new Exception("Product's category is not match with counter.");
+            }
 
             var orderDetail = OrderDetailDTO.Adapt<OrderDetailEntity>();
+
+            var primaryPrice = OrderDetailDTO.Quantity * product.Cost;
             if (promotion is null)
             {
                 orderDetail.ProductCost = OrderDetailDTO.Quantity * product.Cost;
@@ -64,11 +80,13 @@ namespace Services.ServiceImpl
             _OrderDetailRepository.Add(orderDetail);
 
             order.Status = "Done";
+            order.PrimaryPrice += primaryPrice;
             order.Total += orderDetail.ProductCost;
+            product.Quantity -= orderDetail.Quantity;
 
             if (await _OrderDetailRepository.UnitOfWork.SaveChangesAsync(cancellationToken) != 0)
             {
-                return OrderDetailDTO;
+                return order.Adapt<GetOrderResponse>();
             }
             throw new Exception("Something went wrong! Add action unsuccesful");
         }

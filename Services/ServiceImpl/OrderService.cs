@@ -25,15 +25,26 @@ namespace Services.ServiceImpl
             _OrderRepository = OrderRepository;
         }
 
-        public async Task<OrderDTO> Add(OrderDTO OrderDTO, CancellationToken cancellationToken)
+        public async Task<List<GetOrderResponse>> Add(OrderDTO OrderDTO, CancellationToken cancellationToken, ClaimsPrincipal claims)
         {
+            var userId = claims.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
+            if (userId is null)
+            {
+                throw new Exception("User not authorized!");
+            }
             var order = OrderDTO.Adapt<OrderEntity>();
+
+            order.UserID = userId;
             order.Status = "InCart";
+            order.PrimaryPrice = 0;
             order.Total = 0;
+            order.CreatorID = userId;
+
             _OrderRepository.Add(order);
             if (await _OrderRepository.UnitOfWork.SaveChangesAsync(cancellationToken) != 0)
             {
-                return OrderDTO;
+                return (await _OrderRepository.GetAllWithDetail(cancellationToken))
+                    .Where(o => o.UserID == userId).Adapt<List<GetOrderResponse>>();
             }
             throw new Exception("Something went wrong! Add action unsuccesful");
         }
@@ -72,8 +83,14 @@ namespace Services.ServiceImpl
             return result.Adapt<GetOrderResponse>();
         }
 
-        public async Task<OrderDTO> Update(string id, OrderDTO OrderDTO, CancellationToken cancellationToken)
+        public async Task<OrderDTO> Update(string id, OrderDTO OrderDTO, CancellationToken cancellationToken, ClaimsPrincipal claims)
         {
+            var userId = claims.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
+            if (userId is null)
+            {
+                throw new Exception("User not authorized!");
+            }
+
             var Order = await _OrderRepository.FindAsync(p => p.ID.Equals(id));
             if (Order is null)
             {
@@ -84,7 +101,9 @@ namespace Services.ServiceImpl
                 Order.Note = OrderDTO.Note;
                 Order.PromotionID = OrderDTO.PromotionID;
                 Order.CounterID = OrderDTO.CounterID;
-                Order.UserID = OrderDTO.UserID;
+                Order.UserID = userId;
+                Order.UpdaterID = userId;
+                Order.LastestUpdateAt = DateTime.UtcNow;
             }
             catch (Exception ex)
             {

@@ -39,7 +39,6 @@ namespace JewelryStorePRN221.Controllers
             return Ok(await _OrderService.GetAll(cancellationToken));
         }
 
-        [AllowAnonymous]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -47,10 +46,9 @@ namespace JewelryStorePRN221.Controllers
         [HttpPost("create")]
         public async Task<ActionResult> Create([FromForm] OrderDTO OrderDTO, CancellationToken cancellationToken = default)
         {
-            return Ok(await _OrderService.Add(OrderDTO, cancellationToken));
+            return Ok(await _OrderService.Add(OrderDTO, cancellationToken, HttpContext.User));
         }
 
-        [AllowAnonymous]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -58,10 +56,9 @@ namespace JewelryStorePRN221.Controllers
         [HttpPatch("update/{id}")]
         public async Task<ActionResult<OrderDTO>> Update(string id, [FromForm] OrderDTO OrderDTO, CancellationToken cancellationToken = default)
         {
-            return Ok(await _OrderService.Update(id, OrderDTO, cancellationToken));
+            return Ok(await _OrderService.Update(id, OrderDTO, cancellationToken, HttpContext.User));
         }
 
-        [AllowAnonymous]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessObjecs.DTOs
+namespace BusinessObjecs.ResponseModels.Models
 {
-    public class PromotionDTO
+    public class Promotion
     {
-        [Required]
+        public string ID { get; set; }
         public string Description { get; set; } = null!;
         public decimal ConditionsOfUse { get; set; }
         public float ReducedPercent { get; set; }

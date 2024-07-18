@@ -14,8 +14,8 @@ namespace Services.IService
     {
         Task<GetOrderResponse> GetById(string id, CancellationToken cancellationToken);
         Task<List<GetOrderResponse>> GetAll(CancellationToken cancellationToken);
-        Task<OrderDTO> Add(OrderDTO OrderDTO, CancellationToken cancellationToken);
-        Task<OrderDTO> Update(string id, OrderDTO OrderDTO, CancellationToken cancellationToken);
+        Task<List<GetOrderResponse>> Add(OrderDTO OrderDTO, CancellationToken cancellationToken, ClaimsPrincipal claims);
+        Task<OrderDTO> Update(string id, OrderDTO OrderDTO, CancellationToken cancellationToken, ClaimsPrincipal claims);
         Task<OrderDTO> Delete(string id, CancellationToken cancellationToken, ClaimsPrincipal claims);
         Task<List<GetOrderResponse>> GetByUserId(string userId, CancellationToken cancellationToken);
     }
