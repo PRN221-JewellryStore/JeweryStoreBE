@@ -40,10 +40,6 @@ namespace Services.ServiceImpl
             }
 
             var promotion = await _PromotionRepository.FindAsync(p => p.ID == order.PromotionID);
-            if (promotion is null)
-            {
-                throw new NotFoundException("Promotion not found!");
-            }
 
             var product = await _ProductRepository.FindAsync(p => p.ID == OrderDetailDTO.ProductID);
             if (product is null)
@@ -52,11 +48,18 @@ namespace Services.ServiceImpl
             }
 
             var orderDetail = OrderDetailDTO.Adapt<OrderDetailEntity>();
-            var reducedPrice = (decimal) (OrderDetailDTO.Quantity * promotion.ReducedPercent) * product.Cost / 100;
+            if (promotion is null)
+            {
+                orderDetail.ProductCost = OrderDetailDTO.Quantity * product.Cost;
+            }
+            else
+            {
+                var reducedPrice = (decimal)(OrderDetailDTO.Quantity * promotion.ReducedPercent) * product.Cost / 100;
 
-            orderDetail.ProductCost = (reducedPrice > promotion.MaximumReduce) 
-                ? OrderDetailDTO.Quantity * product.Cost - promotion.MaximumReduce
-                : OrderDetailDTO.Quantity * product.Cost - reducedPrice;
+                orderDetail.ProductCost = (reducedPrice > promotion.MaximumReduce)
+                    ? OrderDetailDTO.Quantity * product.Cost - promotion.MaximumReduce
+                    : OrderDetailDTO.Quantity * product.Cost - reducedPrice;
+            }
 
             _OrderDetailRepository.Add(orderDetail);
 
