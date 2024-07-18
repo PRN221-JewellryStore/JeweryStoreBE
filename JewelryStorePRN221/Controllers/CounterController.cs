@@ -21,7 +21,7 @@ namespace JewelryStorePRN221.Controllers
             _userService = userServices;
             _counterService = CounterService;
         }
-        [HttpGet("Counter/{id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<CounterDTOResponse>> GetById(int id)
         {
             var counterDto = await _counterService.GetById(id);
@@ -41,7 +41,7 @@ namespace JewelryStorePRN221.Controllers
 
         [AllowAnonymous]
         [HttpGet]
-        [Route("Counter/getall")]
+        [Route("getall")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -53,7 +53,7 @@ namespace JewelryStorePRN221.Controllers
         }
 
         [HttpPost]
-        [Route("counter/Create")]
+        [Route("Create")]
         public async Task<ActionResult<CategoryDTO>> CreateCategory([FromForm] CounterDTO counter)
         {
 
