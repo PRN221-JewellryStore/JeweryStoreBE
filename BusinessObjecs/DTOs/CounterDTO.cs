@@ -41,13 +41,15 @@ namespace BusinessObjecs.DTOs
     public class CounterDTOResponse
     {
         // Mapping is handled by the same MappingProfile class as CounterDTO
+        public int ID { get; set; }
         public string Name { get; set; }
         public CategoryDTO Category { get; set; }
 
-        public static CounterDTOResponse Create(string Name, CategoryDTO category)
+        public static CounterDTOResponse Create(string Name, int ID, CategoryDTO category)
         {
             return new CounterDTOResponse
             {
+                ID = ID,
                 Name = Name,
                 Category = category,
             };

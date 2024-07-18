@@ -1,5 +1,6 @@
 using AutoMapper;
 using BusinessObjecs.Mapping;
+using BusinessObjecs.Models;
 using JewelryStorePRN221;
 using JewelryStorePRN221.Configuration;
 using JewelryStorePRN221.Services;
@@ -44,6 +45,8 @@ builder.Services.AddScoped<IOrderDetailService, OrderDetailService>();
 builder.Services.AddScoped<IPromotionService, PromotionService>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IVnPayService, VnPayService>();
+builder.Services.AddScoped<IEmailService, EmailService>();
+
 
 builder.Services.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<JeweryStoreDBContext>());
 
@@ -56,6 +59,8 @@ builder.Services.AddTransient<IOrderRepository, OrderRepository>();
 builder.Services.AddTransient<IOrderDetailRepository, OrderDetailRepository>();
 builder.Services.AddTransient<IPromotionRepository, PromotionRepository>();
 builder.Services.AddTransient<IProductRepository, ProductRepository>();
+
+builder.Services.Configure<SmtpSettings>(builder.Configuration.GetSection("Smtp"));
 
 builder.Services.AddDbContext<JeweryStoreDBContext>(options =>
 {

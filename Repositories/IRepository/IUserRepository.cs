@@ -1,4 +1,5 @@
-﻿using BusinessObjecs.Models;
+﻿using BusinessObjecs.DTOs;
+using BusinessObjecs.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,7 @@ namespace Repositories.IRepository
     {
         bool VerifyPassword(string password, string passwordHash);
         string HashPassword(string password);
+
+        Task<UserEntity> Get(string email);
     }
 }

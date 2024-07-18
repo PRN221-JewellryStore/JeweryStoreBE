@@ -22,12 +22,14 @@ namespace Services.ServiceImpl
         private readonly IMapper _mapper;
         private readonly ICurrentUserService _currentUserService;
         private readonly IRoleRepository _roleRepository;
-        public UserServices(IUserRepository userRepository, IRoleRepository roleRepository, IMapper mapper, ICurrentUserService currentUserService)
+        private readonly IEmailService _emailService;   
+        public UserServices(IUserRepository userRepository, IRoleRepository roleRepository, IMapper mapper, ICurrentUserService currentUserService, IEmailService emailService)
         {
             _currentUserService = currentUserService;
             _mapper = mapper;
             _userRepository = userRepository;
             _roleRepository = roleRepository;
+            _emailService = emailService;
         }
         public async Task<UserLoginDTO> Login(LoginDTO query, CancellationToken cancellationToken)
         {
@@ -156,6 +158,49 @@ namespace Services.ServiceImpl
             user.DeletedAt = DateTime.Now;
             _userRepository.Update(user);
             return await _userRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Delete thành công" : "Delete thất bại";
+        }
+
+        public async Task SendEmailCustomer(string email, CancellationToken cancellationToken)
+        {
+            var getcustomer = await _userRepository.Get(email);
+
+            // Chuẩn bị nội dung email cảm ơn
+            var subject = "Thank you for using our with us!";
+            var sb = new StringBuilder();
+            sb.Append("<html>");
+            sb.Append("<head>");
+            sb.Append("<style>");
+            sb.Append("body { font-family: Arial, sans-serif; line-height: 1.6; }");
+            sb.Append("table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }");
+            sb.Append("th, td { padding: 8px; border: 1px solid #dddddd; text-align: center; }");
+            sb.Append("th { background-color: #5e8583; color: white; }");
+            sb.Append("</style>");
+            sb.Append("</head>");
+            sb.Append("<body>");
+            sb.Append($"<p>Dear {getcustomer.Username},</p>");
+            sb.Append("<p>Thank you for your purchase! Your payment has been successfully completed. </p>");
+  /*          sb.Append("<table>");*/
+/*            sb.Append("<tr><th>Room Number</th><th>Start Date</th><th>End Date</th><th>Price</th></tr>");
+*/            //foreach (var booking in getInforBooking)
+            //{
+           /* sb.Append($"<tr><td>{getInforBooking.RoomNumber}</td><td>{getInforBooking.StartDate.ToString()}</td><td>{getInforBooking.EndDate.ToString()}</td><td>{getInforBooking.ActualPrice.ToString()}</td></tr>");*/
+            //}
+/*            sb.Append("</table>");
+*/            sb.Append("<p>If you have any complaints, please send an email to 'Quang@gmail.com' or call us at 0939193974.</p>");
+            sb.Append("<p>Best regards,<br/>");
+            //sb.Append("FUMiniHotel</p>");
+            sb.Append("</body>");
+            sb.Append("</html>");
+
+            var emailBody = sb.ToString();
+            try
+            {
+                await _emailService.SendEmailAsync(getcustomer.Email, subject, emailBody);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+            }
         }
     }
 }
