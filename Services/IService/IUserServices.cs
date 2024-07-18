@@ -19,5 +19,8 @@ namespace Services.IService
 
         Task<string> Update(string id, UserUpdateDTO dto, CancellationToken cancellationToken);
         Task<string> Delete(string id, CancellationToken cancellationToken);
+
+        Task SendEmailCustomer(string email, CancellationToken cancellationToken );
+
     }
 }
