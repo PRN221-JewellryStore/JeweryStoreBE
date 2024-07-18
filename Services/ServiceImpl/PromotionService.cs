@@ -79,7 +79,6 @@ namespace Services.ServiceImpl
                 promotion.ConditionsOfUse = promotionDTO.ConditionsOfUse;
                 promotion.ReducedPercent = promotionDTO.ReducedPercent;
                 promotion.MaximumReduce = promotionDTO.MaximumReduce;
-                promotion.ExchangePoint = promotionDTO.ExchangePoint;
                 promotion.ExpiresTime = promotionDTO.ExpiresTime;
             }
             catch (Exception ex) 
