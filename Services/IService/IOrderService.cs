@@ -1,5 +1,6 @@
 ﻿using BusinessObjecs.DTOs;
 using BusinessObjecs.Models;
+using BusinessObjecs.ResponseModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +12,11 @@ namespace Services.IService
 {
     public interface IOrderService : IServices<OrderEntity>
     {
-        Task<OrderEntity> GetById(string id, CancellationToken cancellationToken);
-        Task<List<OrderEntity>> GetAll(CancellationToken cancellationToken);
+        Task<GetOrderResponse> GetById(string id, CancellationToken cancellationToken);
+        Task<List<GetOrderResponse>> GetAll(CancellationToken cancellationToken);
         Task<OrderDTO> Add(OrderDTO OrderDTO, CancellationToken cancellationToken);
         Task<OrderDTO> Update(string id, OrderDTO OrderDTO, CancellationToken cancellationToken);
         Task<OrderDTO> Delete(string id, CancellationToken cancellationToken, ClaimsPrincipal claims);
-        Task<OrderEntity> GetByUserId(string userId, CancellationToken cancellationToken);
+        Task<List<GetOrderResponse>> GetByUserId(string userId, CancellationToken cancellationToken);
     }
 }

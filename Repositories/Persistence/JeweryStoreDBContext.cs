@@ -118,8 +118,8 @@ namespace Repositories
 
             var promotions = new List<PromotionEntity>
             {
-                new PromotionEntity { ID = Guid.NewGuid().ToString(), Description = "Summer Sale", ConditionsOfUse = 5000000, ReducedPercent = 10, MaximumReduce = 500000, ExpiresTime = DateTime.Now.AddMonths(1), UserID = null, Status = "Done"},
-                new PromotionEntity { ID = Guid.NewGuid().ToString(), Description = "Winter Sale", ConditionsOfUse = 3000000, ReducedPercent = 15, MaximumReduce = 300000, ExpiresTime = DateTime.Now.AddMonths(2), UserID = null, Status = "Done"}
+                new PromotionEntity { ID = Guid.NewGuid().ToString(), Description = "Summer Sale", ConditionsOfUse = 5000000, ReducedPercent = 10, MaximumReduce = 500000, ExpiresTime = DateTime.Now.AddMonths(1), UserID = null, Status = "Active"},
+                new PromotionEntity { ID = Guid.NewGuid().ToString(), Description = "Winter Sale", ConditionsOfUse = 3000000, ReducedPercent = 15, MaximumReduce = 300000, ExpiresTime = DateTime.Now.AddMonths(2), UserID = null, Status = "Active"}
             };
             modelBuilder.Entity<PromotionEntity>().HasData(promotions);
 

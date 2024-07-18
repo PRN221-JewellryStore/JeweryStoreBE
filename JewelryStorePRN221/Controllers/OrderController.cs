@@ -78,7 +78,7 @@ namespace JewelryStorePRN221.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         [HttpGet("user:{userId}")]
-        public async Task<ActionResult<OrderDTO>> GetByUserId(string userId, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<List<OrderDTO>>> GetByUserId(string userId, CancellationToken cancellationToken = default)
         {
             return Ok(await _OrderService.GetById(userId, cancellationToken));
         }
