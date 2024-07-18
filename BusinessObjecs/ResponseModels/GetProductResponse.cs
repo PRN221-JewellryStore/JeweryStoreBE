@@ -1,4 +1,5 @@
 ﻿using BusinessObjecs.DTOs;
+using BusinessObjecs.ResponseModels.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -17,6 +18,6 @@ namespace BusinessObjecs.ResponseModels
         public string? Description { get; set; }
         public required int CategoryID { get; set; }
         public CategoryDTO Category { get; set; }
-        public List<OrderDetailDTO> OrderDetails { get; set; } = [];
+        public List<OrderDetail> OrderDetails { get; set; } = [];
     }
 }

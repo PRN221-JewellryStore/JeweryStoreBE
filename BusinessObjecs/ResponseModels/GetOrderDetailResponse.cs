@@ -1,4 +1,4 @@
-﻿using BusinessObjecs.DTOs;
+﻿using BusinessObjecs.ResponseModels.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -12,9 +12,9 @@ namespace BusinessObjecs.ResponseModels
     {
         public string ID { get; set; }
         public required string OrderID { get; set; }
-        public OrderDTO Order { get; set; }
+        public Order Order { get; set; }
         public required string ProductID { get; set; }
-        public ProductDTO Product { get; set; }
+        public Product Product { get; set; }
         public required int Quantity { get; set; }
         public required decimal ProductCost { get; set; }
     }

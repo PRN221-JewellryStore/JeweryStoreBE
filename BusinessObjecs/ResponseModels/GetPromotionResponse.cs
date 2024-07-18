@@ -1,4 +1,5 @@
 ﻿using BusinessObjecs.DTOs;
+using BusinessObjecs.ResponseModels.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -18,7 +19,7 @@ namespace BusinessObjecs.ResponseModels
         public required DateTime ExpiresTime { get; set; }
         public string? UserID { get; set; }
         public UserDTO User { get; set; }
-        public List<OrderDTO> Orders { get; set; } = [];
+        public List<Order> Orders { get; set; } = [];
         public required string Status { get; set; }
     }
 }
