@@ -71,5 +71,16 @@ namespace JewelryStorePRN221.Controllers
         {
             return Ok(await _OrderService.Delete(id, cancellationToken, HttpContext.User));
         }
+
+        [AllowAnonymous]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        [HttpGet("user:{userId}")]
+        public async Task<ActionResult<List<OrderDTO>>> GetByUserId(string userId, CancellationToken cancellationToken = default)
+        {
+            return Ok(await _OrderService.GetById(userId, cancellationToken));
+        }
     }
 }

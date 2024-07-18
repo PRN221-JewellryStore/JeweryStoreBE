@@ -12,6 +12,7 @@ using Repositories.Common.Exceptions;
 using System.Security.Claims;
 using System.IdentityModel.Tokens.Jwt;
 using Repositories.RepositoryImpl;
+using BusinessObjecs.ResponseModels;
 
 namespace Services.ServiceImpl
 {
@@ -25,7 +26,9 @@ namespace Services.ServiceImpl
 
         public async Task<PromotionDTO> Add(PromotionDTO promotionDTO, CancellationToken cancellationToken)
         {
-            _promotionRepository.Add(promotionDTO.Adapt<PromotionEntity>());
+            var promotion = promotionDTO.Adapt<PromotionEntity>();
+            promotion.Status = "Active";
+            _promotionRepository.Add(promotion);
             if (await _promotionRepository.UnitOfWork.SaveChangesAsync(cancellationToken) != 0)
             {
                 return promotionDTO;
@@ -50,20 +53,20 @@ namespace Services.ServiceImpl
             throw new Exception("Something went wrong! Delete action unsuccesful");
         }
 
-        public async Task<List<PromotionEntity>> GetAll(CancellationToken cancellationToken)
+        public async Task<List<GetPromotionResponse>> GetAll(CancellationToken cancellationToken)
         {
             var result = await _promotionRepository.GetAllWithDetail(cancellationToken);
-            return result;
+            return result.Adapt<List<GetPromotionResponse>>();
         }
 
-        public async Task<PromotionEntity> GetById(string id, CancellationToken cancellationToken)
+        public async Task<GetPromotionResponse> GetById(string id, CancellationToken cancellationToken)
         {
             var result = (await _promotionRepository.GetAllWithDetail(cancellationToken)).FirstOrDefault(p => p.ID.Equals(id));
             if (result is null)
             {
                 throw new NotFoundException("Promotion not existed");
             }
-            return result;
+            return result.Adapt<GetPromotionResponse>();
         }
 
         public async Task<PromotionDTO> Update(string id, PromotionDTO promotionDTO, CancellationToken cancellationToken)
@@ -79,7 +82,6 @@ namespace Services.ServiceImpl
                 promotion.ConditionsOfUse = promotionDTO.ConditionsOfUse;
                 promotion.ReducedPercent = promotionDTO.ReducedPercent;
                 promotion.MaximumReduce = promotionDTO.MaximumReduce;
-                promotion.ExchangePoint = promotionDTO.ExchangePoint;
                 promotion.ExpiresTime = promotionDTO.ExpiresTime;
             }
             catch (Exception ex) 

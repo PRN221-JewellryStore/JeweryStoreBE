@@ -82,7 +82,6 @@ namespace Services.ServiceImpl
                 PasswordHash = _userRepository.HashPassword(request.Password),
                 RoleID = request.RoleID,
                 CreatedAt = DateTime.UtcNow,
-                Point = 0,
             };
             _userRepository.Add(user);
             await _userRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
@@ -141,10 +140,6 @@ namespace Services.ServiceImpl
             if (request.RoleID != null)
             {
                 user.RoleID = (int)request.RoleID;
-            }
-            if (request.Point != null)
-            {
-                user.Point = (int)request.Point;
             }
             user.UpdaterID = _currentUserService.UserId;
             user.LastestUpdateAt = DateTime.Now;

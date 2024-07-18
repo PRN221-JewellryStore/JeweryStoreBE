@@ -23,5 +23,7 @@ namespace BusinessObjecs.Models
         [ForeignKey(nameof(UserID))]
         public virtual UserEntity User { get; set; }
         public virtual ICollection<OrderDetailEntity> OrderDetails { get; set; }
+        public required string Status { get; set; }
+        public decimal? Total { get; set; }
     }
 }

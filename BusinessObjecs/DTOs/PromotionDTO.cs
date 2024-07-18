@@ -15,7 +15,6 @@ namespace BusinessObjecs.DTOs
         public decimal ConditionsOfUse { get; set; }
         public float ReducedPercent { get; set; }
         public decimal MaximumReduce { get; set; }
-        public int ExchangePoint { get; set; }
         public DateTime ExpiresTime { get; set; }
         [Required]
         public string UserID { get; set; } = null!;

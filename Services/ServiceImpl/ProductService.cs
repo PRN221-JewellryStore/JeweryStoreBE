@@ -1,5 +1,6 @@
 ﻿using BusinessObjecs.DTOs;
 using BusinessObjecs.Models;
+using BusinessObjecs.ResponseModels;
 using Mapster;
 using Repositories.Common.Exceptions;
 using Repositories.IRepository;
@@ -52,20 +53,20 @@ namespace Services.ServiceImpl
             throw new Exception("Something went wrong! Delete action unsuccesful");
         }
 
-        public async Task<List<ProductEntity>> GetAll(CancellationToken cancellationToken)
+        public async Task<List<GetProductResponse>> GetAll(CancellationToken cancellationToken)
         {
             var result = await _ProductRepository.GetAllWithDetail(cancellationToken);
-            return result;
+            return result.Adapt<List<GetProductResponse>>();
         }
 
-        public async Task<ProductEntity> GetById(string id, CancellationToken cancellationToken)
+        public async Task<GetProductResponse> GetById(string id, CancellationToken cancellationToken)
         {
             var result = (await _ProductRepository.GetAllWithDetail(cancellationToken)).FirstOrDefault(p => p.ID.Equals(id));
             if (result is null)
             {
                 throw new NotFoundException("Product not existed");
             }
-            return result;
+            return result.Adapt<GetProductResponse>();
         }
 
         public async Task<ProductDTO> Update(string id, ProductDTO ProductDTO, CancellationToken cancellationToken)

@@ -1,4 +1,4 @@
-﻿using BusinessObjecs.Models.Base;
+﻿using BusinessObjecs.DTOs;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -6,21 +6,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessObjecs.Models
+namespace BusinessObjecs.ResponseModels
 {
-    [Table("Promotion")]
-    public class PromotionEntity : BaseEntity
+    public class GetPromotionResponse
     {
+        public string ID { get; set; }
         public string? Description { get; set; }
         public required decimal ConditionsOfUse { get; set; }
         public required float ReducedPercent { get; set; }
         public required decimal MaximumReduce { get; set; }
         public required DateTime ExpiresTime { get; set; }
         public string? UserID { get; set; }
-        [ForeignKey(nameof(UserID))]
-        public virtual UserEntity User { get; set; }
-        public virtual ICollection<OrderEntity> Orders { get; set; }
+        public UserDTO User { get; set; }
+        public List<OrderDTO> Orders { get; set; } = [];
         public required string Status { get; set; }
-
     }
 }

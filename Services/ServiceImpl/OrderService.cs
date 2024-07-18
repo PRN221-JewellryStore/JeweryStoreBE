@@ -1,5 +1,6 @@
 ﻿using BusinessObjecs.DTOs;
 using BusinessObjecs.Models;
+using BusinessObjecs.ResponseModels;
 using Mapster;
 using Repositories.Common.Exceptions;
 using Repositories.IRepository;
@@ -26,7 +27,10 @@ namespace Services.ServiceImpl
 
         public async Task<OrderDTO> Add(OrderDTO OrderDTO, CancellationToken cancellationToken)
         {
-            _OrderRepository.Add(OrderDTO.Adapt<OrderEntity>());
+            var order = OrderDTO.Adapt<OrderEntity>();
+            order.Status = "InCart";
+            order.Total = 0;
+            _OrderRepository.Add(order);
             if (await _OrderRepository.UnitOfWork.SaveChangesAsync(cancellationToken) != 0)
             {
                 return OrderDTO;
@@ -52,20 +56,20 @@ namespace Services.ServiceImpl
             throw new Exception("Something went wrong! Delete action unsuccesful");
         }
 
-        public async Task<List<OrderEntity>> GetAll(CancellationToken cancellationToken)
+        public async Task<List<GetOrderResponse>> GetAll(CancellationToken cancellationToken)
         {
             var result = await _OrderRepository.GetAllWithDetail(cancellationToken);
-            return result;
+            return result.Adapt<List<GetOrderResponse>>();
         }
 
-        public async Task<OrderEntity> GetById(string id, CancellationToken cancellationToken)
+        public async Task<GetOrderResponse> GetById(string id, CancellationToken cancellationToken)
         {
             var result = (await _OrderRepository.GetAllWithDetail(cancellationToken)).FirstOrDefault(p => p.ID.Equals(id));
             if (result is null)
             {
                 throw new NotFoundException("Order not existed");
             }
-            return result;
+            return result.Adapt<GetOrderResponse>();
         }
 
         public async Task<OrderDTO> Update(string id, OrderDTO OrderDTO, CancellationToken cancellationToken)
@@ -92,6 +96,15 @@ namespace Services.ServiceImpl
                 return OrderDTO;
             }
             throw new Exception("Something went wrong! Delete action unsuccesful");
+        }
+        public async Task<List<GetOrderResponse>> GetByUserId(string userId, CancellationToken cancellationToken)
+        {
+            var result = (await _OrderRepository.GetAllWithDetail(cancellationToken)).Where(p => p.UserID.Equals(userId)).ToList();
+            if (result is null)
+            {
+                throw new NotFoundException("Order not existed");
+            }
+            return result.Adapt<List<GetOrderResponse>>();
         }
     }
 }

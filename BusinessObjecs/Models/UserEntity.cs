@@ -22,7 +22,6 @@ namespace BusinessObjecs.Models
         [MaxLength(11)]
         public required string PhoneNumber { get; set; }
         public required string Address { get; set; }
-        public required int Point { get; set; } = 0;
         public required int RoleID { get; set; }
         [ForeignKey(nameof(RoleID))]
         public virtual RoleEntity Role { get; set; }
