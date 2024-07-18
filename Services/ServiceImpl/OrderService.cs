@@ -26,7 +26,10 @@ namespace Services.ServiceImpl
 
         public async Task<OrderDTO> Add(OrderDTO OrderDTO, CancellationToken cancellationToken)
         {
-            _OrderRepository.Add(OrderDTO.Adapt<OrderEntity>());
+            var order = OrderDTO.Adapt<OrderEntity>();
+            order.Status = "InCart";
+
+            _OrderRepository.Add(order);
             if (await _OrderRepository.UnitOfWork.SaveChangesAsync(cancellationToken) != 0)
             {
                 return OrderDTO;
@@ -92,6 +95,15 @@ namespace Services.ServiceImpl
                 return OrderDTO;
             }
             throw new Exception("Something went wrong! Delete action unsuccesful");
+        }
+        public async Task<OrderEntity> GetByUserId(string userId, CancellationToken cancellationToken)
+        {
+            var result = (await _OrderRepository.GetAllWithDetail(cancellationToken)).FirstOrDefault(p => p.UserID.Equals(userId));
+            if (result is null)
+            {
+                throw new NotFoundException("Order not existed");
+            }
+            return result;
         }
     }
 }

@@ -18,7 +18,6 @@ namespace BusinessObjecs.DTOs
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string Address { get; set; }
-        public int Point { get; set; }
         public int RoleID { get; set; }
 
         public void Mapping(Profile profile)

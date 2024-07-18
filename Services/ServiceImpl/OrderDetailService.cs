@@ -18,15 +18,50 @@ namespace Services.ServiceImpl
     public class OrderDetailService : IOrderDetailService
     {
         private readonly IOrderDetailRepository _OrderDetailRepository;
+        private readonly IOrderRepository _OrderRepository;
+        private readonly IPromotionRepository _PromotionRepository;
+        private readonly IProductRepository _ProductRepository;
 
-        public OrderDetailService(IOrderDetailRepository OrderDetailRepository)
+        public OrderDetailService(IOrderDetailRepository OrderDetailRepository, IOrderRepository orderRepository, IPromotionRepository promotionRepository, IProductRepository productRepository)
         {
             _OrderDetailRepository = OrderDetailRepository;
+            _OrderRepository = orderRepository;
+            _PromotionRepository = promotionRepository;
+            _ProductRepository = productRepository;
         }
 
         public async Task<OrderDetailDTO> Add(OrderDetailDTO OrderDetailDTO, CancellationToken cancellationToken)
         {
-            _OrderDetailRepository.Add(OrderDetailDTO.Adapt<OrderDetailEntity>());
+            var order = await _OrderRepository.FindAsync(o => o.ID == OrderDetailDTO.OrderID);
+            if (order is null)
+            {
+                throw new NotFoundException("Order not existed!");
+            }
+
+            var promotion = await _PromotionRepository.FindAsync(p => p.ID == order.PromotionID);
+            if (promotion is null)
+            {
+                throw new NotFoundException("Promotion not found!");
+            }
+
+            var product = await _ProductRepository.FindAsync(p => p.ID == OrderDetailDTO.ProductID);
+            if (product is null)
+            {
+                throw new NotFoundException("Promotion not found!");
+            }
+
+            var orderDetail = OrderDetailDTO.Adapt<OrderDetailEntity>();
+            var reducedPrice = (decimal) (OrderDetailDTO.Quantity * promotion.ReducedPercent) * product.Cost / 100;
+
+            orderDetail.ProductCost = (reducedPrice > promotion.MaximumReduce) 
+                ? OrderDetailDTO.Quantity * product.Cost - promotion.MaximumReduce
+                : OrderDetailDTO.Quantity * product.Cost - reducedPrice;
+
+            _OrderDetailRepository.Add(orderDetail);
+
+            order.Status = "Done";
+            order.Total += orderDetail.ProductCost;
+
             if (await _OrderDetailRepository.UnitOfWork.SaveChangesAsync(cancellationToken) != 0)
             {
                 return OrderDetailDTO;
@@ -80,7 +115,6 @@ namespace Services.ServiceImpl
                 OrderDetail.OrderID = OrderDetailDTO.OrderID;
                 OrderDetail.ProductID = OrderDetailDTO.ProductID;
                 OrderDetail.Quantity = OrderDetailDTO.Quantity;
-                OrderDetail.ProductCost = OrderDetailDTO.ProductCost;
             }
             catch (Exception ex)
             {

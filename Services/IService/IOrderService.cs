@@ -16,5 +16,6 @@ namespace Services.IService
         Task<OrderDTO> Add(OrderDTO OrderDTO, CancellationToken cancellationToken);
         Task<OrderDTO> Update(string id, OrderDTO OrderDTO, CancellationToken cancellationToken);
         Task<OrderDTO> Delete(string id, CancellationToken cancellationToken, ClaimsPrincipal claims);
+        Task<OrderEntity> GetByUserId(string userId, CancellationToken cancellationToken);
     }
 }

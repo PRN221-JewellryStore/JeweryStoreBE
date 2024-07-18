@@ -13,6 +13,5 @@ namespace BusinessObjecs.DTOs
         public string OrderID { get; set; } = null!;
         public string ProductID { get; set; } = null!;
         public int Quantity { get; set; }
-        public decimal ProductCost { get; set; }
     }
 }
