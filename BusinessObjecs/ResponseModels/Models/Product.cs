@@ -9,6 +9,7 @@ namespace BusinessObjecs.ResponseModels.Models
     public class Product
     {
         public string ID { get; set; }
+        public string Name { get; set; }
         public decimal Cost { get; set; }
         public float Weight { get; set; }
         public int Quantity { get; set; }

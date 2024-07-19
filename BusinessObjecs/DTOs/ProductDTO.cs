@@ -8,6 +8,7 @@ namespace BusinessObjecs.DTOs
 {
     public class ProductDTO
     {
+        public string Name { get; set; }
         public decimal Cost { get; set; }
         public float Weight { get; set; }
         public int Quantity { get; set; }

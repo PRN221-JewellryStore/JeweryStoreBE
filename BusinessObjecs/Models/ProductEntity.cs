@@ -12,6 +12,7 @@ namespace BusinessObjecs.Models
     [Table("Product")]
     public class ProductEntity : BaseEntity
     {
+        public required string Name { get; set; }
         public required decimal Cost { get; set; }
         public required float Weight { get; set; }
         public required int Quantity { get; set; }
