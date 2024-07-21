@@ -33,7 +33,11 @@ namespace JewelryStorePRN221.Controllers
           public async Task<ActionResult<CategoryEntity>> GetAll() {
           return Ok (await _categoryService.GetAll());    
           }*/
-
+        [HttpGet("getRevenuebyCategory/{id}")]
+        public async Task<ActionResult<decimal>> getGevenuebycategory(int id)
+        {
+            return Ok(await _categoryService.GetRevenueByCategory(id));
+        }
 
         [AllowAnonymous]
         [HttpGet]

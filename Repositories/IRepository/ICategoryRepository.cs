@@ -20,10 +20,12 @@ namespace Repositories.IRepository
 
         Task DeleteCategoryById(int id, string DeletedId);
         Task UpdateCategoryById(CategoryEntity entity, int id);
+        Task<IQueryable<CategoryEntity>> GetCategoriesWithProductsAndOrderDetailsAsync();
+
 
     //    Task<CategoryDTO> AddCategoryAsync(CategoryDTO categoryDto);
 
-      //  public bool IsAdmin(UserEntity user);
+        //  public bool IsAdmin(UserEntity user);
 
 
     }
