@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QYCfm8CwZGR+LIMNox2RYr1hBDDMoeqMgCKI0akzxs8MlTuZ+8EgJ0uVKiKWvF5Qk/noG74iTj4cfKlHueiQuA==",
+  "dgSpecHash": "+bAgZno/SwJVmqSXMxKmBc1WW0mrgoQB+/GKPS0B2A8tlGEpSrrEBY+8idSDJG+XAeDHxCY+ORYC1w2QLBvATw==",
   "success": true,
-  "projectFilePath": "D:\\github\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj",
+  "projectFilePath": "D:\\github\\Ton\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\wew91\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\wew91\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",

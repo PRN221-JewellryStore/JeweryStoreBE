@@ -2,8 +2,10 @@
 using BusinessObjecs.Models;
 using BusinessObjecs.ResponseModels;
 using Mapster;
+using Microsoft.EntityFrameworkCore;
 using Repositories.Common.Exceptions;
 using Repositories.IRepository;
+using Repositories.RepositoryImpl;
 using Services.IService;
 using System;
 using System.Collections.Generic;
@@ -53,6 +55,15 @@ namespace Services.ServiceImpl
             throw new Exception("Something went wrong! Delete action unsuccesful");
         }
 
+        public async Task<List<ProductDTO>> SearchByName(string name, CancellationToken cancellationToken)
+        {
+            var productEntities = await _ProductRepository.SearchByNameAsync(name, cancellationToken);
+
+            // Assuming you have AutoMapper configured for ProductEntity to GetProductResponse
+
+            return productEntities.Adapt<List<ProductDTO>>();
+        }
+
         public async Task<List<GetProductResponse>> GetAll(CancellationToken cancellationToken)
         {
             var result = await _ProductRepository.GetAllWithDetail(cancellationToken);
@@ -94,6 +105,14 @@ namespace Services.ServiceImpl
                 return ProductDTO;
             }
             throw new Exception("Something went wrong! Delete action unsuccesful");
+        }
+
+        public async Task<List<ProductDTO>> SearchbyCategory(int id, CancellationToken cancellationToken)
+        {
+            var query = await  _ProductRepository.SearchbyCategory(cancellationToken);
+            var filteredQuery = query.Where(p => p.CategoryID == id);
+          //  var productEntities = await filteredQuery.ToList(cancellationToken);
+            return filteredQuery.Adapt<List<ProductDTO>>();
         }
     }
 }

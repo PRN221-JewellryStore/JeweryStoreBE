@@ -4714,11 +4714,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\github\\JeweryStoreBE\\JewelryStorePRN221\\JewelryStorePRN221.csproj",
+      "projectUniqueName": "D:\\github\\Ton\\JeweryStoreBE\\JewelryStorePRN221\\JewelryStorePRN221.csproj",
       "projectName": "JewelryStorePRN221",
-      "projectPath": "D:\\github\\JeweryStoreBE\\JewelryStorePRN221\\JewelryStorePRN221.csproj",
+      "projectPath": "D:\\github\\Ton\\JeweryStoreBE\\JewelryStorePRN221\\JewelryStorePRN221.csproj",
       "packagesPath": "C:\\Users\\wew91\\.nuget\\packages\\",
-      "outputPath": "D:\\github\\JeweryStoreBE\\JewelryStorePRN221\\obj\\",
+      "outputPath": "D:\\github\\Ton\\JeweryStoreBE\\JewelryStorePRN221\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -4739,14 +4739,14 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "D:\\github\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj": {
-              "projectPath": "D:\\github\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj"
+            "D:\\github\\Ton\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj": {
+              "projectPath": "D:\\github\\Ton\\JeweryStoreBE\\BusinessObjecs\\BusinessObjecs.csproj"
             },
-            "D:\\github\\JeweryStoreBE\\Repositories\\Repositories.csproj": {
-              "projectPath": "D:\\github\\JeweryStoreBE\\Repositories\\Repositories.csproj"
+            "D:\\github\\Ton\\JeweryStoreBE\\Repositories\\Repositories.csproj": {
+              "projectPath": "D:\\github\\Ton\\JeweryStoreBE\\Repositories\\Repositories.csproj"
             },
-            "D:\\github\\JeweryStoreBE\\Services\\Services.csproj": {
-              "projectPath": "D:\\github\\JeweryStoreBE\\Services\\Services.csproj"
+            "D:\\github\\Ton\\JeweryStoreBE\\Services\\Services.csproj": {
+              "projectPath": "D:\\github\\Ton\\JeweryStoreBE\\Services\\Services.csproj"
             }
           }
         }
