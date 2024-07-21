@@ -29,12 +29,22 @@ namespace Repositories.RepositoryImpl
             return product;
         }
 
-        public Task<List<ProductEntity>> Searchbyname(string name, CancellationToken cancellationToken)
+        public async Task<List<ProductEntity>> SearchbyCategory( CancellationToken cancellationToken)
+        {
+            return await _dbContext.productEntities.Include(o => o.Category).ToListAsync(cancellationToken);
+        }
 
+        public async Task<List<ProductEntity>> SearchByNameAsync(string name, CancellationToken cancellationToken)
         {
             var query = _dbContext.productEntities.AsQueryable();
 
+            if (!string.IsNullOrEmpty(name))
+            {
+                query = query.Where(x => x.Name.ToLower().Contains(name.ToLower()));
+            }
 
+            return await query.ToListAsync(cancellationToken);
         }
+
     }
 }

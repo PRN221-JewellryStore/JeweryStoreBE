@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "+qyaY0bTKsuj/c8Q3mYRfF9qHQeGWKPvokOs06N0EsUUbrunQVRvS8bcDyt2bQ9lC0BnKdWAajzYOS+xGUgjTw==",
+  "dgSpecHash": "JEmvCYozaCB+qO/sd2o8I1ew6S/+flVFZlkqHoFtbEdUQoy6qP1EetDLP/AQYUjgb0BTttpq8lt71GqZ5GcAcg==",
   "success": true,
-  "projectFilePath": "D:\\github\\JeweryStoreBE\\Services\\Services.csproj",
+  "projectFilePath": "D:\\github\\Ton\\JeweryStoreBE\\Services\\Services.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\wew91\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\wew91\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",

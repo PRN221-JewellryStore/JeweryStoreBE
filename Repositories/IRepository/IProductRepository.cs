@@ -12,5 +12,7 @@ namespace Repositories.IRepository
         Task<List<ProductEntity>> GetAllWithDetail(CancellationToken cancellationToken);
         Task<List<ProductEntity>> SearchByNameAsync(string name, CancellationToken cancellationToken);
 
+        Task<List<ProductEntity>> SearchbyCategory( CancellationToken cancellationToken);
+
     }
 }

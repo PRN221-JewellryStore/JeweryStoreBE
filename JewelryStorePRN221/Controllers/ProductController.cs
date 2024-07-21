@@ -49,7 +49,16 @@ namespace JewelryStorePRN221.Controllers
             return Ok(await _ProductService.SearchByName(name,cancellationToken));
         }
 
-
+        [AllowAnonymous]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        [HttpGet("search-by-Category/{id}")]
+        public async Task<ActionResult<List<ProductDTO>>> Searchbyname(int id, CancellationToken cancellationToken = default)
+        {
+            return Ok(await _ProductService.SearchbyCategory(id, cancellationToken));
+        }
         [AllowAnonymous]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]

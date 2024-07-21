@@ -106,5 +106,13 @@ namespace Services.ServiceImpl
             }
             throw new Exception("Something went wrong! Delete action unsuccesful");
         }
+
+        public async Task<List<ProductDTO>> SearchbyCategory(int id, CancellationToken cancellationToken)
+        {
+            var query = await  _ProductRepository.SearchbyCategory(cancellationToken);
+            var filteredQuery = query.Where(p => p.CategoryID == id);
+          //  var productEntities = await filteredQuery.ToList(cancellationToken);
+            return filteredQuery.Adapt<List<ProductDTO>>();
+        }
     }
 }
