@@ -17,5 +17,10 @@ namespace Services.IService
         Task<ProductDTO> Add(ProductDTO productDTO, CancellationToken cancellationToken);
         Task<ProductDTO> Update(string id, ProductDTO productDTO, CancellationToken cancellationToken);
         Task<ProductDTO> Delete(string id, CancellationToken cancellationToken, ClaimsPrincipal claims);
+
+        Task<List<ProductDTO>> SearchByName(string name, CancellationToken cancellationToken);
+
+        Task<List<ProductDTO>> SearchbyCategory(int id,CancellationToken cancellationToken);
+
     }
 }
