@@ -42,13 +42,18 @@ namespace Services.ServiceImpl
             {
                 throw new NotFoundException("Order not existed!");
             }
-
+            /*
+            if (order.Status != "InCart")
+            {
+                throw new Exception("Status is not InCart");
+            }
+            */
             var promotion = await _PromotionRepository.FindAsync(p => p.ID == order.PromotionID);
 
             var product = await _ProductRepository.FindAsync(p => p.ID == OrderDetailDTO.ProductID);
             if (product is null)
             {
-                throw new NotFoundException("Promotion not found!");
+                throw new NotFoundException("Product not found!");
             }
             if (product.Quantity < OrderDetailDTO.Quantity)
             {
@@ -61,34 +66,42 @@ namespace Services.ServiceImpl
                 throw new Exception("Product's category is not match with counter.");
             }
 
-            var orderDetail = OrderDetailDTO.Adapt<OrderDetailEntity>();
-
-            var primaryPrice = OrderDetailDTO.Quantity * product.Cost;
-            if (promotion is null)
+            try
             {
-                orderDetail.ProductCost = OrderDetailDTO.Quantity * product.Cost;
-            }
-            else
-            {
-                var reducedPrice = (decimal)(OrderDetailDTO.Quantity * promotion.ReducedPercent) * product.Cost / 100;
+                var orderDetail = OrderDetailDTO.Adapt<OrderDetailEntity>();
 
-                orderDetail.ProductCost = (reducedPrice > promotion.MaximumReduce)
-                    ? OrderDetailDTO.Quantity * product.Cost - promotion.MaximumReduce
-                    : OrderDetailDTO.Quantity * product.Cost - reducedPrice;
-            }
+                var primaryPrice = OrderDetailDTO.Quantity * product.Cost;
 
-            _OrderDetailRepository.Add(orderDetail);
+                if (promotion is null)
+                {
+                    orderDetail.ProductCost = OrderDetailDTO.Quantity * product.Cost;
+                }
+                else
+                {
+                    var reducedPrice = (decimal)(promotion.ReducedPercent) * primaryPrice / 100;
 
-            order.Status = "Done";
-            order.PrimaryPrice += primaryPrice;
-            order.Total += orderDetail.ProductCost;
-            product.Quantity -= orderDetail.Quantity;
+                    orderDetail.ProductCost = (reducedPrice > promotion.MaximumReduce)
+                        ? primaryPrice - promotion.MaximumReduce
+                        : primaryPrice - reducedPrice;
+                }
 
-            if (await _OrderDetailRepository.UnitOfWork.SaveChangesAsync(cancellationToken) != 0)
-            {
+                _OrderDetailRepository.Add(orderDetail);
+
+                order.Status = "Done";
+                order.PrimaryPrice += primaryPrice;
+                order.Total += orderDetail.ProductCost;
+                product.Quantity -= orderDetail.Quantity;
+                await _OrderDetailRepository.UnitOfWork.SaveChangesAsync();
                 return order.Adapt<GetOrderResponse>();
             }
-            throw new Exception("Something went wrong! Add action unsuccesful");
+            catch (Exception ex)
+            {
+                order.Status = "Cancelled";
+                order.PrimaryPrice = 0;
+                order.Total = 0;
+                await _OrderDetailRepository.UnitOfWork.SaveChangesAsync();
+                throw new Exception("Something went wrong! Add action unsuccesful");
+            }
         }
 
         public async Task<OrderDetailDTO> Delete(string id, CancellationToken cancellationToken, ClaimsPrincipal claims)

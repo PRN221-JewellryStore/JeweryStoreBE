@@ -13,6 +13,7 @@ namespace BusinessObjecs.ResponseModels.Models
         public string ID { get; set; }
         public string OrderID { get; set; } = null!;
         public string ProductID { get; set; } = null!;
+        public Product? Product { get; set; }
         public int Quantity { get; set; }
     }
 }

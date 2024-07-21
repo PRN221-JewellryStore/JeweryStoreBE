@@ -27,6 +27,7 @@ namespace Repositories.RepositoryImpl
                 .Include(o => o.Counter)
                 .Include(o => o.User)
                 .Include(o => o.OrderDetails)
+                    .ThenInclude(or => or.Product)
                 .ToListAsync(cancellationToken);
             return order;
         }
