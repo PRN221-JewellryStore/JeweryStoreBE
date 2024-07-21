@@ -35,8 +35,13 @@ namespace Services.ServiceImpl
             _CategoryRepository = categoryRepository;
         }
 
-        public async Task<GetOrderResponse> Add(OrderDetailDTO OrderDetailDTO, CancellationToken cancellationToken)
+        public async Task<GetOrderResponse> Add(OrderDetailDTO OrderDetailDTO, CancellationToken cancellationToken, ClaimsPrincipal claims)
         {
+            var userId = claims.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
+            if (userId is null)
+            {
+                throw new Exception("User not authorized!");
+            }
             var order = await _OrderRepository.FindAsync(o => o.ID == OrderDetailDTO.OrderID);
             if (order is null)
             {
@@ -71,25 +76,25 @@ namespace Services.ServiceImpl
                 var orderDetail = OrderDetailDTO.Adapt<OrderDetailEntity>();
 
                 var primaryPrice = OrderDetailDTO.Quantity * product.Cost;
-
-                if (promotion is null)
+                if (promotion != null)
                 {
-                    orderDetail.ProductCost = OrderDetailDTO.Quantity * product.Cost;
+                    var reducedPrice = (decimal)(promotion.ReducedPercent) * primaryPrice / 100;
+                    var discountPrice = (reducedPrice > promotion.MaximumReduce)
+                            ? primaryPrice - promotion.MaximumReduce
+                            : primaryPrice - reducedPrice;
+                    order.Total += discountPrice;
                 }
                 else
                 {
-                    var reducedPrice = (decimal)(promotion.ReducedPercent) * primaryPrice / 100;
-
-                    orderDetail.ProductCost = (reducedPrice > promotion.MaximumReduce)
-                        ? primaryPrice - promotion.MaximumReduce
-                        : primaryPrice - reducedPrice;
+                    order.Total += primaryPrice;
                 }
+                orderDetail.ProductCost = primaryPrice;
+                orderDetail.CreatorID = userId;
 
                 _OrderDetailRepository.Add(orderDetail);
 
                 order.Status = "Done";
                 order.PrimaryPrice += primaryPrice;
-                order.Total += orderDetail.ProductCost;
                 product.Quantity -= orderDetail.Quantity;
                 await _OrderDetailRepository.UnitOfWork.SaveChangesAsync();
                 return order.Adapt<GetOrderResponse>();
