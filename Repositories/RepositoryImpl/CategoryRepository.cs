@@ -90,12 +90,23 @@ namespace Repositories.RepositoryImpl
 
         }
 
-   /*     public bool IsAdmin()
+        public async Task<IQueryable<CategoryEntity>> GetCategoriesWithProductsAndOrderDetailsAsync()
         {
-            throw new NotImplementedException();
-        }*/
+            return  _Context.categoryEntities
+                      .Include(c => c.Products)
+                          .ThenInclude(p => p.OrderDetails)
+                              .ThenInclude(od => od.Order)
+                      .Where(c => c.Products
+                          .Any(p => p.OrderDetails
+                              .Any(od => od.Order.Status != "InCart")));
+        }
 
-     
+        /*     public bool IsAdmin()
+             {
+                 throw new NotImplementedException();
+             }*/
+
+
 
         /*  public async Task<CategoryDTO> AddCategoryAsync(CategoryDTO categoryDto)
           {

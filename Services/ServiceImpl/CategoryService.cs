@@ -111,5 +111,18 @@ namespace Services.ServiceImpl
             _categoryRepository.Update(existingCounterEntity);
             await _categoryRepository.UnitOfWork.SaveChangesAsync();
         }
+
+        public async Task<decimal> GetRevenueByCategory(int id )
+        {
+            var categoriesWithDetails = await _categoryRepository.GetCategoriesWithProductsAndOrderDetailsAsync();
+            var getRevenue = categoriesWithDetails.Where(c => c.ID == id)
+        .SelectMany(c => c.Products) // Lấy tất cả sản phẩm của danh mục
+        .SelectMany(p => p.OrderDetails) // Lấy tất cả chi tiết đơn hàng của sản phẩm
+        .Where(od => od.Order.Status != "InCart") // Lọc chi tiết đơn hàng không phải "InCart"
+        .Sum(od => od.Quantity * od.Product.Cost);
+            return getRevenue;
+
+
+        }
     }
 }
