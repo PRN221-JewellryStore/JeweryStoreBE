@@ -24,8 +24,10 @@ namespace Services.ServiceImpl
         private readonly IProductRepository _ProductRepository;
         private readonly ICounterRepository _CounterRepository;
         private readonly ICategoryRepository _CategoryRepository;
+        private readonly IOrderService _OrderService;
 
-        public OrderDetailService(IOrderDetailRepository OrderDetailRepository, IOrderRepository orderRepository, IPromotionRepository promotionRepository, IProductRepository productRepository, ICounterRepository counterRepository, ICategoryRepository categoryRepository)
+
+        public OrderDetailService(IOrderDetailRepository OrderDetailRepository, IOrderRepository orderRepository, IPromotionRepository promotionRepository, IProductRepository productRepository, ICounterRepository counterRepository, ICategoryRepository categoryRepository, IOrderService orderService)
         {
             _OrderDetailRepository = OrderDetailRepository;
             _OrderRepository = orderRepository;
@@ -33,6 +35,7 @@ namespace Services.ServiceImpl
             _ProductRepository = productRepository;
             _CounterRepository = counterRepository;
             _CategoryRepository = categoryRepository;
+            _OrderService = orderService;
         }
 
         public async Task<GetOrderResponse> Add(OrderDetailDTO OrderDetailDTO, CancellationToken cancellationToken, ClaimsPrincipal claims)
@@ -97,7 +100,7 @@ namespace Services.ServiceImpl
                 order.PrimaryPrice += primaryPrice;
                 product.Quantity -= orderDetail.Quantity;
                 await _OrderDetailRepository.UnitOfWork.SaveChangesAsync();
-                return order.Adapt<GetOrderResponse>();
+                return (await _OrderService.GetById(orderDetail.OrderID, cancellationToken)).Adapt<GetOrderResponse>();
             }
             catch (Exception ex)
             {
