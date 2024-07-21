@@ -28,5 +28,13 @@ namespace Repositories.RepositoryImpl
                 .ToListAsync(cancellationToken);
             return product;
         }
+
+        public Task<List<ProductEntity>> Searchbyname(string name, CancellationToken cancellationToken)
+
+        {
+            var query = _dbContext.productEntities.AsQueryable();
+
+
+        }
     }
 }

@@ -10,5 +10,7 @@ namespace Repositories.IRepository
     public interface IProductRepository : IEFRepository<ProductEntity, ProductEntity>
     {
         Task<List<ProductEntity>> GetAllWithDetail(CancellationToken cancellationToken);
+        Task<List<ProductEntity>> SearchByNameAsync(string name, CancellationToken cancellationToken);
+
     }
 }
