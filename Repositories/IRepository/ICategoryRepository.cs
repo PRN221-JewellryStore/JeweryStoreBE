@@ -23,6 +23,7 @@ namespace Repositories.IRepository
         Task<IQueryable<CategoryEntity>> GetCategoriesWithProductsAndOrderDetailsAsync();
 
 
+
     //    Task<CategoryDTO> AddCategoryAsync(CategoryDTO categoryDto);
 
         //  public bool IsAdmin(UserEntity user);

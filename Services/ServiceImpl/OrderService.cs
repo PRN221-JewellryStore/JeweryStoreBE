@@ -26,7 +26,7 @@ namespace Services.ServiceImpl
             _OrderRepository = OrderRepository;
         }
 
-        public async Task<List<GetOrderResponse>> Add(OrderDTO OrderDTO, CancellationToken cancellationToken, ClaimsPrincipal claims)
+        public async Task<GetOrderResponse> Add(OrderDTO OrderDTO, CancellationToken cancellationToken, ClaimsPrincipal claims)
         {
             var userId = claims.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
             if (userId is null)
@@ -44,8 +44,8 @@ namespace Services.ServiceImpl
             _OrderRepository.Add(order);
             if (await _OrderRepository.UnitOfWork.SaveChangesAsync(cancellationToken) != 0)
             {
-                return (await _OrderRepository.GetAllWithDetail(cancellationToken))
-                    .Where(o => o.UserID == userId).Adapt<List<GetOrderResponse>>();
+                var result = (await _OrderRepository.GetAllWithDetail(cancellationToken)).FirstOrDefault(o => o.ID == order.ID);
+                return result.Adapt<GetOrderResponse>();
             }
             throw new Exception("Something went wrong! Add action unsuccesful");
         }

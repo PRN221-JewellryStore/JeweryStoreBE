@@ -19,5 +19,7 @@ namespace Services.IService
 
         public  Task<Decimal> GetRevenueByCategory(int id);
 
+        public Task<List<CategoryReponse>> getAllRevenuebyCategory();
+
     }
 }

@@ -39,6 +39,13 @@ namespace JewelryStorePRN221.Controllers
             return Ok(await _categoryService.GetRevenueByCategory(id));
         }
 
+        [HttpGet("getAllRevenuebyCategory")]
+        public async Task<ActionResult<List<CategoryReponse>>> getallRevenue()
+        {
+            return Ok(await _categoryService.getAllRevenuebyCategory());
+        }
+
+
         [AllowAnonymous]
         [HttpGet]
         [Route("getall")]

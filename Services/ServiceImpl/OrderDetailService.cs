@@ -74,6 +74,7 @@ namespace Services.ServiceImpl
                 var orderDetail = OrderDetailDTO.Adapt<OrderDetailEntity>();
 
                 var primaryPrice = OrderDetailDTO.Quantity * product.Cost;
+                /*
                 if (promotion != null)
                 {
                     var reducedPrice = (decimal)(promotion.ReducedPercent) * primaryPrice / 100;
@@ -86,6 +87,7 @@ namespace Services.ServiceImpl
                 {
                     order.Total += primaryPrice;
                 }
+                */
                 orderDetail.ProductCost = primaryPrice;
                 orderDetail.CreatorID = userId;
                 orderDetail.CreatedAt = DateTime.Now;
@@ -94,6 +96,11 @@ namespace Services.ServiceImpl
 
                 order.Status = "Pending";
                 order.PrimaryPrice += primaryPrice;
+                order.Total = promotion != null
+                    ? (order.PrimaryPrice * (decimal)promotion.ReducedPercent / 100) > promotion.MaximumReduce 
+                        ? order.PrimaryPrice - promotion.MaximumReduce
+                        : order.PrimaryPrice - (order.PrimaryPrice * (decimal)promotion.ReducedPercent / 100)
+                    : order.PrimaryPrice;
                 product.Quantity -= orderDetail.Quantity;
                 await _OrderDetailRepository.UnitOfWork.SaveChangesAsync();
                 return (await _OrderService.GetById(orderDetail.OrderID, cancellationToken)).Adapt<GetOrderResponse>();
@@ -161,7 +168,7 @@ namespace Services.ServiceImpl
             {
                 if(order.Promotion != null) 
                 {
-                    var reducePrice = OrderDetail.ProductCost * (decimal)order.Promotion.ReducedPercent / 100;
+                    var reducePrice = order.PrimaryPrice * (decimal)order.Promotion.ReducedPercent / 100;
                     order.Total -= (reducePrice > order.Promotion.MaximumReduce)
                         ? OrderDetail.ProductCost - order.Promotion.MaximumReduce
                         : OrderDetail.ProductCost - reducePrice;
