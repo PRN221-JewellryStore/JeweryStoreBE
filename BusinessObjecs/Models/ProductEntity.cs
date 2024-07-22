@@ -18,6 +18,8 @@ namespace BusinessObjecs.Models
         public required int Quantity { get; set; }
         public string? Description { get; set; }
         public required int CategoryID { get; set; }
+        public string? ImgUrl { get; set; }  // New property
+
         [ForeignKey(nameof(CategoryID))]
         public virtual CategoryEntity Category { get; set; }
         public virtual ICollection<OrderDetailEntity> OrderDetails { get; set; }
