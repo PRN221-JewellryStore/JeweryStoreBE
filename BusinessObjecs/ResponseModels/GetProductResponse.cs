@@ -18,6 +18,7 @@ namespace BusinessObjecs.ResponseModels
         public required int Quantity { get; set; }
         public string? Description { get; set; }
         public required int CategoryID { get; set; }
+        public string? ImgUrl { get; set; }
         public CategoryDTO Category { get; set; }
         public List<OrderDetail> OrderDetails { get; set; } = [];
     }
