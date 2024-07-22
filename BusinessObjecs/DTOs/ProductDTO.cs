@@ -1,4 +1,7 @@
-﻿using System;
+﻿using AutoMapper;
+using BusinessObjecs.Mapping;
+using BusinessObjecs.ResponseModels.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BusinessObjecs.DTOs
 {
-    public class ProductDTO
+    public class ProductDTO : IMapFrom<Product>
     {
         public string Name { get; set; }
         public decimal Cost { get; set; }
@@ -14,6 +17,11 @@ namespace BusinessObjecs.DTOs
         public int Quantity { get; set; }
         public string? Description { get; set; }
         public int CategoryID { get; set; }
-        public string? ImgUrl { get; set; }
+        public CategoryDTO Category { get; set; }
+
+        public void Mapping(Profile profile)
+        {
+            profile.CreateMap<Product, ProductDTO>();
+        }
     }
 }

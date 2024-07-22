@@ -1,20 +1,76 @@
 ﻿using BusinessObjecs.DTOs;
+using BusinessObjecs.Models.FileUpload;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.IService;
 using System.Net.Mime;
+using Firebase.Auth;
+using IHostingEnvironment = Microsoft.AspNetCore.Hosting.IHostingEnvironment;
 
 namespace JewelryStorePRN221.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class ProductController : ControllerBase
-    {
-        private readonly IProductService _ProductService;
+    {      
+        private readonly IFirebaseService _firebaseService;
+        private readonly IConfiguration _config;
+        private readonly IWebHostEnvironment _environment;
+        IProductService _ProductService;
 
-        public ProductController(IProductService ProductService)
+        public ProductController(IProductService ProductService
+            , IFirebaseService firebaseService
+            , IWebHostEnvironment environment
+            , IConfiguration config)
         {
             _ProductService = ProductService;
+            _firebaseService = firebaseService;
+            _environment = environment;
+            _config = config;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Index(FileUploadModel fileUploadModel)
+        {
+            if (fileUploadModel.File == null || fileUploadModel.File.Length == 0)
+            {
+                return BadRequest("No file uploaded.");
+            }
+
+            try
+            {
+                var folderName = "productImg";
+                var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "images", folderName);
+
+                if (!Directory.Exists(folderPath))
+                {
+                    Directory.CreateDirectory(folderPath);
+                }
+
+                var filePath = Path.Combine(folderPath, fileUploadModel.File.FileName);
+
+                // Save the file temporarily to the server
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await fileUploadModel.File.CopyToAsync(fileStream);
+                }
+
+                using (var fileStream = new FileStream(filePath, FileMode.Open))
+                {
+                    await _firebaseService.Push(fileUploadModel.File, fileStream);
+                }
+
+                // Optionally, delete the temporary file after upload
+                System.IO.File.Delete(filePath);
+
+                return Ok("File uploaded successfully.");
+            }
+            catch (Exception ex)
+            {
+                // Log exception details
+                Console.WriteLine($"Error uploading file: {ex.Message}");
+                return StatusCode(500, "Internal server error.");
+            }
         }
 
         [Produces(MediaTypeNames.Application.Json)]
