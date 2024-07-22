@@ -18,5 +18,6 @@ namespace Services.IService
         Task<GetOrderResponse> Add(OrderDetailDTO OrderDetailDTO, CancellationToken cancellationToken, ClaimsPrincipal claims);
         Task<GetOrderResponse> Update(string id, OrderDetailDTO OrderDetailDTO, CancellationToken cancellationToken, ClaimsPrincipal claims);
         Task<OrderDetail> Delete(string id, CancellationToken cancellationToken, ClaimsPrincipal claims);
+
     }
 }

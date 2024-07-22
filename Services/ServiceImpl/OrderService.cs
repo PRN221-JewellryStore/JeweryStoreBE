@@ -124,5 +124,15 @@ namespace Services.ServiceImpl
             }
             return result.Adapt<List<GetOrderResponse>>();
         }
+
+        public async Task<Decimal?> getTotalRevenue(CancellationToken cancellationToken)
+        {
+            var getAll = await  _OrderRepository.GetAllWithDetail(cancellationToken);
+            var getOrderSucess =  getAll.Where(p => p.Status != "InCart");
+            /*var listOrderIds = getOrderSucess.Select(order => order.ID).ToList();*/
+            var totalRevenue = getOrderSucess.Sum(order => order.Total);
+            return totalRevenue;
+
+        }
     }
 }

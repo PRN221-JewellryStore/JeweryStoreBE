@@ -50,7 +50,8 @@ namespace Services.ServiceImpl
                 throw new NotFoundException("Order not existed!");
             }
             /*
-            if (order.Status != "InCart")
+            if (order.Status != "
+            ")
             {
                 throw new Exception("Status is not InCart");
             }
@@ -140,6 +141,8 @@ namespace Services.ServiceImpl
             }
             return result.Adapt<GetOrderDetailResponse>();
         }
+
+    
 
         public async Task<GetOrderResponse> Update(string id, OrderDetailDTO OrderDetailDTO, CancellationToken cancellationToken, ClaimsPrincipal claims)
         {

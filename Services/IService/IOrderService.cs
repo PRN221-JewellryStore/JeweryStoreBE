@@ -19,5 +19,7 @@ namespace Services.IService
         Task<Order> Update(string id, OrderDTO OrderDTO, CancellationToken cancellationToken, ClaimsPrincipal claims);
         Task<Order> Delete(string id, CancellationToken cancellationToken, ClaimsPrincipal claims);
         Task<List<GetOrderResponse>> GetByUserId(string userId, CancellationToken cancellationToken);
+        Task<Decimal?> getTotalRevenue(CancellationToken cancellationToken);
+
     }
 }

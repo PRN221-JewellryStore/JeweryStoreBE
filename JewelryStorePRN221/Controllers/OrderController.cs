@@ -39,6 +39,17 @@ namespace JewelryStorePRN221.Controllers
             return Ok(await _OrderService.GetAll(cancellationToken));
         }
 
+        [AllowAnonymous]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        [HttpGet("get-total-revenue")]
+        public async Task<ActionResult<decimal>> gettotalrevenue(CancellationToken cancellationToken = default)
+        {
+            return Ok(await _OrderService.getTotalRevenue(cancellationToken));
+        }
+
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
