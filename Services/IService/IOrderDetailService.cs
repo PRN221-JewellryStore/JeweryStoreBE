@@ -1,6 +1,7 @@
 ﻿using BusinessObjecs.DTOs;
 using BusinessObjecs.Models;
 using BusinessObjecs.ResponseModels;
+using BusinessObjecs.ResponseModels.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace Services.IService
         Task<GetOrderDetailResponse> GetById(string id, CancellationToken cancellationToken);
         Task<List<GetOrderDetailResponse>> GetAll(CancellationToken cancellationToken);
         Task<GetOrderResponse> Add(OrderDetailDTO OrderDetailDTO, CancellationToken cancellationToken, ClaimsPrincipal claims);
-        Task<OrderDetailDTO> Update(string id, OrderDetailDTO OrderDetailDTO, CancellationToken cancellationToken);
-        Task<OrderDetailDTO> Delete(string id, CancellationToken cancellationToken, ClaimsPrincipal claims);
+        Task<GetOrderResponse> Update(string id, OrderDetailDTO OrderDetailDTO, CancellationToken cancellationToken, ClaimsPrincipal claims);
+        Task<OrderDetail> Delete(string id, CancellationToken cancellationToken, ClaimsPrincipal claims);
     }
 }

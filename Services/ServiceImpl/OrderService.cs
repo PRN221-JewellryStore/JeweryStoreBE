@@ -1,6 +1,7 @@
 ﻿using BusinessObjecs.DTOs;
 using BusinessObjecs.Models;
 using BusinessObjecs.ResponseModels;
+using BusinessObjecs.ResponseModels.Models;
 using Mapster;
 using Repositories.Common.Exceptions;
 using Repositories.IRepository;
@@ -49,7 +50,7 @@ namespace Services.ServiceImpl
             throw new Exception("Something went wrong! Add action unsuccesful");
         }
 
-        public async Task<OrderDTO> Delete(string id, CancellationToken cancellationToken, ClaimsPrincipal claims)
+        public async Task<Order> Delete(string id, CancellationToken cancellationToken, ClaimsPrincipal claims)
         {
             var Order = await _OrderRepository.FindAsync(p => p.ID.Equals(id));
             if (Order is null)
@@ -59,10 +60,11 @@ namespace Services.ServiceImpl
 
             Order.DeleterID = claims.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
             Order.DeletedAt = DateTime.Now;
+            Order.Status = "Cancelled";
 
-            if (await _OrderRepository.UnitOfWork.SaveChangesAsync(cancellationToken) != 0)
+            if (await _OrderRepository.UnitOfWork.SaveChangesAsync(cancellationToken) == 0)
             {
-                return Order.Adapt<OrderDTO>();
+                return Order.Adapt<Order>();
             }
             throw new Exception("Something went wrong! Delete action unsuccesful");
         }
@@ -83,7 +85,7 @@ namespace Services.ServiceImpl
             return result.Adapt<GetOrderResponse>();
         }
 
-        public async Task<OrderDTO> Update(string id, OrderDTO OrderDTO, CancellationToken cancellationToken, ClaimsPrincipal claims)
+        public async Task<Order> Update(string id, OrderDTO OrderDTO, CancellationToken cancellationToken, ClaimsPrincipal claims)
         {
             var userId = claims.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
             if (userId is null)
@@ -99,7 +101,6 @@ namespace Services.ServiceImpl
             try
             {
                 Order.PromotionID = OrderDTO.PromotionID;
-                Order.UserID = userId;
                 Order.UpdaterID = userId;
                 Order.LastestUpdateAt = DateTime.UtcNow;
             }
@@ -108,9 +109,9 @@ namespace Services.ServiceImpl
                 throw new Exception(ex.Message);
             }
 
-            if (await _OrderRepository.UnitOfWork.SaveChangesAsync(cancellationToken) != 0)
+            if (await _OrderRepository.UnitOfWork.SaveChangesAsync(cancellationToken) == 0)
             {
-                return OrderDTO;
+                return Order.Adapt<Order>();
             }
             throw new Exception("Something went wrong! Delete action unsuccesful");
         }

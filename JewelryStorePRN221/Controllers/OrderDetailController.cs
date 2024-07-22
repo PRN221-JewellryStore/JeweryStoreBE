@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.IService;
 using System.Net.Mime;
+using System.Security.Claims;
 
 namespace JewelryStorePRN221.Controllers
 {
@@ -56,7 +57,7 @@ namespace JewelryStorePRN221.Controllers
         [HttpPatch("update/{id}")]
         public async Task<ActionResult<OrderDetailDTO>> Update(string id, [FromForm] OrderDetailDTO OrderDetailDTO, CancellationToken cancellationToken = default)
         {
-            return Ok(await _OrderDetailService.Update(id, OrderDetailDTO, cancellationToken));
+            return Ok(await _OrderDetailService.Update(id, OrderDetailDTO, cancellationToken, HttpContext.User));
         }
 
         [Produces(MediaTypeNames.Application.Json)]

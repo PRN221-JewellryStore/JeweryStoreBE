@@ -1,6 +1,7 @@
 ﻿using BusinessObjecs.DTOs;
 using BusinessObjecs.Models;
 using BusinessObjecs.ResponseModels;
+using BusinessObjecs.ResponseModels.Models;
 using Mapster;
 using Repositories.Common.Exceptions;
 using Repositories.IRepository;
@@ -86,6 +87,7 @@ namespace Services.ServiceImpl
                 }
                 orderDetail.ProductCost = primaryPrice;
                 orderDetail.CreatorID = userId;
+                orderDetail.CreatedAt = DateTime.Now;
 
                 _OrderDetailRepository.Add(orderDetail);
 
@@ -105,7 +107,7 @@ namespace Services.ServiceImpl
             }
         }
 
-        public async Task<OrderDetailDTO> Delete(string id, CancellationToken cancellationToken, ClaimsPrincipal claims)
+        public async Task<OrderDetail> Delete(string id, CancellationToken cancellationToken, ClaimsPrincipal claims)
         {
             var OrderDetail = await _OrderDetailRepository.FindAsync(p => p.ID.Equals(id));
             if (OrderDetail is null)
@@ -116,9 +118,9 @@ namespace Services.ServiceImpl
             OrderDetail.DeleterID = claims.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
             OrderDetail.DeletedAt = DateTime.Now;
 
-            if (await _OrderDetailRepository.UnitOfWork.SaveChangesAsync(cancellationToken) != 0)
+            if (await _OrderDetailRepository.UnitOfWork.SaveChangesAsync(cancellationToken) == 0)
             {
-                return OrderDetail.Adapt<OrderDetailDTO>();
+                return OrderDetail.Adapt<OrderDetail>();
             }
             throw new Exception("Something went wrong! Delete action unsuccesful");
         }
@@ -139,27 +141,46 @@ namespace Services.ServiceImpl
             return result.Adapt<GetOrderDetailResponse>();
         }
 
-        public async Task<OrderDetailDTO> Update(string id, OrderDetailDTO OrderDetailDTO, CancellationToken cancellationToken)
+        public async Task<GetOrderResponse> Update(string id, OrderDetailDTO OrderDetailDTO, CancellationToken cancellationToken, ClaimsPrincipal claims)
         {
             var OrderDetail = await _OrderDetailRepository.FindAsync(p => p.ID.Equals(id));
+            
             if (OrderDetail is null)
             {
                 throw new NotFoundException("OrderDetail not found!");
             }
+
+            var userId = OrderDetail.CreatorID;
+
+            var order = await _OrderService.GetById(OrderDetail.OrderID, cancellationToken);
+            var result = new GetOrderResponse();
             try
             {
-                OrderDetail.OrderID = OrderDetailDTO.OrderID;
-                OrderDetail.ProductID = OrderDetailDTO.ProductID;
-                OrderDetail.Quantity = OrderDetailDTO.Quantity;
+                if(order.Promotion != null) 
+                {
+                    var reducePrice = OrderDetail.ProductCost * (decimal)order.Promotion.ReducedPercent / 100;
+                    order.Total -= (reducePrice > order.Promotion.MaximumReduce)
+                        ? OrderDetail.ProductCost - order.Promotion.MaximumReduce
+                        : OrderDetail.ProductCost - reducePrice;
+                }
+                else
+                {
+                    order.Total -= OrderDetail.ProductCost;
+                }
+                
+                order.PrimaryPrice -= OrderDetail.ProductCost;
+
+                _OrderDetailRepository.Remove(OrderDetail);
+                result = await Add(OrderDetailDTO, cancellationToken, claims);
             }
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
             }
-
-            if (await _OrderDetailRepository.UnitOfWork.SaveChangesAsync(cancellationToken) != 0)
+            var error = await _OrderDetailRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+            if (error == 0)
             {
-                return OrderDetailDTO;
+                return result;
             }
             throw new Exception("Something went wrong! Delete action unsuccesful");
         }

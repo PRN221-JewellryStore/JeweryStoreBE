@@ -29,7 +29,7 @@ namespace Services.ServiceImpl
             var promotion = promotionDTO.Adapt<PromotionEntity>();
             promotion.Status = "Active";
             _promotionRepository.Add(promotion);
-            if (await _promotionRepository.UnitOfWork.SaveChangesAsync(cancellationToken) != 0)
+            if (await _promotionRepository.UnitOfWork.SaveChangesAsync(cancellationToken) == 0)
             {
                 return promotionDTO;
             }
@@ -46,7 +46,7 @@ namespace Services.ServiceImpl
             promotion.DeleterID = claims.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
             promotion.DeletedAt = DateTime.Now;
 
-            if (await _promotionRepository.UnitOfWork.SaveChangesAsync(cancellationToken) != 0)
+            if (await _promotionRepository.UnitOfWork.SaveChangesAsync(cancellationToken) == 0)
             {
                 return promotion.Adapt<PromotionDTO>();
             }
@@ -89,7 +89,7 @@ namespace Services.ServiceImpl
                 throw new Exception(ex.Message);
             }
             
-            if (await _promotionRepository.UnitOfWork.SaveChangesAsync(cancellationToken) != 0)
+            if (await _promotionRepository.UnitOfWork.SaveChangesAsync(cancellationToken) == 0)
             {
                 return promotionDTO;
             }

@@ -29,7 +29,7 @@ namespace Services.ServiceImpl
         public async Task<ProductDTO> Add(ProductDTO ProductDTO, CancellationToken cancellationToken)
         {
             _ProductRepository.Add(ProductDTO.Adapt<ProductEntity>());
-            if (await _ProductRepository.UnitOfWork.SaveChangesAsync(cancellationToken) != 0)
+            if (await _ProductRepository.UnitOfWork.SaveChangesAsync(cancellationToken) == 0)
             {
                 return ProductDTO;
             }
@@ -48,7 +48,7 @@ namespace Services.ServiceImpl
             Product.DeleterID = claims.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
             Product.DeletedAt = DateTime.Now;
 
-            if (await _ProductRepository.UnitOfWork.SaveChangesAsync(cancellationToken) != 0)
+            if (await _ProductRepository.UnitOfWork.SaveChangesAsync(cancellationToken) == 0)
             {
                 return Product.Adapt<ProductDTO>();
             }
@@ -100,7 +100,7 @@ namespace Services.ServiceImpl
                 throw new Exception(ex.Message);
             }
 
-            if (await _ProductRepository.UnitOfWork.SaveChangesAsync(cancellationToken) != 0)
+            if (await _ProductRepository.UnitOfWork.SaveChangesAsync(cancellationToken) == 0)
             {
                 return ProductDTO;
             }

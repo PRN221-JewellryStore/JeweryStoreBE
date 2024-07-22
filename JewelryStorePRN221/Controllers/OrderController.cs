@@ -77,7 +77,7 @@ namespace JewelryStorePRN221.Controllers
         [HttpGet("user:{userId}")]
         public async Task<ActionResult<List<OrderDTO>>> GetByUserId(string userId, CancellationToken cancellationToken = default)
         {
-            return Ok(await _OrderService.GetById(userId, cancellationToken));
+            return Ok(await _OrderService.GetByUserId(userId, cancellationToken));
         }
     }
 }
