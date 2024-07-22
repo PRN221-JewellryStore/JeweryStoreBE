@@ -10,7 +10,7 @@ namespace JewelryStorePRN221.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        IProductService _ProductService;
+        private readonly IProductService _ProductService;
 
         public ProductController(IProductService ProductService)
         {
