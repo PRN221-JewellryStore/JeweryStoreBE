@@ -15,5 +15,7 @@ namespace BusinessObjecs.ResponseModels.Models
         public int Quantity { get; set; }
         public string? Description { get; set; }
         public int CategoryID { get; set; }
+        public string? ImgUrl { get; set; }  // New property
+
     }
 }
