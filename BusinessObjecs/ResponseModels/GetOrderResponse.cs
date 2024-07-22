@@ -15,10 +15,10 @@ namespace BusinessObjecs.ResponseModels
         public string ID { get; set; }
         public string? PromotionID { get; set; }
         public Promotion Promotion { get; set; }
-        public required string UserID { get; set; }
+        public string UserID { get; set; }
         public UserDTO User { get; set; }
-        public virtual List<OrderDetail> OrderDetails { get; set; } = [];
-        public required string Status { get; set; }
+        public List<OrderDetail> OrderDetails { get; set; } = [];
+        public string Status { get; set; }
         public decimal? PrimaryPrice { get; set; }
         public decimal? Total { get; set; }
     }
