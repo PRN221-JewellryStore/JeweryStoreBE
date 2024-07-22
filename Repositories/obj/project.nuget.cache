@@ -1,10 +1,6 @@
 {
   "version": 2,
-<<<<<<< HEAD
   "dgSpecHash": "RBHJYJh9J/Tx/EAipZNvnrYmidVvhUb9ojDImM0PN852Wh3nQCf493o2dXGmKLfD/+aEHap6BnU9J4tVU2FH5A==",
-=======
-  "dgSpecHash": "8GlxNbbflUvQq87y6ilXnUMonMtAqIj3TgNMtXAF+NB8kI4UcSiZW5OoffoqxPt8PKVW9MNvH1UjACe2Udp/4g==",
->>>>>>> main
   "success": true,
   "projectFilePath": "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\Repositories\\Repositories.csproj",
   "expectedPackageFiles": [
@@ -89,5 +85,12 @@
     "C:\\Users\\ACER\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "C:\\Users\\ACER\\.nuget\\packages\\system.windows.extensions\\6.0.0\\system.windows.extensions.6.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\Repositories\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
