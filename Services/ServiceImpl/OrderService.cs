@@ -98,9 +98,7 @@ namespace Services.ServiceImpl
             }
             try
             {
-                Order.Note = OrderDTO.Note;
                 Order.PromotionID = OrderDTO.PromotionID;
-                Order.CounterID = OrderDTO.CounterID;
                 Order.UserID = userId;
                 Order.UpdaterID = userId;
                 Order.LastestUpdateAt = DateTime.UtcNow;

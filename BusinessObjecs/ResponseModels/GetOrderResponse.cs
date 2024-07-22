@@ -13,11 +13,8 @@ namespace BusinessObjecs.ResponseModels
     public class GetOrderResponse
     {
         public string ID { get; set; }
-        public required string Note { get; set; }
         public string? PromotionID { get; set; }
         public Promotion Promotion { get; set; }
-        public int? CounterID { get; set; }
-        public CounterDTO Counter { get; set; }
         public required string UserID { get; set; }
         public UserDTO User { get; set; }
         public virtual List<OrderDetail> OrderDetails { get; set; } = [];

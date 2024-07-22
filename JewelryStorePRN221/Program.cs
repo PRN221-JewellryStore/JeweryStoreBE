@@ -39,7 +39,6 @@ builder.Services.AddTransient<IJwtService, JwtService>();
 builder.Services.AddTransient<ICurrentUserService, CurrentUserService>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
-builder.Services.AddScoped<ICounterService, CounterService>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IOrderDetailService, OrderDetailService>();
 builder.Services.AddScoped<IPromotionService, PromotionService>();
@@ -54,7 +53,6 @@ builder.Services.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IRoleRepository, RoleRepository>();
 builder.Services.AddTransient<ICategoryRepository, CategoryRepository>();
-builder.Services.AddTransient<ICounterRepository, CounterRepository>();
 builder.Services.AddTransient<IOrderRepository, OrderRepository>();
 builder.Services.AddTransient<IOrderDetailRepository, OrderDetailRepository>();
 builder.Services.AddTransient<IPromotionRepository, PromotionRepository>();
