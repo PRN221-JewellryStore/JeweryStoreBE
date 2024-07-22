@@ -10,6 +10,7 @@ using Services.IService;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
@@ -21,9 +22,11 @@ namespace Services.ServiceImpl
     {
         private readonly IProductRepository _ProductRepository;
 
+
         public ProductService(IProductRepository ProductRepository)
         {
             _ProductRepository = ProductRepository;
+            
         }
 
         public async Task<ProductDTO> Add(ProductDTO ProductDTO, CancellationToken cancellationToken)

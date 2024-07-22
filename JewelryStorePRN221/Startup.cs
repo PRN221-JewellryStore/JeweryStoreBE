@@ -97,6 +97,7 @@ namespace JewelryStorePRN221
                     c.SwaggerEndpoint("/swagger/v1/swagger.json", "JewelryStorePRN221 v1");
                 });
             }
+            app.UseStaticFiles();
             app.UseRouting();
             app.UseCors("CorsPolicy");
             app.UseExceptionHandler();
