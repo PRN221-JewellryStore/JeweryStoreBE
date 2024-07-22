@@ -123,6 +123,52 @@ namespace Services.ServiceImpl
             return getRevenue;
 
 
+     
+        }
+
+        /*     public async Task<List<CategoryRevenueReponse>> GetRevenueByCategory(int id)
+             {
+                 var categoriesWithDetails = await _categoryRepository.GetCategoriesWithProductsAndOrderDetailsAsync();
+
+
+                 var getRevenue = categoriesWithDetails.Where(c => c.ID == id).Select(category => new CategoryRevenueReponse
+                 {
+                     CategoryId = category.ID,
+                     Name = category.Name,
+                     Revenue = category.Products
+                     .SelectMany(product => product.OrderDetails)
+                     .Where(orderDetail => orderDetail.Order.Status != "InCart")
+                     .Sum(orderDetail => orderDetail.Quantity * orderDetail.Product.Cost)
+                 }).ToList();
+
+                 *//*  .SelectMany(c => c.Products) // Lấy tất cả sản phẩm của danh mục
+                   .SelectMany(p => p.OrderDetails) // Lấy tất cả chi tiết đơn hàng của sản phẩm
+                   .Where(od => od.Order.Status != "InCart") // Lọc chi tiết đơn hàng không phải "InCart"
+                   .Sum(od => od.Quantity * od.Product.Cost);*//*
+
+                 return getRevenue;
+
+             }*/
+
+        public async Task<List<CategoryReponse>> getAllRevenuebyCategory()
+        {
+            // Retrieve categories with details from the repository
+            var categoriesWithDetails = await _categoryRepository.GetCategoriesWithProductsAndOrderDetailsAsync();
+
+            // Aggregate revenue for each category
+            var categoryRevenues = categoriesWithDetails
+                .Select(category => new CategoryReponse
+                {
+                    CategoryId = category.ID,
+                    name = category.Name,
+                    Revenue = category.Products
+                        .SelectMany(product => product.OrderDetails)
+                        .Where(orderDetail => orderDetail.Order.Status != "InCart")
+                        .Sum(orderDetail => orderDetail.Quantity * orderDetail.Product.Cost)
+                })
+                .ToList();
+
+            return categoryRevenues;
         }
     }
 }
