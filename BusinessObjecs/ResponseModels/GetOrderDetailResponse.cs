@@ -11,11 +11,11 @@ namespace BusinessObjecs.ResponseModels
     public class GetOrderDetailResponse
     {
         public string ID { get; set; }
-        public required string OrderID { get; set; }
+        public string OrderID { get; set; }
         public Order Order { get; set; }
-        public required string ProductID { get; set; }
+        public string ProductID { get; set; }
         public Product Product { get; set; }
-        public required int Quantity { get; set; }
-        public required decimal ProductCost { get; set; }
+        public int Quantity { get; set; }
+        public decimal ProductCost { get; set; }
     }
 }

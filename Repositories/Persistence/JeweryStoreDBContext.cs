@@ -31,8 +31,6 @@ namespace Repositories
 
         public DbSet<CategoryEntity> categoryEntities { get; set; }
 
-        public DbSet<CounterEntity> counterEntities { get; set; }
-
         public DbSet<RoleEntity> roleEntities { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -86,15 +84,6 @@ namespace Repositories
         };
 
             modelBuilder.Entity<CategoryEntity>().HasData(categories);
-
-            var counters = categories.Select(c => new CounterEntity
-            {
-                ID = c.ID,
-                Name = c.Name + " Counter",
-                CategoryID = c.ID
-            }).ToList();
-
-            modelBuilder.Entity<CounterEntity>().HasData(counters);
 
             var products = new List<ProductEntity>
             {

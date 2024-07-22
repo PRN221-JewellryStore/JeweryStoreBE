@@ -11,8 +11,6 @@ namespace BusinessObjecs.DTOs
 {
     public class OrderDTO
     {
-        public string Note { get; set; }
         public string? PromotionID { get; set; }
-        public int? CounterID { get; set; }
     }
 }

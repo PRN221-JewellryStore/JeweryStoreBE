@@ -15,5 +15,7 @@ namespace BusinessObjecs.ResponseModels.Models
         public string ProductID { get; set; } = null!;
         public Product? Product { get; set; }
         public int Quantity { get; set; }
+        public decimal ProductCost { get; set; }
+
     }
 }

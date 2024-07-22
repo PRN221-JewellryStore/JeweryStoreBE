@@ -16,8 +16,6 @@ namespace BusinessObjecs.Mapping
         {
             ApplyMappingsFromAssembly(Assembly.GetExecutingAssembly());
             CreateMap<CategoryEntity, CategoryDTO>().ReverseMap();
-            CreateMap<CounterEntity, CounterDTO>().ReverseMap();
-
         }
 
         private void ApplyMappingsFromAssembly(Assembly assembly)
