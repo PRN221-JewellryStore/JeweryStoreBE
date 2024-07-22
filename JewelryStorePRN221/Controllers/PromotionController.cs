@@ -11,7 +11,7 @@ namespace JewelryStorePRN221.Controllers
     [ApiController]
     public class PromotionController : ControllerBase
     {
-        IPromotionService _promotionService;
+        private readonly IPromotionService _promotionService;
 
         public PromotionController(IPromotionService promotionService)
         {

@@ -92,7 +92,7 @@ namespace Services.ServiceImpl
 
                 _OrderDetailRepository.Add(orderDetail);
 
-                order.Status = "Done";
+                order.Status = "Pending";
                 order.PrimaryPrice += primaryPrice;
                 product.Quantity -= orderDetail.Quantity;
                 await _OrderDetailRepository.UnitOfWork.SaveChangesAsync();

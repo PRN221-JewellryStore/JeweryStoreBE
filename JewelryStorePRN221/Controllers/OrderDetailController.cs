@@ -11,7 +11,7 @@ namespace JewelryStorePRN221.Controllers
     [ApiController]
     public class OrderDetailController : ControllerBase
     {
-        IOrderDetailService _OrderDetailService;
+        private readonly IOrderDetailService _OrderDetailService;
 
         public OrderDetailController(IOrderDetailService OrderDetailService)
         {

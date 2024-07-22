@@ -1,6 +1,10 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "dgSpecHash": "RBHJYJh9J/Tx/EAipZNvnrYmidVvhUb9ojDImM0PN852Wh3nQCf493o2dXGmKLfD/+aEHap6BnU9J4tVU2FH5A==",
+=======
+  "dgSpecHash": "8GlxNbbflUvQq87y6ilXnUMonMtAqIj3TgNMtXAF+NB8kI4UcSiZW5OoffoqxPt8PKVW9MNvH1UjACe2Udp/4g==",
+>>>>>>> main
   "success": true,
   "projectFilePath": "D:\\BTAP Nam\\CN7\\PRN221\\PJ_Team\\JeweryStoreBE\\Repositories\\Repositories.csproj",
   "expectedPackageFiles": [

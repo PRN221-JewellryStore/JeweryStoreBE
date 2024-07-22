@@ -16,8 +16,8 @@ namespace JewelryStorePRN221.Controllers
     //[ApiController]
     public class CategoryController : ControllerBase
     {
-        ICategoryService _categoryService;
-        IUserServices _userService;
+        private readonly ICategoryService _categoryService;
+        private readonly IUserServices _userService;
 
         public CategoryController(ICategoryService categoryService ,IUserServices userServices, IUserRepository userRepo)
         {

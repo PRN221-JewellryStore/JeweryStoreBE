@@ -20,7 +20,7 @@ namespace Services.ServiceImpl
     public class CategoryService : ICategoryService
     {
         // private readonly UserRepository _userRepository;
-        ICategoryRepository _categoryRepository;
+        private readonly ICategoryRepository _categoryRepository;
         private readonly IMapper _mapper;
 
         public CategoryService( ICategoryRepository categoryRepository, IMapper mapper)
