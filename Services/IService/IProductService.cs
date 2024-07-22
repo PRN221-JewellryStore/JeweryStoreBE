@@ -20,7 +20,7 @@ namespace Services.IService
 
         Task<List<ProductDTO>> SearchByName(string name, CancellationToken cancellationToken);
 
-        Task<List<ProductDTO>> SearchbyCategory(int id,CancellationToken cancellationToken);
+        Task<List<GetProductResponse>> SearchbyCategory(int id,CancellationToken cancellationToken);
 
     }
 }
