@@ -16,5 +16,8 @@ namespace Services.IService
         public Task<CategoryDTO> Add(CategoryDTO CategoryEntity);
         public Task Update(CategoryDTO CategoryEntity, int Id);
         public Task Delete(int id, UserDTO user);
+
+        public  Task<Decimal> GetRevenueByCategory(int id);
+
     }
 }
