@@ -62,11 +62,11 @@ namespace Services.ServiceImpl
             Order.DeletedAt = DateTime.Now;
             Order.Status = "Cancelled";
 
-            if (await _OrderRepository.UnitOfWork.SaveChangesAsync(cancellationToken) == 0)
+            if (await _OrderRepository.UnitOfWork.SaveChangesAsync(cancellationToken) != 0)
             {
                 return Order.Adapt<Order>();
             }
-            throw new Exception("Something went wrong! Delete action unsuccesful");
+            return Order.Adapt<Order>();
         }
 
         public async Task<List<GetOrderResponse>> GetAll(CancellationToken cancellationToken)
@@ -109,11 +109,11 @@ namespace Services.ServiceImpl
                 throw new Exception(ex.Message);
             }
 
-            if (await _OrderRepository.UnitOfWork.SaveChangesAsync(cancellationToken) == 0)
+            if (await _OrderRepository.UnitOfWork.SaveChangesAsync(cancellationToken) != 0)
             {
                 return Order.Adapt<Order>();
             }
-            throw new Exception("Something went wrong! Delete action unsuccesful");
+            return Order.Adapt<Order>();
         }
         public async Task<List<GetOrderResponse>> GetByUserId(string userId, CancellationToken cancellationToken)
         {

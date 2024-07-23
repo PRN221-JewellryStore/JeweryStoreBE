@@ -126,11 +126,11 @@ namespace Services.ServiceImpl
             OrderDetail.DeleterID = claims.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
             OrderDetail.DeletedAt = DateTime.Now;
 
-            if (await _OrderDetailRepository.UnitOfWork.SaveChangesAsync(cancellationToken) == 0)
+            if (await _OrderDetailRepository.UnitOfWork.SaveChangesAsync(cancellationToken) != 0)
             {
                 return OrderDetail.Adapt<OrderDetail>();
             }
-            throw new Exception("Something went wrong! Delete action unsuccesful");
+            return OrderDetail.Adapt<OrderDetail>();
         }
 
         public async Task<List<GetOrderDetailResponse>> GetAll(CancellationToken cancellationToken)
@@ -188,11 +188,11 @@ namespace Services.ServiceImpl
                 throw new Exception(ex.Message);
             }
             var error = await _OrderDetailRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            if (error == 0)
+            if (error != 0)
             {
                 return result;
             }
-            throw new Exception("Something went wrong! Delete action unsuccesful");
+            return result;
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Services.ServiceImpl
            
         }
 
-        public async Task Push(IFormFile file, FileStream data)
+        public async Task<string> Push(IFormFile file, FileStream data)
         {
             var apiKey = _configuration["Firebase:apiKey"];
             var authEmail = _configuration["Firebase:authEmail"];
@@ -48,10 +48,12 @@ namespace Services.ServiceImpl
             {
                 var downloadUrl = await task;
                 Console.WriteLine($"File uploaded to Firebase Storage. Download URL: {downloadUrl}");
+                return downloadUrl;
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"Failed to upload file to Firebase Storage: {ex.Message}");
+                return "";
             }
         }
     }
