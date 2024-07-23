@@ -36,7 +36,7 @@ namespace JewelryStorePRN221.Controllers
             {
                 return BadRequest("No file uploaded.");
             }
-
+            string imgUrl = "";
             try
             {
                 var folderName = "productImg";
@@ -57,13 +57,13 @@ namespace JewelryStorePRN221.Controllers
 
                 using (var fileStream = new FileStream(filePath, FileMode.Open))
                 {
-                    await _firebaseService.Push(fileUploadModel.File, fileStream);
+                   imgUrl = await _firebaseService.Push(fileUploadModel.File, fileStream);
                 }
 
                 // Optionally, delete the temporary file after upload
                 System.IO.File.Delete(filePath);
-
-                return Ok("File uploaded successfully.");
+                Console.WriteLine("File uploaded successfully.");
+                return Ok(imgUrl);
             }
             catch (Exception ex)
             {
@@ -123,7 +123,16 @@ namespace JewelryStorePRN221.Controllers
         [HttpPost("create")]
         public async Task<ActionResult> Create([FromForm] ProductDTO ProductDTO, CancellationToken cancellationToken = default)
         {
-            return Ok(await _ProductService.Add(ProductDTO, cancellationToken));
+            var result = await Index(new FileUploadModel { File = ProductDTO.File });
+            if (result is OkObjectResult okResult)
+            {
+                ProductDTO.ImgUrl = okResult.Value as string;
+                return Ok(await _ProductService.Add(ProductDTO, cancellationToken));
+            }
+            else
+            {
+                return BadRequest("Error in pushing image"); // Return the error from Index method
+            }
         }
 
         [AllowAnonymous]

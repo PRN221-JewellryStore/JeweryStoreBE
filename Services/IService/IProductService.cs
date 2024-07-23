@@ -14,11 +14,11 @@ namespace Services.IService
     {
         Task<GetProductResponse> GetById(string id, CancellationToken cancellationToken);
         Task<List<GetProductResponse>> GetAll(CancellationToken cancellationToken);
-        Task<ProductDTO> Add(ProductDTO productDTO, CancellationToken cancellationToken);
+        Task<GetProductResponse> Add(ProductDTO productDTO, CancellationToken cancellationToken);
         Task<ProductDTO> Update(string id, ProductDTO productDTO, CancellationToken cancellationToken);
         Task<ProductDTO> Delete(string id, CancellationToken cancellationToken, ClaimsPrincipal claims);
 
-        Task<List<ProductDTO>> SearchByName(string name, CancellationToken cancellationToken);
+        Task<List<GetProductResponse>> SearchByName(string name, CancellationToken cancellationToken);
 
         Task<List<GetProductResponse>> SearchbyCategory(int id,CancellationToken cancellationToken);
 

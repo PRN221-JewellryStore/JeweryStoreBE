@@ -1,6 +1,8 @@
-﻿using BusinessObjecs.DTOs;
+﻿using AutoMapper;
+using BusinessObjecs.DTOs;
 using BusinessObjecs.Models;
 using BusinessObjecs.ResponseModels;
+using BusinessObjecs.ResponseModels.Models;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Repositories.Common.Exceptions;
@@ -21,6 +23,7 @@ namespace Services.ServiceImpl
     public class ProductService : IProductService
     {
         private readonly IProductRepository _ProductRepository;
+        private readonly IMapper _mapper;
 
 
         public ProductService(IProductRepository ProductRepository)
@@ -29,12 +32,13 @@ namespace Services.ServiceImpl
             
         }
 
-        public async Task<ProductDTO> Add(ProductDTO ProductDTO, CancellationToken cancellationToken)
+        public async Task<GetProductResponse> Add(ProductDTO ProductDTO, CancellationToken cancellationToken)
         {
-            _ProductRepository.Add(ProductDTO.Adapt<ProductEntity>());
-            if (await _ProductRepository.UnitOfWork.SaveChangesAsync(cancellationToken) == 0)
+            var product = ProductDTO.Adapt<ProductEntity>();
+            _ProductRepository.Add(product);
+            if (await _ProductRepository.UnitOfWork.SaveChangesAsync(cancellationToken) != 0)
             {
-                return ProductDTO;
+                return product.Adapt<GetProductResponse>();
             }
             throw new Exception("Something went wrong! Add action unsuccesful");
         }
@@ -51,20 +55,20 @@ namespace Services.ServiceImpl
             Product.DeleterID = claims.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
             Product.DeletedAt = DateTime.Now;
 
-            if (await _ProductRepository.UnitOfWork.SaveChangesAsync(cancellationToken) == 0)
+            if (await _ProductRepository.UnitOfWork.SaveChangesAsync(cancellationToken) != 0)
             {
                 return Product.Adapt<ProductDTO>();
             }
-            throw new Exception("Something went wrong! Delete action unsuccesful");
+            return Product.Adapt<ProductDTO>();
         }
 
-        public async Task<List<ProductDTO>> SearchByName(string name, CancellationToken cancellationToken)
+        public async Task<List<GetProductResponse>> SearchByName(string name, CancellationToken cancellationToken)
         {
             var productEntities = await _ProductRepository.SearchByNameAsync(name, cancellationToken);
 
             // Assuming you have AutoMapper configured for ProductEntity to GetProductResponse
 
-            return productEntities.Adapt<List<ProductDTO>>();
+            return productEntities.Adapt<List<GetProductResponse>>();
         }
 
         public async Task<List<GetProductResponse>> GetAll(CancellationToken cancellationToken)
@@ -103,11 +107,11 @@ namespace Services.ServiceImpl
                 throw new Exception(ex.Message);
             }
 
-            if (await _ProductRepository.UnitOfWork.SaveChangesAsync(cancellationToken) == 0)
+            if (await _ProductRepository.UnitOfWork.SaveChangesAsync(cancellationToken) != 0)
             {
                 return ProductDTO;
             }
-            throw new Exception("Something went wrong! Delete action unsuccesful");
+            return ProductDTO;
         }
 
         public async Task<List<GetProductResponse>> SearchbyCategory(int id, CancellationToken cancellationToken)

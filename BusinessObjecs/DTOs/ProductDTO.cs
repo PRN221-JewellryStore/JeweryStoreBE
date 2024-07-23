@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using BusinessObjecs.Mapping;
+using BusinessObjecs.Models;
 using BusinessObjecs.ResponseModels.Models;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,11 +19,11 @@ namespace BusinessObjecs.DTOs
         public int Quantity { get; set; }
         public string? Description { get; set; }
         public int CategoryID { get; set; }
-        public CategoryDTO Category { get; set; }
-
+        public IFormFile File { get; set; }
+        public string? ImgUrl { get; set; }
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<Product, ProductDTO>();
+            profile.CreateMap<ProductEntity, ProductDTO>();
         }
     }
 }

@@ -10,6 +10,6 @@ namespace Services.IService
 {
     public interface IFirebaseService
     {
-        public Task Push(IFormFile file, FileStream data);
+        public Task<string> Push(IFormFile file, FileStream data);
     }
 }
