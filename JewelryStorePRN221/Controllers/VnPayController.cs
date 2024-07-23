@@ -35,13 +35,13 @@ namespace JewelryStorePRN221.Controllers
             return Json(Task.FromResult(response));
         }
 
-        [HttpGet("send-email")]
+        [HttpPost("send-email")]
         public async Task<IActionResult> SendTestEmail(string email, CancellationToken cancellationToken)
         {
             try
             {
                 await _userService.SendEmailCustomer(email, cancellationToken);
-                return Ok(new { message = "Test email sent successfully." });
+                return Ok(new { message = " email sent successfully." });
             }
             catch (Exception ex)
             {
