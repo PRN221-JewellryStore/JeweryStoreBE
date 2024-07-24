@@ -34,7 +34,7 @@ namespace Repositories.RepositoryImpl
         public async Task<OrderEntity> GetOrderInCart(CancellationToken cancellationToken , string userid)
         {
             var order = await _dbContext.orderEntities
-                .AsTracking() 
+                .AsNoTracking()
                 .FirstOrDefaultAsync(p => p.Status == "Pending" && p.UserID == userid);
                return order;            
         }
