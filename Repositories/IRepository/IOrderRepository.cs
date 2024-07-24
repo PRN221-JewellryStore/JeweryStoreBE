@@ -12,5 +12,6 @@ namespace Repositories.IRepository
     public interface IOrderRepository : IEFRepository<OrderEntity, OrderEntity>
     {
         Task<List<OrderEntity>> GetAllWithDetail(CancellationToken cancellationToken);
+        Task<OrderEntity> GetOrderInCart(CancellationToken cancellationToken, string userid);
     }
 }

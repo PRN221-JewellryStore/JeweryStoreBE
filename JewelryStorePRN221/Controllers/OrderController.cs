@@ -1,4 +1,5 @@
 ﻿using BusinessObjecs.DTOs;
+using BusinessObjecs.ResponseModels.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.IService;
@@ -26,6 +27,12 @@ namespace JewelryStorePRN221.Controllers
         public async Task<ActionResult<OrderDTO>> GetById(string id, CancellationToken cancellationToken = default)
         {
             return Ok(await _OrderService.GetById(id, cancellationToken));
+        }
+
+        [HttpGet("GetInCart{id}")]
+        public async Task<ActionResult<Order>> GetInCart(string id, CancellationToken cancellationToken = default)
+        {
+            return Ok(await _OrderService.getOrderInCart(id, cancellationToken));
         }
 
         [AllowAnonymous]

@@ -20,6 +20,10 @@ namespace Services.IService
         Task<Order> Delete(string id, CancellationToken cancellationToken, ClaimsPrincipal claims);
         Task<List<GetOrderResponse>> GetByUserId(string userId, CancellationToken cancellationToken);
         Task<Decimal?> getTotalRevenue(CancellationToken cancellationToken);
+        Task<Order> getOrderInCart(string userId, CancellationToken cancellationToken);
+
+
+        Task UpdateOrderStatusAfterPaymentAsync(PaymentResponseModel reponse,string userid, CancellationToken cancellationToken);
 
     }
 }

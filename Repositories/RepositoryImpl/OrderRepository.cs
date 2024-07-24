@@ -30,5 +30,11 @@ namespace Repositories.RepositoryImpl
                 .ToListAsync(cancellationToken);
             return order;
         }
+
+        public async Task<OrderEntity> GetOrderInCart(CancellationToken cancellationToken , string userid)
+        {
+            var order = await _dbContext.orderEntities.FirstOrDefaultAsync(p => p.Status == "InCart" && p.UserID == userid);
+               return order;            
+        }
     }
 }

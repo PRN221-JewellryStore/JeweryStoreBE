@@ -4,6 +4,7 @@ using BusinessObjecs.ResponseModels;
 using BusinessObjecs.ResponseModels.Models;
 using Mapster;
 using Repositories.Common.Exceptions;
+using Repositories.Common.Interface;
 using Repositories.IRepository;
 using Repositories.RepositoryImpl;
 using Services.IService;
@@ -125,6 +126,17 @@ namespace Services.ServiceImpl
             return result.Adapt<List<GetOrderResponse>>();
         }
 
+        public async Task<Order> getOrderInCart(string userId, CancellationToken cancellationToken)
+        {
+            var result = (await _OrderRepository.GetOrderInCart(cancellationToken, userId));
+
+            if (result is null)
+            {
+                throw new NotFoundException("Order not existed");
+            }
+            return result.Adapt<Order>();
+        }
+
         public async Task<Decimal?> getTotalRevenue(CancellationToken cancellationToken)
         {
             var getAll = await  _OrderRepository.GetAllWithDetail(cancellationToken);
@@ -132,6 +144,30 @@ namespace Services.ServiceImpl
             /*var listOrderIds = getOrderSucess.Select(order => order.ID).ToList();*/
             var totalRevenue = getOrderSucess.Sum(order => order.Total);
             return totalRevenue;
+
+        }
+
+        public async Task UpdateOrderStatusAfterPaymentAsync(PaymentResponseModel reponse,string userid, CancellationToken cancellationToken)
+        {
+            var getStatus = reponse.Success;
+            var getOrder = await getOrderInCart(userid, cancellationToken);
+
+            if (getOrder == null)
+            {
+                throw new Exception("Order not found");
+            }
+
+            if (getStatus == true)
+            {
+                getOrder.Status = "done";
+            }
+            else
+            {
+                getOrder.Status = "Cancel";
+
+            }
+             getOrder.Adapt<Order>();
+            await _OrderRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
         }
     }

@@ -13,12 +13,14 @@ namespace JewelryStorePRN221.Controllers
         private readonly IVnPayService _vnPayService;
         private readonly IEmailService _emailService;
         private readonly IUserServices _userService;
+        private readonly IOrderService _orderService;
 
-        public VnPayController(IVnPayService vnPayService, IEmailService emailService, IUserServices userService)
+        public VnPayController(IVnPayService vnPayService, IEmailService emailService, IUserServices userService,IOrderService orderService)
         {
             _vnPayService = vnPayService;
             _emailService = emailService;
             _userService = userService;
+            _orderService = orderService;
         }
 
         [HttpPost("create-payment-url")]
@@ -28,10 +30,13 @@ namespace JewelryStorePRN221.Controllers
             return Ok(Task.FromResult(paymentUrl));
         }
 
-        [HttpGet("payment-callback")]
-        public async Task<IActionResult> PaymentCallback()
+        [HttpGet("payment-callback/")]
+        public async Task<IActionResult> PaymentCallback([FromQuery] string userid, CancellationToken cancellationToken)
         {
             var response = _vnPayService.PaymentExecute(Request.Query);
+            var paymentResponseModel = response;
+            await _orderService.UpdateOrderStatusAfterPaymentAsync(response, userid, cancellationToken);
+
             return Json(Task.FromResult(response));
         }
 
@@ -41,7 +46,7 @@ namespace JewelryStorePRN221.Controllers
             try
             {
                 await _userService.SendEmailCustomer(email, cancellationToken);
-                return Ok(new { message = " email sent successfully." });
+                return Ok(new { message = "email sent successfully." });
             }
             catch (Exception ex)
             {

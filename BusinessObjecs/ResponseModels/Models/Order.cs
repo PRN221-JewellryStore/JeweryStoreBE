@@ -16,6 +16,9 @@ namespace BusinessObjecs.ResponseModels.Models
         public string UserID { get; set; }
         public decimal? PrimaryPrice { get; set; }
         public decimal? Total { get; set; }
+        public string Status { get; set; }
+
+
 
     }
 }
