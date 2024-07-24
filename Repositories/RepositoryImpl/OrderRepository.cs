@@ -35,7 +35,7 @@ namespace Repositories.RepositoryImpl
         {
             var order = await _dbContext.orderEntities
                 .AsTracking() 
-                .FirstOrDefaultAsync(p => p.Status == "InCart" && p.UserID == userid);
+                .FirstOrDefaultAsync(p => p.Status == "Pending" && p.UserID == userid);
                return order;            
         }
     }
