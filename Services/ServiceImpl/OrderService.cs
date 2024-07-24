@@ -159,7 +159,7 @@ namespace Services.ServiceImpl
 
             if (getStatus == true)
             {
-                getOrder.Status = "done";
+                getOrder.Status = "Done";
             }
             else
             {
