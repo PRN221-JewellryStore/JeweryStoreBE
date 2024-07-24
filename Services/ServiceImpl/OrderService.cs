@@ -166,8 +166,11 @@ namespace Services.ServiceImpl
                 getOrder.Status = "Cancel";
 
             }
-             getOrder.Adapt<Order>();
-            await _OrderRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+            var getOrderEntity = getOrder.Adapt<OrderEntity>(); 
+             _OrderRepository.Update(getOrderEntity);
+/*             getOrder.Adapt<Order>();
+ *             
+*/            await _OrderRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
         }
     }
